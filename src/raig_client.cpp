@@ -13,6 +13,7 @@ int main() {
 	IRAIG *raig = new RAIG();
 	raig->createMap();
 	Position2D playerPos;
+
 	// game loop
 	while(raig->isAlive())
 	{
