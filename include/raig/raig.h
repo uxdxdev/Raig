@@ -1,8 +1,7 @@
 #ifndef _RAIG_RAIG_H
 #define _RAIG_RAIG_H
 
-// included for testing
-#include <iostream>
+
 
 struct Position2D{
 	int x;
@@ -29,25 +28,39 @@ public:
 		alive = true;
 	};
 	~RAIG(){};
-	void createMap(){ std::cout << "map created" << std::endl; }
+	void createMap()
+	{
+		std::cout << "map created" << std::endl;
+	}
 	Position2D readData(int x, int y)
 	{
 		data.x = x;
 		data.y = y;
 		return data;
 	}
-	void updateMap(){ std::cout << "map updated" << std::cout; }
+	void updateMap()
+	{
+		std::cout << "map updated" << std::cout;
+	}
 	void update()
 	{
 		std::cout << "in raig update loop..." << std::endl;
 		std::cout << "check if there are any messages from the server using select()" << std::endl;
 		std::cout << "if there are, copy data into raig buffer and set date waiting flag to true" << std::endl;
 
+
+
 		// shutdown the raig client
 		alive = false;
 	}
-	void deleteEntity(){ std::cout << "entity deleted" << std::endl; }
-	bool isAlive(){ return alive; }
+	void deleteEntity()
+	{
+		std::cout << "entity deleted" << std::endl;
+	}
+	bool isAlive()
+	{
+		return alive;
+	}
 private:
 	Position2D data;
 	bool isComplete;
