@@ -9,7 +9,7 @@
 #include <unistd.h> // read(), write()
 
 # define LINESIZE 80
-# define HANGMAN_TCP_PORT 1067
+# define HANGMAN_TCP_PORT 1068
 
 struct Position2D
 {
