@@ -117,7 +117,11 @@ Outline the literature reviewed and research completed to inform the completion 
 
 \subsection{Client side API}
 
+\subsubsection{Pimpl Idiom}
 
+The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+
+This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be a simple as possible to support ease of use. 
 
 \subsection{Server System Design}
 
