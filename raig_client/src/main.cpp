@@ -6,8 +6,8 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-#include "../include/raig/raig.h"
-// included for testing
+#include "../include/raig.h"
+#include <iostream> // cout, endl
 
 // Game client for testing
 int main(int argc, char* argv[])
