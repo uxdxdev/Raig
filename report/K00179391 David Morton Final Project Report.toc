@@ -1,0 +1,35 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Technologies}{3}
+\contentsline {section}{\numberline {2}Problem Definition and Background}{3}
+\contentsline {subsection}{\numberline {2.1}Background}{3}
+\contentsline {subsection}{\numberline {2.2}Objectives}{3}
+\contentsline {subsection}{\numberline {2.3}Project Planning}{4}
+\contentsline {section}{\numberline {3}Literature Review and Research}{4}
+\contentsline {subsection}{\numberline {3.1}UDP vs TCP}{4}
+\contentsline {subsection}{\numberline {3.2}Client side API}{4}
+\contentsline {subsection}{\numberline {3.3}Server System Design}{4}
+\contentsline {subsubsection}{\numberline {3.3.1}Fork or Select}{4}
+\contentsline {subsubsection}{\numberline {3.3.2}Round Robin DNS}{6}
+\contentsline {subsection}{\numberline {3.4}Existing Technologies}{6}
+\contentsline {subsection}{\numberline {3.5}Design Patterns}{6}
+\contentsline {subsection}{\numberline {3.6}Artificial Intelligence \& Algorithms}{7}
+\contentsline {subsection}{\numberline {3.7}Documentation}{7}
+\contentsline {subsection}{\numberline {3.8}Testing}{7}
+\contentsline {subsection}{\numberline {3.9}Conclusions}{7}
+\contentsline {section}{\numberline {4}System Design and Configuration}{7}
+\contentsline {subsection}{\numberline {4.1}System Architecture}{7}
+\contentsline {subsection}{\numberline {4.2}Class Diagram}{7}
+\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{7}
+\contentsline {section}{\numberline {5}Example of use}{7}
+\contentsline {subsection}{\numberline {5.1}User Stories}{8}
+\contentsline {section}{\numberline {6}Testing \& Implementation}{8}
+\contentsline {subsection}{\numberline {6.1}Implementation}{8}
+\contentsline {subsection}{\numberline {6.2}Testing}{9}
+\contentsline {subsection}{\numberline {6.3}Future Features}{9}
+\contentsline {section}{\numberline {7}User manual (where appropriate)}{9}
+\contentsline {section}{\numberline {8}Critical analysis and Conclusions}{9}
+\contentsline {section}{References}{10}
+\contentsline {section}{Appendices}{11}
+\contentsline {section}{\numberline {A}Graph Appendix}{11}
+\contentsline {section}{\numberline {B}Another Appendix}{11}

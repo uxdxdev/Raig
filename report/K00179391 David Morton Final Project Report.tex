@@ -1,0 +1,290 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[toc,page]{appendix}
+
+% Line spacing
+\usepackage{setspace}
+\onehalfspacing
+
+% Title page
+\usepackage{pdfpages}
+
+% Color
+\usepackage{color}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+
+% Code listings
+\usepackage{listings}
+\lstset{language=C++,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  escapeinside={(*@}{@*)},
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{greencomments},
+  keywordstyle=\color{bluekeywords},
+  stringstyle=\color{redstrings},
+  basicstyle=\ttfamily,
+  numbers=left,                    
+  numbersep=5pt,
+  numberstyle=\tiny\color{codegray},
+}
+\lstset{frame=tlrb}
+\renewcommand{\lstlistingname}{Code Listing}
+\renewcommand{\lstlistlistingname}{\lstlistingname s} 
+
+\begin{document}
+\includepdf{reportTitlePage}
+
+% Abstract
+\begin{abstract}
+This is the abstract.
+\end{abstract}
+
+% Table of contents
+\tableofcontents
+
+% List of Tables
+\listoftables
+
+% List of figures
+\listoffigures
+
+% List of Listings
+\lstlistoflistings
+
+\newpage
+
+\section{Introduction}
+This section should contain general information on the project and the technology used.
+
+\subsection{Technologies}
+Technologies used in the project.
+
+\section{Problem Definition and Background}
+
+\begin{table}[H] %% <--- and this
+\begin{center}
+\caption{Example table caption}
+\label{table:x Example table}
+\begin{tabular}{ | c | c |}
+\hline
+A & B \\ 
+\hline
+C & D \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+This is a reference to table \ref{table:x Example table}
+
+\subsection{Background}
+
+\begin{figure}[H]
+	\centering
+    	\includegraphics[width=\textwidth]{Figures/lit_logo}
+	\caption{EXAMPLE Figure and caption}
+	\label{fig:example figure and caption}
+\end{figure}
+
+And this is a reference to the figure in Figure \ref{fig:example figure and caption}.
+
+\subsection{Objectives}
+Explain how you understand the project objective(s), what is to be solved or done, your perception of what has to be accomplished including the scope. 
+
+\subsection{Project Planning}
+Agile approach, PID, Charter, Phases.
+
+Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.
+
+\section{Literature Review and Research}
+Outline the literature reviewed and research completed to inform the completion of your project.  This should include commentary on current and emerging technologies/systems, key data, information, source, code etc. which was sourced as part of your research.  Where relevant indicate any conclusions or recommendations arising from your research
+
+\subsection{UDP vs TCP}
+
+
+\subsection{Client side API}
+
+
+
+\subsection{Server System Design}
+
+There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution. 
+
+\subsubsection{Fork or Select}
+
+Two ways to handle multiple clients connecting to a server are to \textit{fork()} a new process for each client, or using the \textit{select()} function to listen for active file descriptors. Both methods have there advantages and limitations. Forking a process to handle a client request or using select to handle requests starts with creating a listening socket on the server. 
+
+\begin{lstlisting}[caption=Server listen socket implementation \cite{stevensunp},label=lst:server listen]
+sock = socket(AF_INET, SOCK_STREAM, 0); 
+if (sock < 0) {
+	perror("creating stream socket");
+	exit(1);
+}
+
+server.sin_family = AF_INET;
+server.sin_addr.s_addr = htonl(INADDR_ANY);
+server.sin_port = htons(HANGMAN_TCP_PORT);
+
+if (bind(sock, (struct sockaddr *) &server, sizeof(server)) < 0) {
+	perror("binding socket");
+	exit(2);
+}
+
+listen(sock, 5);
+\end{lstlisting}
+
+The socket is created using the \textit{socket()} function, this returns a file descriptor which is an integer value identifying the socket on the system. The \textit{SOCK\_STREAM} argument is used to create a TCP streaming socket. Next the servers address structure is filled in with details pertaining to a passive server. The \textit{htonl(INADDR\_ANY)} function on line 8, tells the server to listen for any address, IP 0.0.0.0, in order to receive incoming connection requests from any IP address. The address structure is also initialized with a port number, shown on line 9 in code listing \ref{lst:server listen}. Using the \textit{bind()} function while passing in the socket file descriptor and address structure will bind the socket to the port.\\ 
+
+This is similar to how a client socket is created and initialized. The main differences being that the active client will use the \textit{connect()} function to connect to a passive server and will also fill in an address structure with details of the server. The server on the other hand uses the \textit{listen()} function to passively listen for incoming client connections on the port number it is bound to. \\
+
+Once the server is running and listening for incoming clients it can handle each client request by forking a process. Forking a process starts with a parent, this parent will create child processes that will execute along side the parent and will communicate with clients using the file descriptors associated with each. When a server accepts a connection is will \textit{fork()}, this will create another process that contains a copy of the data stored in the parent process, along with the newly created file descriptor for the conenction. The parent will then close the file descriptor it has which reduces the reference count to the descriptor by 1. The child process has a copy of this information and so the child can still use the file descriptor to send and receive data. Once the child process is finished with the client communications it closes the socket, reducing the reference count to 0, and exits. The parent must then kill the process in order to aviod creating \textit{zombie} processes that have been allocated system resources but are not being used. Killing a child process involves handling signals from the kernel in the parent that identify the child process being terminated. An advantage to using \textit{fork()} over \textit{select()} is that the process can handle each client individually and does not have to worry about any more incoming connections to the server. A disadvantage to forking is that it has to uses shared memory to communicate with other processes. This can introduce concurrency issues that can be very complex, difficult to understand, and hard to debug if something goes wrong.\\
+
+Another approach to handling client connections is to use \textit{select()}. This method will not create new processes. A single process handles all open file descriptors by looping through them and processing any that are active. The advantages of this approach over forking is that all clients are handled by a single process. This removes the need for shared memory or synchronisation primitives in order to communicate with other processes.\cite{theworldofselect} The disadvantage to using \textit{select()} over forking is that it cannot act like there is only one client at a time. With \textit{fork()} the developer can program the server as if there is only ever going to be one client which makes the code alot less complex. 
+
+
+
+In conclusion, handling multiple clients at the server can be achieved through a variety of different ways 
+
+\subsubsection{Round Robin DNS}
+
+Multiple servers running instances of the AI application that can handle a number of clients each. 
+
+\subsection{Existing Technologies}
+
+\subsection{Design Patterns}
+Observer pattern\\
+Stradegy pattern\\
+Lazy loading\\
+RAII\\
+
+\subsection{Artificial Intelligence \& Algorithms}
+A* Path finding\\
+Brute force\\
+Depth first search\\
+
+\subsection{Documentation}
+LaTeX\\
+doxygen\\
+Make\\
+MetaUML\\
+UMLet\\
+
+\subsection{Testing}
+Google C++ testing framework
+
+\subsection{Conclusions}
+
+\section{System Design and Configuration}
+Describe your approach to solving the problem and, where relevant, include sub sections on
+
+\subsection{System Architecture}
+
+\subsection{Class Diagram}
+
+\subsection{Sequence Diagram}
+
+Actual code is to be provided on an accompanying and suitably labeled CD.
+
+\section{Example of use}
+How do you see the solution being used in practise? Illustrate as appropriate with User Stories / Use Cases 
+
+\subsection{User Stories}
+
+\section{Testing \& Implementation}
+
+\subsection{Implementation}
+
+Describe how the solution was implemented and any problems particular to this stage.
+
+\begin{lstlisting}[caption=EXAMPLE IRAIG.h interface used for game engine, label=lst:raig header file]
+const float TimeBetweenCameraChanges = 2.0f;
+const float SmoothBlendTime = 0.75f;
+TimeToNextCameraChange -= DeltaTime;
+if (TimeToNextCameraChange <= 0.0f)
+{
+    TimeToNextCameraChange += TimeBetweenCameraChanges;
+
+    // Find the actor that handles control for the local player.
+    APlayerController* OurPlayerController = UGameplayStatics::GetPlayerController(this, 0);
+    if (OurPlayerController)
+    {
+        if ((OurPlayerController->GetViewTarget() != CameraOne) && (CameraOne != nullptr))
+        {
+            // Cut instantly to camera one.
+            OurPlayerController->SetViewTarget(CameraOne);
+        }
+        else if ((OurPlayerController->GetViewTarget() != CameraTwo) && (CameraTwo != nullptr))
+        {
+            // Blend smoothly to camera two.
+            OurPlayerController->SetViewTargetWithBlend (CameraTwo, SmoothBlendTime);
+        }
+    }
+}
+\end{lstlisting}
+
+And this is a reference to the code listing \ref{lst:raig header file}
+\subsection{Testing}
+
+Describe the testing that was carried out and the results.
+
+\subsection{Future Features}
+
+Give an account of the results of the project, what was accomplished, what wasn't and the reasons why. If the project is incomplete or has potential for improvement state what further features could be included and how existing ones might be improved.
+
+\section{User manual (where appropriate)}
+Write a concise but complete user manual or guide. This can be light on text so long as a novice user has enough information to use the application unaided.
+
+\section{Critical analysis and Conclusions}
+Evaluate the success of what was achieved against the original objectives. 
+
+What difficulties were encountered and what lessons learned from the project? 
+
+How well did the project follow the planned timeline and how useful was the timeline?  
+
+What are your key conclusions from the work.?
+
+This is a reference to the graph appendix \ref{appendix:graph}
+
+This is a reference to the Network Programming Book \cite[p.~215]{stevensunp}
+
+% References
+\newpage
+%\bibliographystyle{alpha}
+\begin{thebibliography}{9}
+\addcontentsline{toc}{section}{References}
+
+\bibitem{stevensunp}
+W. Richard Stevens, 2003. \textit{Unix Network Programming, Volume 1: The Sockets Networking API (3rd Edition)}. 3 Edition. Addison-Wesley Professional.
+
+\bibitem{theworldofselect}
+The World of select(). 2015. The World of select(). [ONLINE] \\
+Available at: \texttt{http://www.lowtek.com/sockets/select.html.} [Accessed 01 October 2015].
+
+\end{thebibliography}
+
+% Appendices
+\newpage
+\begin{appendices}
+
+\section{Graph Appendix}
+\label{appendix:graph}
+This is the graph appendix...
+
+\section{Another Appendix}
+
+\end{appendices}
+
+\end{document}
