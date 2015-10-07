@@ -112,10 +112,11 @@ Provide a plan for the project timeline implementation including key tasks, dead
 \section{Literature Review and Research}
 Outline the literature reviewed and research completed to inform the completion of your project.  This should include commentary on current and emerging technologies/systems, key data, information, source, code etc. which was sourced as part of your research.  Where relevant indicate any conclusions or recommendations arising from your research
 
+\subsection{API Design}
+
+The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answwer. While implementing the API the developer needs options or weigths that may determine what path is choosen for a particular situation. 
+
 \subsection{UDP vs TCP}
-
-
-\subsection{Client side API}
 
 \subsubsection{Pimpl Idiom}
 
@@ -125,7 +126,15 @@ This technique is used in the client side API for RAIG to simplify the interface
 
 \subsection{Server System Design}
 
-There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution. 
+There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution.\\
+
+\subsubsection{Benefits}
+
+Moving the graph search and processing to the server is a huge benefit to game developers. It allows the developers to forget about how the AI algorithms will run on particular systems or how much time it may take to calculate a specific query. Graph processing for state based AI is an example of a CPU intensive task, when implemented well. Removing this processing to the server frees up the resources needed for the action so they can be used elsewhere.\\
+
+\subsubsection{Efficiencies}
+
+Effecient processing and network communication is an integral part of creating a service that can be used by developers effectively. 
 
 \subsubsection{Fork or Select}
 
@@ -175,9 +184,14 @@ Lazy loading\\
 RAII\\
 
 \subsection{Artificial Intelligence \& Algorithms}
-A* Path finding\\
-Brute force\\
-Depth first search\\
+
+\subsection{A* Path finding}
+
+\subsection{Brute force}
+
+\subsection{Graph Sturctures}
+
+Game AI is best represented as a graph like structure. Using a graph allows many different algorithms to be used to process the data efficiently.
 
 \subsection{Documentation}
 LaTeX\\

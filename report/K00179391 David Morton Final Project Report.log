@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  3 OCT 2015 19:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 OCT 2015 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -544,37 +544,46 @@ File: Figures/lit_logo.jpg Graphic file (type jpg)
 <use Figures/lit_logo.jpg>
 Package pdftex.def Info: Figures/lit_logo.jpg used on input line 97.
 (pdftex.def)             Requested size: 452.9679pt x 124.90553pt.
- [3 <./Figures/lit_logo.jpg>] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+ [3 <./Figures/lit_logo.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 168--172
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--177
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 179--184
+Underfull \hbox (badness 10000) in paragraph at lines 181--185
 
  []
 
-[7] [8] [9] [10] [11] (./K00179391 David Morton Final Project Report.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--202
+
+ []
+
+[7] [8] [9] [10] [11] [12] (./K00179391 David Morton Final Project Report.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  5428 strings out of 493117
  75151 string characters out of 6135433
@@ -583,18 +592,17 @@ Here is how much of TeX's memory you used:
  9016 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,18n,58p,1697b,1720s stack positions out of 5000i,500n,10000p,200000b,80000s
-</us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local
-/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "K00179391 David Morton Final Project Report.pdf" (13 pages, 
-238859 bytes).
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "K00179391 David Morton Final Project Report.pdf" (14 pages, 
+241260 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
