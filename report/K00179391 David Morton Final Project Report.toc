@@ -3,11 +3,11 @@
 \contentsline {section}{\numberline {2}Problem Definition, Background, and Planning}{5}
 \contentsline {subsection}{\numberline {2.1}Objectives}{5}
 \contentsline {subsection}{\numberline {2.2}Project Planning}{5}
-\contentsline {section}{\numberline {3}Literature Review and Research}{5}
+\contentsline {section}{\numberline {3}Literature Review and Research}{6}
 \contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{6}
 \contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{6}
 \contentsline {subsubsection}{\numberline {3.1.2}Levels of Aritificial Intelligence}{6}
-\contentsline {subsection}{\numberline {3.2}Networking Aspects of Aritificial Intelligence}{6}
+\contentsline {subsection}{\numberline {3.2}Networked Aritificial Intelligence}{6}
 \contentsline {subsubsection}{\numberline {3.2.1}Distributed Client Side Processing}{6}
 \contentsline {subsubsection}{\numberline {3.2.2}Central Server Architecture}{6}
 \contentsline {subsection}{\numberline {3.3}Current Issues with Aritificial Intelligence in Games}{6}
@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {4.1}System Architecture}{6}
 \contentsline {subsection}{\numberline {4.2}Class Diagram}{6}
 \contentsline {subsection}{\numberline {4.3}Sequence Diagram}{6}
-\contentsline {section}{\numberline {5}Example of use}{6}
+\contentsline {section}{\numberline {5}Example of use}{7}
 \contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{8}
 \contentsline {subsection}{\numberline {6.1}Introduction}{8}
 \contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{8}
