@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 OCT 2015 13:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 OCT 2015 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -305,6 +305,26 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@ppsavesec=\count91
 \c@@ppsaveapp=\count92
 )
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen106
+\captionmargin@=\dimen107
+\captionwidth=\dimen108
+\caption@tempdima=\dimen109
+\caption@indent=\dimen110
+\caption@parindent=\dimen111
+\caption@hangindent=\dimen112
+)
+\c@ContinuedFloat=\count93
+Package caption Info: float package is loaded.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/chngcntr/chngcntr.sty
+Package: chngcntr 2009/09/02 v1.0a change counter resetting
+)
 (/usr/local/texlive/2014/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
@@ -316,15 +336,15 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count93
-\calc@Bcount=\count94
-\calc@Adimen=\dimen106
-\calc@Bdimen=\dimen107
+\calc@Acount=\count94
+\calc@Bcount=\count95
+\calc@Adimen=\dimen113
+\calc@Bdimen=\dimen114
 \calc@Askip=\skip44
 \calc@Bskip=\skip45
 LaTeX Info: Redefining \setlength on input line 75.
 LaTeX Info: Redefining \addtolength on input line 76.
-\calc@Ccount=\count95
+\calc@Ccount=\count96
 \calc@Cskip=\skip46
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/eso-pic/eso-pic.sty
@@ -359,27 +379,27 @@ File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box28
 \AM@toc@title=\toks19
-\c@AM@survey=\count96
+\c@AM@survey=\count97
 \AM@templatesizebox=\box29
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count97
+\lst@mode=\count98
 \lst@gtempboxa=\box30
 \lst@token=\toks20
-\lst@length=\count98
-\lst@currlwidth=\dimen108
-\lst@column=\count99
-\lst@pos=\count100
-\lst@lostspace=\dimen109
-\lst@width=\dimen110
-\lst@newlines=\count101
-\lst@lineno=\count102
-\lst@maxwidth=\dimen111
+\lst@length=\count99
+\lst@currlwidth=\dimen115
+\lst@column=\count100
+\lst@pos=\count101
+\lst@lostspace=\dimen116
+\lst@width=\dimen117
+\lst@newlines=\count102
+\lst@lineno=\count103
+\lst@maxwidth=\dimen118
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
-\c@lstnumber=\count103
-\lst@skipnumbers=\count104
+\c@lstnumber=\count104
+\lst@skipnumbers=\count105
 \lst@framebox=\box31
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.cfg
@@ -399,31 +419,31 @@ File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 (./K00179391 David Morton Final Project Report.aux)
 \openout1 = `"K00179391 David Morton Final Project Report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count105
-\scratchdimen=\dimen112
+\scratchcounter=\count106
+\scratchdimen=\dimen119
 \scratchbox=\box32
-\nofMPsegments=\count106
-\nofMParguments=\count107
+\nofMPsegments=\count107
+\nofMParguments=\count108
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count108
-\MPscratchDim=\dimen113
-\MPnumerator=\count109
-\makeMPintoPDFobject=\count110
+\MPscratchCnt=\count109
+\MPscratchDim=\dimen120
+\MPnumerator=\count110
+\makeMPintoPDFobject=\count111
 \everyMPtoPDFconversion=\toks22
 ) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -469,43 +489,46 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box33
-\c@lstlisting=\count111
+\c@lstlisting=\count112
 
 <reportTitlePage.pdf, id=1, 597.50829pt x 845.0471pt>
 File: reportTitlePage.pdf Graphic file (type pdf)
 
 <use reportTitlePage.pdf>
-Package pdftex.def Info: reportTitlePage.pdf used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf used on input line 49.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: reportTitlePage.pdf Graphic file (type pdf)
  <use reportTitlePage.pdf>
-Package pdftex.def Info: reportTitlePage.pdf used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf used on input line 49.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 
 <reportTitlePage.pdf, id=4, page=1, 597.50829pt x 845.0471pt>
 File: reportTitlePage.pdf Graphic file (type pdf)
 
 <use reportTitlePage.pdf, page 1>
-Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: reportTitlePage.pdf Graphic file (type pdf)
  <use reportTitlePage.pdf, page 1>
-Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: reportTitlePage.pdf Graphic file (type pdf)
 
 <use reportTitlePage.pdf, page 1>
-Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: reportTitlePage.pdf Graphic file (type pdf)
  <use reportTitlePage.pdf, page 1>
-Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: reportTitlePage.pdf Graphic file (type pdf)
 
 <use reportTitlePage.pdf, page 1>
-Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
+Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 49.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [1
 
@@ -513,96 +536,131 @@ Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 48.
 ap/pdftex.map}>] [1]
 (./K00179391 David Morton Final Project Report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 3.
+(Font)              <12> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 3.
+(Font)              <6> on input line 4.
  [1])
 \tf@toc=\write3
 \openout3 = `"K00179391 David Morton Final Project Report.toc"'.
 
-
+ [2]
 (./K00179391 David Morton Final Project Report.lot)
 \tf@lot=\write4
 \openout4 = `"K00179391 David Morton Final Project Report.lot"'.
 
-
+ [3]
 (./K00179391 David Morton Final Project Report.lof)
 \tf@lof=\write5
 \openout5 = `"K00179391 David Morton Final Project Report.lof"'.
 
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
 
-(./K00179391 David Morton Final Project Report.lol)
-\tf@lol=\write6
-\openout6 = `"K00179391 David Morton Final Project Report.lol"'.
+ []
 
- [2]
-<Figures/lit_logo.jpg, id=43, 604.2575pt x 166.6225pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+<Figures/lit_logo.jpg, id=49, 604.2575pt x 166.6225pt>
 File: Figures/lit_logo.jpg Graphic file (type jpg)
 
 <use Figures/lit_logo.jpg>
-Package pdftex.def Info: Figures/lit_logo.jpg used on input line 97.
+Package pdftex.def Info: Figures/lit_logo.jpg used on input line 104.
 (pdftex.def)             Requested size: 452.9679pt x 124.90553pt.
- [3 <./Figures/lit_logo.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
+ [5 <./Figures/lit_logo.jpg>] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 200--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 210--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
 
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 181--185
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--202
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
 
  []
 
-[7] [8] [9] [10] [11] [12] (./K00179391 David Morton Final Project Report.aux)
+[10]
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: Reference `lst:server listen' on page 11 undefined on input line
+ 275.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
+
+ []
+
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 315--320
+
+ []
+
+[13] [14] [15] (./K00179391 David Morton Final Project Report.aux)
+
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5428 strings out of 493117
- 75151 string characters out of 6135433
- 195064 words of memory out of 5000000
- 8793 multiletter control sequences out of 15000+600000
- 9016 words of font info for 32 fonts, out of 8000000 for 9000
+ 6460 strings out of 493117
+ 94089 string characters out of 6135433
+ 214776 words of memory out of 5000000
+ 9818 multiletter control sequences out of 15000+600000
+ 9624 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,18n,58p,1697b,1720s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
+ 39i,18n,58p,1697b,1292s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr
 /local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "K00179391 David Morton Final Project Report.pdf" (14 pages, 
-241260 bytes).
+Output written on "K00179391 David Morton Final Project Report.pdf" (17 pages, 
+259194 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

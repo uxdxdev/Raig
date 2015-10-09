@@ -5,6 +5,12 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[toc,page]{appendix}
+\usepackage[labelfont=bf,font=small]{caption}
+
+% Figure numbering
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 % Line spacing
 \usepackage{setspace}
@@ -18,9 +24,6 @@
 \definecolor{bluekeywords}{rgb}{0.13,0.13,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
 \definecolor{redstrings}{rgb}{0.9,0,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
 
 % Code listings
 \usepackage{listings}
@@ -31,18 +34,16 @@
   showstringspaces=false,
   breakatwhitespace=true,
   escapeinside={(*@}{@*)},
-  backgroundcolor=\color{backcolour},   
   commentstyle=\color{greencomments},
   keywordstyle=\color{bluekeywords},
   stringstyle=\color{redstrings},
   basicstyle=\ttfamily,
-  numbers=left,                    
-  numbersep=5pt,
-  numberstyle=\tiny\color{codegray},
+  numbers=left,
+  stepnumber=1,    
+  firstnumber=1,
+  numberfirstline=true,
+  frame=tlrb
 }
-\lstset{frame=tlrb}
-\renewcommand{\lstlistingname}{Code Listing}
-\renewcommand{\lstlistlistingname}{\lstlistingname s} 
 
 \begin{document}
 \includepdf{reportTitlePage}
@@ -55,29 +56,35 @@ This is the abstract.
 % Table of contents
 \tableofcontents
 
+\newpage
+
 % List of Tables
 \listoftables
+
+\newpage
 
 % List of figures
 \listoffigures
 
-% List of Listings
-\lstlistoflistings
-
 \newpage
 
 \section{Introduction}
-This section should contain general information on the project and the technology used.
-
-\subsection{Technologies}
+This section should contain general information on the project and the technology used.\\
 Technologies used in the project.
 
-\section{Problem Definition and Background}
+\section{Problem Definition, Background, and Planning}
+
+Explain how you understand the project objective(s),\\
+
+what is to be solved or done\\
+
+your perception of what has to be accomplished including the scope. RTS Games, controlling enemy characters.\\
+
+Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.\\
 
 \begin{table}[H] %% <--- and this
 \begin{center}
-\caption{Example table caption}
-\label{table:x Example table}
+
 \begin{tabular}{ | c | c |}
 \hline
 A & B \\ 
@@ -85,17 +92,17 @@ A & B \\
 C & D \\
 \hline
 \end{tabular}
+\caption{Example table caption}
+\label{table:x Example table}
 \end{center}
 \end{table}
 
 This is a reference to table \ref{table:x Example table}
 
-\subsection{Background}
-
 \begin{figure}[H]
 	\centering
     	\includegraphics[width=\textwidth]{Figures/lit_logo}
-	\caption{EXAMPLE Figure and caption}
+	\caption{Picture of the LIT Logo}
 	\label{fig:example figure and caption}
 \end{figure}
 
@@ -112,98 +119,29 @@ Provide a plan for the project timeline implementation including key tasks, dead
 \section{Literature Review and Research}
 Outline the literature reviewed and research completed to inform the completion of your project.  This should include commentary on current and emerging technologies/systems, key data, information, source, code etc. which was sourced as part of your research.  Where relevant indicate any conclusions or recommendations arising from your research
 
-\subsection{API Design}
+\subsection{Overview of Aritificial Intelligence in Games}
 
-The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answwer. While implementing the API the developer needs options or weigths that may determine what path is choosen for a particular situation. 
+\subsubsection{Hardware Resources}
 
-\subsection{UDP vs TCP}
+\subsubsection{Levels of Aritificial Intelligence}
 
-\subsubsection{Pimpl Idiom}
+\subsection{Networking Aspects of Aritificial Intelligence}
 
-The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+\subsubsection{Distributed Client Side Processing}
 
-This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be a simple as possible to support ease of use. 
+\subsubsection{Central Server Architecture}
 
-\subsection{Server System Design}
+\subsection{Current Issues with Aritificial Intelligence in Games}
 
-There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution.\\
+\subsubsection{Complex Algorithms \& Implementations}
 
-\subsubsection{Benefits}
+\subsubsection{Network Latency}
 
-Moving the graph search and processing to the server is a huge benefit to game developers. It allows the developers to forget about how the AI algorithms will run on particular systems or how much time it may take to calculate a specific query. Graph processing for state based AI is an example of a CPU intensive task, when implemented well. Removing this processing to the server frees up the resources needed for the action so they can be used elsewhere.\\
+\subsubsection{Human Perception}
 
-\subsubsection{Efficiencies}
+\subsection{Conclusions of Research}
 
-Effecient processing and network communication is an integral part of creating a service that can be used by developers effectively. 
-
-\subsubsection{Fork or Select}
-
-Two ways to handle multiple clients connecting to a server are to \textit{fork()} a new process for each client, or using the \textit{select()} function to listen for active file descriptors. Both methods have there advantages and limitations. Forking a process to handle a client request or using select to handle requests starts with creating a listening socket on the server. 
-
-\begin{lstlisting}[caption=Server listen socket implementation \cite{stevensunp},label=lst:server listen]
-sock = socket(AF_INET, SOCK_STREAM, 0); 
-if (sock < 0) {
-	perror("creating stream socket");
-	exit(1);
-}
-
-server.sin_family = AF_INET;
-server.sin_addr.s_addr = htonl(INADDR_ANY);
-server.sin_port = htons(HANGMAN_TCP_PORT);
-
-if (bind(sock, (struct sockaddr *) &server, sizeof(server)) < 0) {
-	perror("binding socket");
-	exit(2);
-}
-
-listen(sock, 5);
-\end{lstlisting}
-
-The socket is created using the \textit{socket()} function, this returns a file descriptor which is an integer value identifying the socket on the system. The \textit{SOCK\_STREAM} argument is used to create a TCP streaming socket. Next the servers address structure is filled in with details pertaining to a passive server. The \textit{htonl(INADDR\_ANY)} function on line 8, tells the server to listen for any address, IP 0.0.0.0, in order to receive incoming connection requests from any IP address. The address structure is also initialized with a port number, shown on line 9 in code listing \ref{lst:server listen}. Using the \textit{bind()} function while passing in the socket file descriptor and address structure will bind the socket to the port.\\ 
-
-This is similar to how a client socket is created and initialized. The main differences being that the active client will use the \textit{connect()} function to connect to a passive server and will also fill in an address structure with details of the server. The server on the other hand uses the \textit{listen()} function to passively listen for incoming client connections on the port number it is bound to. \\
-
-Once the server is running and listening for incoming clients it can handle each client request by forking a process. Forking a process starts with a parent, this parent will create child processes that will execute along side the parent and will communicate with clients using the file descriptors associated with each. When a server accepts a connection is will \textit{fork()}, this will create another process that contains a copy of the data stored in the parent process, along with the newly created file descriptor for the conenction. The parent will then close the file descriptor it has which reduces the reference count to the descriptor by 1. The child process has a copy of this information and so the child can still use the file descriptor to send and receive data. Once the child process is finished with the client communications it closes the socket, reducing the reference count to 0, and exits. The parent must then kill the process in order to aviod creating \textit{zombie} processes that have been allocated system resources but are not being used. Killing a child process involves handling signals from the kernel in the parent that identify the child process being terminated. An advantage to using \textit{fork()} over \textit{select()} is that the process can handle each client individually and does not have to worry about any more incoming connections to the server. A disadvantage to forking is that it has to uses shared memory to communicate with other processes. This can introduce concurrency issues that can be very complex, difficult to understand, and hard to debug if something goes wrong.\\
-
-Another approach to handling client connections is to use \textit{select()}. This method will not create new processes. A single process handles all open file descriptors by looping through them and processing any that are active. The advantages of this approach over forking is that all clients are handled by a single process. This removes the need for shared memory or synchronisation primitives in order to communicate with other processes.\cite{theworldofselect} The disadvantage to using \textit{select()} over forking is that it cannot act like there is only one client at a time. With \textit{fork()} the developer can program the server as if there is only ever going to be one client which makes the code alot less complex. 
-
-
-
-In conclusion, handling multiple clients at the server can be achieved through a variety of different ways 
-
-\subsubsection{Round Robin DNS}
-
-Multiple servers running instances of the AI application that can handle a number of clients each. 
-
-\subsection{Existing Technologies}
-
-\subsection{Design Patterns}
-Observer pattern\\
-Stradegy pattern\\
-Lazy loading\\
-RAII\\
-
-\subsection{Artificial Intelligence \& Algorithms}
-
-\subsection{A* Path finding}
-
-\subsection{Brute force}
-
-\subsection{Graph Sturctures}
-
-Game AI is best represented as a graph like structure. Using a graph allows many different algorithms to be used to process the data efficiently.
-
-\subsection{Documentation}
-LaTeX\\
-doxygen\\
-Make\\
-MetaUML\\
-UMLet\\
-
-\subsection{Testing}
-Google C++ testing framework
-
-\subsection{Conclusions}
+Explain the reasoning behind the decisions made for the client api, the sockets layer using TCP, the server application forking, and the AI system structure using C++ and Python.
 
 \section{System Design and Configuration}
 Describe your approach to solving the problem and, where relevant, include sub sections on
@@ -219,15 +157,8 @@ Actual code is to be provided on an accompanying and suitably labeled CD.
 \section{Example of use}
 How do you see the solution being used in practise? Illustrate as appropriate with User Stories / Use Cases 
 
-\subsection{User Stories}
-
-\section{Testing \& Implementation}
-
-\subsection{Implementation}
-
-Describe how the solution was implemented and any problems particular to this stage.
-
-\begin{lstlisting}[caption=EXAMPLE IRAIG.h interface used for game engine, label=lst:raig header file]
+\begin{figure}[H]
+\begin{lstlisting}
 const float TimeBetweenCameraChanges = 2.0f;
 const float SmoothBlendTime = 0.75f;
 TimeToNextCameraChange -= DeltaTime;
@@ -252,20 +183,143 @@ if (TimeToNextCameraChange <= 0.0f)
     }
 }
 \end{lstlisting}
+	\caption{This is a code listing}
+	\label{code:raig header file}
+\end{figure}
 
-And this is a reference to the code listing \ref{lst:raig header file}
-\subsection{Testing}
+
+
+And this is a reference to the code listing \ref{code:raig header file}
+
+\section{Remote Artificial Intelligence for Games}
+
+\subsection{Introduction}
+
+Describe how the solution was implemented and any problems particular to this stage.
+
+Client side API\\
+Sockets layer\\
+Server side application\\
+AI Algorithms\\
+
+\subsubsection{Networking Model}
+
+Client server model\\
+
+\subsubsection{Design Patterns}
+Observer pattern\\
+Stradegy pattern\\
+Lazy loading\\
+RAII\\
+
+\subsection{Client API Design}
+
+The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answwer. While implementing the API the developer needs options or weigths that may determine what path is choosen for a particular situation. 
+
+\subsubsection{Pimpl Idiom}
+
+The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+
+This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be a simple as possible to support ease of use. 
+
+\subsubsection{Game Representation}
+
+Custom structs and contraining how the game will be presented to the AI
+
+
+\subsection{BSD Sockets Layer}
+
+\subsubsection{UDP vs TCP}
+
+\subsubsection{Communication Protocol}
+
+Packet header overview and details.\\
+
+\subsection{Server System Design}
+
+There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution.\\
+
+\subsubsection{Benefits of Remote Processing}
+
+Moving the graph search and processing to the server is a huge benefit to game developers. It allows the developers to forget about how the AI algorithms will run on particular systems or how much time it may take to calculate a specific query. Graph processing for state based AI is an example of a CPU intensive task, when implemented well. Removing this processing to the server frees up the resources needed for the action so they can be used elsewhere.\\
+
+
+\subsubsection{Fork or Select}
+
+Two ways to handle multiple clients connecting to a server are to \textit{fork()} a new process for each client, or using the \textit{select()} function to listen for active file descriptors. Both methods have there advantages and limitations. Forking a process to handle a client request or using select to handle requests starts with creating a listening socket on the server. 
+
+\begin{figure}[H]
+
+\begin{lstlisting}
+sock = socket(AF_INET, SOCK_STREAM, 0); 
+if (sock < 0) {
+	perror("creating stream socket");
+	exit(1);
+}
+
+server.sin_family = AF_INET;
+server.sin_addr.s_addr = htonl(INADDR_ANY);
+server.sin_port = htons(HANGMAN_TCP_PORT);
+
+if (bind(sock, (struct sockaddr *) &server, sizeof(server)) < 0) {
+	perror("binding socket");
+	exit(2);
+}
+
+listen(sock, 5);
+\end{lstlisting}
+	\caption{This is another code listing \cite{stevensunp}}
+	\label{code:raig header source}
+\end{figure}
+
+The socket is created using the \textit{socket()} function, this returns a file descriptor which is an integer value identifying the socket on the system. The \textit{SOCK\_STREAM} argument is used to create a TCP streaming socket. Next the servers address structure is filled in with details pertaining to a passive server. The \textit{htonl(INADDR\_ANY)} function on line 8, tells the server to listen for any address, IP 0.0.0.0, in order to receive incoming connection requests from any IP address. The address structure is also initialized with a port number, shown on line 9 in code listing \ref{lst:server listen}. Using the \textit{bind()} function while passing in the socket file descriptor and address structure will bind the socket to the port.\\ 
+
+This is similar to how a client socket is created and initialized. The main differences being that the active client will use the \textit{connect()} function to connect to a passive server and will also fill in an address structure with details of the server. The server on the other hand uses the \textit{listen()} function to passively listen for incoming client connections on the port number it is bound to. \\
+
+Once the server is running and listening for incoming clients it can handle each client request by forking a process. Forking a process starts with a parent, this parent will create child processes that will execute along side the parent and will communicate with clients using the file descriptors associated with each. When a server accepts a connection is will \textit{fork()}, this will create another process that contains a copy of the data stored in the parent process, along with the newly created file descriptor for the conenction. The parent will then close the file descriptor it has which reduces the reference count to the descriptor by 1. The child process has a copy of this information and so the child can still use the file descriptor to send and receive data. Once the child process is finished with the client communications it closes the socket, reducing the reference count to 0, and exits. The parent must then kill the process in order to aviod creating \textit{zombie} processes that have been allocated system resources but are not being used. Killing a child process involves handling signals from the kernel in the parent that identify the child process being terminated. An advantage to using \textit{fork()} over \textit{select()} is that the process can handle each client individually and does not have to worry about any more incoming connections to the server. A disadvantage to forking is that it has to uses shared memory to communicate with other processes. This can introduce concurrency issues that can be very complex, difficult to understand, and hard to debug if something goes wrong.\\
+
+Another approach to handling client connections is to use \textit{select()}. This method will not create new processes. A single process handles all open file descriptors by looping through them and processing any that are active. The advantages of this approach over forking is that all clients are handled by a single process. This removes the need for shared memory or synchronisation primitives in order to communicate with other processes.\cite{theworldofselect} The disadvantage to using \textit{select()} over forking is that it cannot act like there is only one client at a time. With \textit{fork()} the developer can program the server as if there is only ever going to be one client which makes the code alot less complex. 
+
+
+
+In conclusion, handling multiple clients at the server can be achieved through a variety of different ways 
+
+\subsubsection{Round Robin DNS}
+
+Multiple servers running instances of the AI application that can handle a number of clients each. 
+
+\subsection{Artificial Intelligence \& Algorithms}
+
+\subsubsection{A* Path finding}
+
+\subsubsection{Brute force}
+
+\subsubsection{Graph Sturctures}
+
+Game AI is best represented as a graph like structure. Using a graph allows many different algorithms to be used to process the data efficiently.
+
+\subsection{Analysis, Testing, and Results}
 
 Describe the testing that was carried out and the results.
 
-\subsection{Future Features}
-
 Give an account of the results of the project, what was accomplished, what wasn't and the reasons why. If the project is incomplete or has potential for improvement state what further features could be included and how existing ones might be improved.
+
+Google C++ testing framework
+
+\subsection{Summary}
+
 
 \section{User manual (where appropriate)}
 Write a concise but complete user manual or guide. This can be light on text so long as a novice user has enough information to use the application unaided.
 
-\section{Critical analysis and Conclusions}
+LaTeX\\
+doxygen\\
+Make\\
+MetaUML\\
+UMLet\\
+
+\section{Critical analysis, Conclusions, and Future Work}
+
 Evaluate the success of what was achieved against the original objectives. 
 
 What difficulties were encountered and what lessons learned from the project? 
