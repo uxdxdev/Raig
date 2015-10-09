@@ -1,9 +1,9 @@
 \select@language {english}
 \contentsline {section}{\numberline {1}Introduction}{5}
 \contentsline {section}{\numberline {2}Problem Definition, Background, and Planning}{5}
-\contentsline {subsection}{\numberline {2.1}Objectives}{6}
-\contentsline {subsection}{\numberline {2.2}Project Planning}{6}
-\contentsline {section}{\numberline {3}Literature Review and Research}{6}
+\contentsline {subsection}{\numberline {2.1}Objectives}{5}
+\contentsline {subsection}{\numberline {2.2}Project Planning}{5}
+\contentsline {section}{\numberline {3}Literature Review and Research}{5}
 \contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{6}
 \contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{6}
 \contentsline {subsubsection}{\numberline {3.1.2}Levels of Aritificial Intelligence}{6}
@@ -15,22 +15,22 @@
 \contentsline {subsubsection}{\numberline {3.3.2}Network Latency}{6}
 \contentsline {subsubsection}{\numberline {3.3.3}Human Perception}{6}
 \contentsline {subsection}{\numberline {3.4}Conclusions of Research}{6}
-\contentsline {section}{\numberline {4}System Design and Configuration}{7}
-\contentsline {subsection}{\numberline {4.1}System Architecture}{7}
-\contentsline {subsection}{\numberline {4.2}Class Diagram}{7}
-\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{7}
-\contentsline {section}{\numberline {5}Example of use}{7}
+\contentsline {section}{\numberline {4}System Design and Configuration}{6}
+\contentsline {subsection}{\numberline {4.1}System Architecture}{6}
+\contentsline {subsection}{\numberline {4.2}Class Diagram}{6}
+\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{6}
+\contentsline {section}{\numberline {5}Example of use}{6}
 \contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{8}
 \contentsline {subsection}{\numberline {6.1}Introduction}{8}
-\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{9}
-\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{9}
-\contentsline {subsection}{\numberline {6.2}Client API Design}{9}
+\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{8}
+\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{8}
+\contentsline {subsection}{\numberline {6.2}Client API Design}{8}
 \contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{9}
 \contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{9}
-\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{10}
-\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{10}
-\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{10}
-\contentsline {subsection}{\numberline {6.4}Server System Design}{10}
+\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{9}
+\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{9}
+\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{9}
+\contentsline {subsection}{\numberline {6.4}Server System Design}{9}
 \contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{10}
 \contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{10}
 \contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{12}
@@ -38,9 +38,9 @@
 \contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{12}
 \contentsline {subsubsection}{\numberline {6.5.2}Brute force}{12}
 \contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{12}
-\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{13}
-\contentsline {subsection}{\numberline {6.7}Summary}{13}
-\contentsline {section}{\numberline {7}User manual (where appropriate)}{13}
+\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{12}
+\contentsline {subsection}{\numberline {6.7}Summary}{12}
+\contentsline {section}{\numberline {7}User manual (where appropriate)}{12}
 \contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{13}
 \contentsline {section}{References}{14}
 \contentsline {section}{Appendices}{15}
