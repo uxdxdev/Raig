@@ -78,13 +78,15 @@ This is the abstract.
 
 Aritificial Intelligence in games is becoming more and more popular due to new advancements in technology and increasing hardware resources on user devices. Running complex AI on users machines can sometimes be infeasible as the necessary CPU time or speed is just not available. Games are very CPU intensive applications that utilize a systems hardware for graphics rendering, audio output, networking, user inputs, and feedback. Artificial Intelligence can sometimes demand alot of processing in order to accurately generate realistic behaviours that can mimic sentient entities in a game. The type of algorithm needed for a particular behaviour in a game comes down to the knowledge and skill of the developer. This however means that highly skilled developers may attempt to implement a very complex and efficient ai algorithm when it may not be needed at all, and sometimes can produce inferior results compared to a simple animation or pre-defined behaviour. Choosing whether to use an algorithm to generate aritificial intelligence or to simply pre-define a behaviour can be very difficult and could lead to huge amounts of time and resources being wasted in a feable attempt to create SkyNet\cite{skynet}. 
 
-Network bandwidth is also becoming cheaper to deliver to users through home broadband connections and on their mobile devices. The combination or cheap bandwidth, increased network speeds, and high performance computer hardware opens up the possibility of distributed processing for faster results from computing large data sets. Distributed processing is used to divide large datasets into smaller, more managable pieces in order to process them individually and produce results faster through the use of multiple machines connected over a network. Multiplayer games can utilize a network to run a game instance on high powered machines that will then send rendering information to the connected clients. Because aritificial intelligence algorithm processing can be intensive it makes sense to use a similar model to the client server multiplayer game to process large amounts of data on a higher end machine compared to a users mobile devices or home computers.
+Network bandwidth is also becoming cheaper to deliver to users through home broadband connections and on their mobile devices. The combination or cheap bandwidth, increased network speeds, and high performance computer hardware opens up the possibility of distributed processing for faster results from computing large data sets. Distributed processing is used to divide large datasets into smaller, more managable pieces in order to process them individually and produce results faster through the use of multiple machines connected over a network. It is the use of more than one processor to perform the processing for an individual task\cite{distributedprocessing}. Multiplayer games can utilize a network to run a game instance on high powered machines that will then send rendering information to the connected clients. MMORPG Massively Multiplayer Online Role Playing Games use the client/server architecture to manage thousands of users simultaneously while they are connected to remote servers running instances of the game. World of Warcraft\cite{worldofwarcraft} is an example fo a very popular MMORPG that efficiently utilizes available network bandwidth and the internet to deliver fast, reliable, and relatively bug free gameplay to thousands of players all over the world. Because aritificial intelligence algorithm processing can be intensive, using a similar model to the client/server architecture used in multiplayer games to process large amounts of data on a higher end machine instead of the users device can free up the devices CPU processing time and allow it to allocate more to other processes.
 
-What this project aims to achieve is the use of the internet as a means to transmit the results of executing CPU intensive path finding algorithms used in real time strategy games on a remote server machine. Abstracting the implementations of path finding algorithms and providing developers with a simple to use Application Programming Interface that communicates with a remote server to generate results may save individually developers and studios a considerable amount of time, money, and resources. The A* pathfinding algorithm is a popular algorithm used in games to calculate paths through the games geometry. The graph consists of nodes and connections, also known as vertex and edges, with weights or values associated with each edge. Moving from one node to another node may incur a cost which is the value assigned to a connection. A* works on a non-negative weighted graph and so the game geometry must be converted into a state that the algorithm can understand. This algorithm, once it recieves the data it needs over the network, will process the data sending the result back to the client for use in the game. Many times in real time strategy games the player or enemy units will need to move from one location on the map to another along the shortest possible route while avoiding obstacles such as villages, cliffs, towers, or oceans. It would not be acceptable for the units to just cut across the map ignoring its explicit structure. 
+What this project aims to achieve is the use of the internet as a means to transmit the results of executing CPU intensive path finding algorithms used in real time strategy games on a remote server machine to the client. Abstracting the implementations of path finding algorithms and providing developers with a simple to use Application Programming Interface that communicates with a remote server to generate results may save individually developers and studios a considerable amount of time, money, and resources. The A* pathfinding algorithm is a popular algorithm used in games to calculate paths through a games geometry. The graph consists of nodes and connections, also known as vertex and edges, with weights or values associated with each edge. Moving from one node to another node may incur a cost which is the value assigned to a connection. A* works on a non-negative weighted graph\cite[p.~198]{nonnegativeweightedgraph} and so the game geometry must be converted into a state that the algorithm can understand. This algorithm, once it recieves the data it needs over the network, will process the data sending the result back to the client for use in the game. Many times in real time strategy games the player or enemy units will need to move from one location on the map to another along the shortest possible route while avoiding obstacles such as villages, cliffs, towers, or oceans. It would not be acceptable for the units to just cut across the map ignoring its explicit structure. The A* pathfinding algorithm has many different variations depending on specific use cases and available hardware for efficiencies. 
+
+The implementation details for the client side API will be explained in detail in the section \ref{section:clientapidesign}. The API itself needs to be usable by game developers in an intuitive way in order to get the results that they need from the system and so will need to be designed with a focus on developers. The communication layer that will be used to transmit data between the client and the server will need to be efficient and reliable in order to deliver data that is complete and integral. Missing packets or corrupt data is unacceptable when accurate processing needs to be done by complex algorithms to produce results fast. Further, congestion on a network needs to be handled efficiently to prevent delays in communication bewteen the client and server when requesting path data for in game entites. Large delays may annoy users of the system and can cause a bad gaming experience. This will be described in the section \ref{section:networklayer}. The server system that will communicate with each client to handle requests and schedule tasks for the Aritificial Intelligence system will be discussed in section \ref{section:serverdesign}. The server system will need to communicate with clients concurrently, handling data I/O and managing a task record in order to efficiently service each client fairly. Efficiently allocating resources as needed and recovering from interrupted or terminated client communications will be the job of the server. Identifying each client and routing information is also necessary to ensure a good user experience. The AI module residing on the server that will communicate with the server system will be responsible for all algorithm management. This will be explained in section \ref{section:aimoduledesign}. Choosing the right implementation of an algorithm in order to achieve the best possible speed and efficiency will be key to producing fast and accurate results for the client games using the system. There are many differnet types of games that fall under the umbella of Real Time Strategy. The AI module will attempt to service client requests that vary greathly from one another in the RTS genre of games in an effort to provide a generic solution to pathfinding that can be applied to many different situations.
 
 \section{Problem Definition, Background, and Planning}
 
-\textbf{Explain how you understand the project objective(s), what is to be solved or done, your perception of what has to be accomplished including the scope. RTS Games, controlling enemy characters. Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.}\\
+The problems faced by game developers when implementing Artificial Intelligence in their games can be many depending of the type of AI needed. One of the problems that need to be addressed initially is the choice of whether to use a complex implementation of an algorithm to produce expected behavioural output data or to just use some nice animation effects to emulate smart entity characteristics. Another problem arises when the choice is made to use an algorithm to produce behavioural data, what is the best and most efficiently way to implement the algorithms execution?. When it comes down to using an algorithm instead of some animation effects more problems surface such as finding a developer that is skillful enough to program the algorithm efficiently but also possesses the knowledge to recognized whether a simple implementation will produce better results than a more complex and conveluded one. They must also know how to use the devices hardware architecture
 
 
 \subsection{Objectives}
@@ -218,6 +220,7 @@ Lazy loading\\
 RAII\\
 
 \subsection{Client API Design}
+\label{section:clientapidesign}
 
 The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answwer. While implementing the API the developer needs options or weigths that may determine what path is choosen for a particular situation. 
 
@@ -233,6 +236,7 @@ Custom structs and contraining how the game will be presented to the AI
 
 
 \subsection{BSD Sockets Layer}
+\label{section:networklayer}
 
 \subsubsection{UDP vs TCP}
 
@@ -241,6 +245,7 @@ Custom structs and contraining how the game will be presented to the AI
 Packet header overview and details.\\
 
 \subsection{Server System Design}
+\label{section:serverdesign}
 
 There are many ways a server systems architecture can be designed. Multiple users may need to connect and use the services provided by the server at any one time. How the server will scale to the number of users is a very important consideration when designing a remote service. This decision needs to made early in the initial envisioning phase of a project becuase it determines how the resources of the host machine will be used, how to limit or allocate more resources if needed, and also the approach taken to implement the solution.\\
 
@@ -294,6 +299,7 @@ In conclusion, handling multiple clients at the server can be achieved through a
 Multiple servers running instances of the AI application that can handle a number of clients each. 
 
 \subsection{Artificial Intelligence \& Algorithms}
+\label{section:aimoduledesign}
 
 \subsubsection{A* Path finding}
 
@@ -351,7 +357,16 @@ W. Richard Stevens, 2003. \textit{Unix Network Programming, Volume 1: The Socket
 
 \bibitem{theworldofselect}
 The World of select(). 2015. The World of select(). [ONLINE] \\
-Available at: \texttt{http://www.lowtek.com/sockets/select.html.} [Accessed 01 October 2015].
+Available at: \textit{http://www.lowtek.com/sockets/select.html.} [Accessed 01 October 2015].
+
+\bibitem{nonnegativeweightedgraph}
+Ian Millington, 2009. \textit{Artificial Intelligence for Games}. 2 Edition. CRC Press.
+
+\bibitem{distributedprocessing}
+Distributed Processing . 2015. Distributed Processing . [ONLINE] Available at: \textit{http://docs.oracle.com/cd/A87860\_01/doc/server.817/a76965/c29dstpr.htm}. [Accessed 10 October 2015].
+
+\bibitem{worldofwarcraft}
+World of Warcraft - Wikipedia, the free encyclopedia. 2015. World of Warcraft - Wikipedia, the free encyclopedia. [ONLINE] Available at: \textit{https://en.wikipedia.org/wiki/World\_of\_Warcraft}. [Accessed 10 October 2015].
 
 \end{thebibliography}
 
