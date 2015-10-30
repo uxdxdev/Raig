@@ -86,10 +86,12 @@ The implementation details for the client side API will be explained in detail i
 
 \section{Problem Definition, Background, and Planning}
 
-The problems faced by game developers when implementing Artificial Intelligence in their games can be many depending of the type of AI needed. One of the problems that need to be addressed initially is the choice of whether to use a complex implementation of an algorithm to produce expected behavioural output data or to just use some nice animation effects to emulate smart entity characteristics. Another problem arises when the choice is made to use an algorithm to produce behavioural data, what is the best and most efficiently way to implement the algorithms execution?. When it comes down to using an algorithm instead of some animation effects more problems surface such as finding a developer that is skillful enough to program the algorithm efficiently but also possesses the knowledge to recognized whether a simple implementation will produce better results than a more complex and conveluded one. They must also know how to use the devices hardware architecture
+The problems faced by game developers when implementing Artificial Intelligence in their games depend on the type of AI needed. One of the problems that need to be addressed initially is the choice of whether to use a complex implementation of an algorithm to produce expected behavioural output data or to just use some nice animation effects to emulate smart entity characteristics. Another problem arises when the choice is made to use an algorithm to produce behavioural data, what is the best and most efficient way to implement the algorithm?. When it comes down to using an algorithm instead of some animation effects more problems surface such as finding a developer that is skillful enough to program efficiently but also possesses the knowledge to recognize whether a simple implementation will produce better results compared to a more complex and conveluded one. They must also know how to use the devices hardware architecture such as the CPUs cache memory to squeeze as much performance out of a device as possible if it is needed. 
 
+Using a network creates another unique set of problems when it comes to transmitting data between clients or to a remote server. Network latency is delay and measures the time taken for data to travel from its source to its destination\cite{networklatency}. A developer can use a network to create a multiplayer game that allows multiple users to send data to each other or to a server so they can interact in a coherent and simulated game world. World of Warcraft\cite{worldofwarcraft} uses the internet to transmit data from a users game client to a central server. This data is used as input to a game instance that is running on the server and the results of the input are sent back to the client. The client will then use this data to update the rendering or physics engine for the local game world to reflect what is happening on the server game world. The time taken for data to travel must be extremely small, measured in milliseconds, in order to maintain a good QoS Quality of Service for the players. For remote AI, similar considerations need to be adhered to when communicating over a network. The concept of using the network to transmit data will be similar but the redundant systems to improve the QoS will be different. For example, in multiplayer games a technique know as Client Side Prediction is used to instantly update the local game world while simultaneously sending coordinate data to the remote server. Predictions are made on the client to alleviate the effects of network latency creating lag when updating the players position in the game world. If there are discrepencies between the players position on the client and the players position after the server has calculated the inputs, the client is updated to reflect the server because the server has authority over the game world which reduces cheating. For remote AI, previous paths can be cached on the client side in order to reduce the processing time taken to calculate a path for an entity. The initial request can be sent to the server, the AI module generates a path and returns the information, it is then stored in case a similar query is made by the game client. This will reduce the dependency on the network to produce results and will improve QoS for the developers. 
 
 \subsection{Objectives}
+
 Explain how you understand the project objective(s), what is to be solved or done, your perception of what has to be accomplished including the scope. 
 
 \subsection{Project Planning}
@@ -196,7 +198,6 @@ This is a reference to table \ref{table:x Example table}
 \end{figure}
 
 And this is a reference to the figure in Figure \ref{fig:example figure and caption}.
-
 
 \section{Remote Artificial Intelligence for Games}
 
@@ -367,6 +368,9 @@ Distributed Processing . 2015. Distributed Processing . [ONLINE] Available at: \
 
 \bibitem{worldofwarcraft}
 World of Warcraft - Wikipedia, the free encyclopedia. 2015. World of Warcraft - Wikipedia, the free encyclopedia. [ONLINE] Available at: \textit{https://en.wikipedia.org/wiki/World\_of\_Warcraft}. [Accessed 10 October 2015].
+
+\bibitem{networklatency}
+HTG Explains: How Latency Can Make Even Fast Internet Connections Feel Slow. 2015. [ONLINE] Available at: \textit{http://www.howtogeek.com/138771/htg-explains-how-latency-can-make-even-fast-internet-connections-feel-slow/.} [Accessed 10 October 2015].
 
 \end{thebibliography}
 
