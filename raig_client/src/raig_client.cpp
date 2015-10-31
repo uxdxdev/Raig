@@ -6,6 +6,7 @@ int main()
 {
 	Raig* raig = new Raig();
 	raig->connect();
-	raig->sendData("data string");
+	raig->sendData((char*)"data string");
+
 	return 0;
 }

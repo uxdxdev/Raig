@@ -21,7 +21,7 @@ public:
 	bool alive;
 
 	int iSocketFileDescriptor;
-	char * strServerIPAddress;
+	char* strServerIPAddress;
 	struct Address sAddress;
 };
 
@@ -65,21 +65,23 @@ void Raig::update()
 void Raig::RaigImpl::connect()
 {
 	std::cout << "Raig::RaigImpl::connect()" << std::endl;
-	/*
-	strServerIPAddress = "127.0.0.1";
+
+	strServerIPAddress = (char*)"127.0.0.1";
 
 	iSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
 
 	Address(AF_INET, (struct Address*) &sAddress, strServerIPAddress, HANGMAN_TCP_PORT);
 
 	Connect(iSocketFileDescriptor, (struct sockaddr*) &sAddress.m_sAddress, sizeof(sAddress.m_sAddress));
-	*/
+
 }
 
 void Raig::RaigImpl::sendData(char* dataString)
 {
 	std::cout << "Raig::RaigImpl::sendData() : " << dataString << std::endl;
-	//multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
+	multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
+
+	close(iSocketFileDescriptor);
 }
 
 void Raig::RaigImpl::sendData(int value)
