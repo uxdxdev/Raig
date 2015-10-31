@@ -1,8 +1,3 @@
-#include <stdio.h> // perror, fprintf, stderr, printf
-#include <cstdlib> // added for use with c code in c++
-#include <netdb.h> // gethostbyname, hostent, sockaddr_in, AF_INET, SOCK_STREAM, socket(),
-#include <cstring> // memcpy
-#include <unistd.h> // read(), write()
 #include "Raig.h" // API for developers
 
 extern "C" {
@@ -70,6 +65,7 @@ void Raig::update()
 void Raig::RaigImpl::connect()
 {
 	std::cout << "Raig::RaigImpl::connect()" << std::endl;
+	/*
 	strServerIPAddress = "127.0.0.1";
 
 	iSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
@@ -77,12 +73,13 @@ void Raig::RaigImpl::connect()
 	Address(AF_INET, (struct Address*) &sAddress, strServerIPAddress, HANGMAN_TCP_PORT);
 
 	Connect(iSocketFileDescriptor, (struct sockaddr*) &sAddress.m_sAddress, sizeof(sAddress.m_sAddress));
+	*/
 }
 
 void Raig::RaigImpl::sendData(char* dataString)
 {
 	std::cout << "Raig::RaigImpl::sendData() : " << dataString << std::endl;
-	multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
+	//multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
 }
 
 void Raig::RaigImpl::sendData(int value)
