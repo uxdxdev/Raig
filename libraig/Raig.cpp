@@ -5,24 +5,29 @@
 #include <unistd.h> // read(), write()
 #include "Raig.h" // API for developers
 
+extern "C" {
+	#include "../libsocket/Sockets.h"
+}
+
 using namespace raig;
 
 // RaigImpl class declaration
 class Raig::RaigImpl
 {
 public:
-	void createMap();
-	Position2D readData(int x, int y);
-	void updateMap();
+	void connect();
+	void sendData(char* dataString);
+	void sendData(int value);
 	void update();
-	void deleteEntity();
-	bool isAlive();
-	void shutdown();
-	void cleanUp();
 
-	Position2D data;
+	// Private members and functions
+	void cleanUp();
 	bool isComplete;
 	bool alive;
+
+	int iSocketFileDescriptor;
+	char * strServerIPAddress;
+	struct Address sAddress;
 };
 
 /*
@@ -39,19 +44,19 @@ Raig::~Raig()
 	m_Impl->cleanUp();
 }
 
-void Raig::createMap()
+void Raig::connect()
 {
-	m_Impl->createMap();
+	m_Impl->connect();
 }
 
-Position2D Raig::readData(int x, int y)
+void Raig::sendData(char* dataString)
 {
-	return m_Impl->readData(x, y);
+	m_Impl->sendData(dataString);
 }
 
-void Raig::updateMap()
+void Raig::sendData(int value)
 {
-	m_Impl->updateMap();
+	m_Impl->sendData(value);
 }
 
 void Raig::update()
@@ -59,61 +64,35 @@ void Raig::update()
 	m_Impl->update();
 }
 
-void Raig::deleteEntity()
-{
-	m_Impl->deleteEntity();
-}
-
-bool Raig::isAlive()
-{
-	return m_Impl->isAlive();
-}
-
-void Raig::shutdown()
-{
-	m_Impl->shutdown();
-}
-
 /*
  * RaigImpl implementation
  */
-void Raig::RaigImpl::createMap()
+void Raig::RaigImpl::connect()
 {
-	std::cout << "Raig::RaigImpl::createMap()" << std::endl;
+	std::cout << "Raig::RaigImpl::connect()" << std::endl;
+	strServerIPAddress = "127.0.0.1";
+
+	iSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
+
+	Address(AF_INET, (struct Address*) &sAddress, strServerIPAddress, HANGMAN_TCP_PORT);
+
+	Connect(iSocketFileDescriptor, (struct sockaddr*) &sAddress.m_sAddress, sizeof(sAddress.m_sAddress));
 }
 
-Position2D Raig::RaigImpl::readData(int x, int y)
+void Raig::RaigImpl::sendData(char* dataString)
 {
-	std::cout << "Raig::RaigImpl::readData(x, y)" << std::endl;
-	data.x = x;
-	data.y = y;
-	return data;
+	std::cout << "Raig::RaigImpl::sendData() : " << dataString << std::endl;
+	multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
 }
 
-void Raig::RaigImpl::updateMap()
+void Raig::RaigImpl::sendData(int value)
 {
+	std::cout << "Raig::RaigImpl::sendData() : " << value << std::endl;
 }
 
 void Raig::RaigImpl::update()
 {
 	std::cout << "Raig::RaigImpl::update()" << std::endl;
-}
-
-void Raig::RaigImpl::deleteEntity()
-{
-	std::cout << "Raig::RaigImpl::deleteEntity()" << std::endl;
-}
-
-bool Raig::RaigImpl::isAlive()
-{
-	std::cout << "Raig::RaigImpl::isAlive() : %s" << ((alive) ? "Alive" : "Dead") << std::endl;
-	return alive;
-}
-
-void Raig::RaigImpl::shutdown()
-{
-	std::cout << "Raig::RaigImpl::shutdown()" << std::endl;
-	alive = false;
 }
 
 void Raig::RaigImpl::cleanUp()

@@ -5,9 +5,7 @@
  *      Author: david
  */
 
-#include <string.h> // memcpy()
-#include <signal.h> // SIGCHLD
-#include <sys/wait.h>
+
 
 #include "Sockets.h"
 

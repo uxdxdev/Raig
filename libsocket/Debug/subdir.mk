@@ -4,22 +4,22 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/AIManager.c \
-../src/raig_server.c 
+../Sockets.c 
+
+O_SRCS += \
+../Sockets.o 
 
 OBJS += \
-./src/AIManager.o \
-./src/raig_server.o 
+./Sockets.o 
 
 C_DEPS += \
-./src/AIManager.d \
-./src/raig_server.d 
+./Sockets.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-src/%.o: ../src/%.c
+%.o: ../%.c
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C Compiler'
+	@echo 'Invoking: Cross GCC Compiler'
 	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '

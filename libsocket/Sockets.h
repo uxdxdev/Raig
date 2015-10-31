@@ -15,6 +15,9 @@
 #include <netdb.h>
 #include <stdlib.h> // exit(),
 #include <unistd.h> // read(), write(), fork()
+#include <string.h> // memcpy()
+#include <signal.h> // SIGCHLD
+#include <sys/wait.h>
 
 #define MAX_BUF_SIZE 4096
 #define MAX_LISTEN_QUEUE_SIZE 1024

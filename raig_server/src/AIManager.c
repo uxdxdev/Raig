@@ -6,7 +6,6 @@
  */
 
 #include "../includes/AIManager.h"
-
 #include "../includes/Definitions.h"
 #include <syslog.h> // syslog()
 #include <string.h> // strlen()
