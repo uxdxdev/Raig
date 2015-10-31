@@ -9,20 +9,23 @@
 
 namespace raig{
 
-typedef struct Position2D
+typedef struct Packet
 {
+	char stringData[255];
 	int x;
 	int y;
-} Position2D;
+} Packet;
 
 class Raig
 {
 public:
 	Raig();
 	~Raig();
-	void connect();
+	void connect(char* ipAddress);
 	void sendData(char* dataString);
 	void sendData(int value);
+	void sendData(Packet* packet);
+	Packet* readData();
 	void update();
 private:
 	class RaigImpl; // Forward declaration

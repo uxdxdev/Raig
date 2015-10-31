@@ -10,9 +10,11 @@ using namespace raig;
 class Raig::RaigImpl
 {
 public:
-	void connect();
+	void connect(char* ipAddress);
 	void sendData(char* dataString);
 	void sendData(int value);
+	void sendData(Packet* packet);
+	Packet* readData();
 	void update();
 
 	// Private members and functions
@@ -23,6 +25,7 @@ public:
 	int iSocketFileDescriptor;
 	char* strServerIPAddress;
 	struct Address sAddress;
+	Packet readPacket;
 };
 
 /*
@@ -39,9 +42,9 @@ Raig::~Raig()
 	m_Impl->cleanUp();
 }
 
-void Raig::connect()
+void Raig::connect(char* ipAddress)
 {
-	m_Impl->connect();
+	m_Impl->connect(ipAddress);
 }
 
 void Raig::sendData(char* dataString)
@@ -54,6 +57,16 @@ void Raig::sendData(int value)
 	m_Impl->sendData(value);
 }
 
+void Raig::sendData(Packet* packet)
+{
+	m_Impl->sendData(packet);
+}
+
+Packet* Raig::readData()
+{
+	return (Packet*) m_Impl->readData();
+}
+
 void Raig::update()
 {
 	m_Impl->update();
@@ -62,11 +75,11 @@ void Raig::update()
 /*
  * RaigImpl implementation
  */
-void Raig::RaigImpl::connect()
+void Raig::RaigImpl::connect(char* ipAddress)
 {
 	std::cout << "Raig::RaigImpl::connect()" << std::endl;
 
-	strServerIPAddress = (char*)"127.0.0.1";
+	strServerIPAddress = ipAddress;
 
 	iSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
 
@@ -79,14 +92,27 @@ void Raig::RaigImpl::connect()
 void Raig::RaigImpl::sendData(char* dataString)
 {
 	std::cout << "Raig::RaigImpl::sendData() : " << dataString << std::endl;
-	multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
+	//multiplexStdinFileDescriptor(stdin, iSocketFileDescriptor);
 
-	close(iSocketFileDescriptor);
+	//close(iSocketFileDescriptor);
 }
 
 void Raig::RaigImpl::sendData(int value)
 {
 	std::cout << "Raig::RaigImpl::sendData() : " << value << std::endl;
+}
+
+void Raig::RaigImpl::sendData(Packet* packet)
+{
+	Write(iSocketFileDescriptor, packet, sizeof(Packet));
+	printf("Packet sent ok (%d, %d)\n", packet->x, packet->y);
+}
+
+Packet* Raig::RaigImpl::readData()
+{
+	Read(iSocketFileDescriptor, &readPacket, sizeof(Packet));
+	printf("Packet read ok (%d, %d)\n", readPacket.x, readPacket.y);
+	return &readPacket;
 }
 
 void Raig::RaigImpl::update()
@@ -97,4 +123,5 @@ void Raig::RaigImpl::update()
 void Raig::RaigImpl::cleanUp()
 {
 	std::cout << "Raig::RaigImpl::cleanUp()" << std::endl;
+	close(iSocketFileDescriptor);
 }

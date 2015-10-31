@@ -3,9 +3,11 @@
 
 #include "../includes/Definitions.h"
 #include "../includes/AIManager.h"
-
-#include "../../libsocket/Sockets.h"
-#include "../../libraig/Raig.h"
+extern "C" {
+	#include "../../libsocket/Sockets.h"
+}
+#include <errno.h>
+#include <signal.h>
 
 int main(int argc, char* argv[]) {
 	int iListenSocketFileDescriptor;
@@ -30,7 +32,7 @@ int main(int argc, char* argv[]) {
 	Listen(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
 
 	// signal handler for terminated processes
-	Signal(SIGCHLD, signalHandler);
+	Signal(SIGCHLD, (void*)signalHandler);
 
 	printf("listening for connections\n");
 	for( ; ; ) {
@@ -61,7 +63,7 @@ int main(int argc, char* argv[]) {
 			// close the parents listen file descriptor in the child
 			close(iListenSocketFileDescriptor);
 
-			/* ---------------- Play_hangman () ---------------------*/
+			/* ---------------- Process Client Request ---------------------*/
 			processRequest(connfd, connfd);
 
 			/*
