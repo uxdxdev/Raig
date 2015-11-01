@@ -38,19 +38,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: RaigServer
+all: raig_server
 
 # Tool invocations
-RaigServer: $(OBJS) $(USER_OBJS)
+raig_server: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C++ Linker'
-	g++ -L"/Users/mortond/Documents/workspace/raig/libsocket" -o "RaigServer" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/Users/mortond/Documents/workspace/raig/libsocket" -o "raig_server" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(CPP_DEPS)$(C_DEPS) RaigServer
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(CPP_DEPS)$(C_DEPS) raig_server
 	-@echo ' '
 
 .PHONY: all clean dependents

@@ -9,12 +9,13 @@
 
 namespace raig{
 
-typedef struct Packet
+struct Packet
 {
 	char stringData[255];
 	int x;
 	int y;
-} Packet;
+	int completeFlag;
+};
 
 class Raig
 {
@@ -24,7 +25,7 @@ public:
 	void connect(char* ipAddress);
 	void sendData(char* dataString);
 	void sendData(int value);
-	void sendData(Packet* packet);
+	void sendData(struct Packet* packet);
 	Packet* readData();
 	void update();
 private:

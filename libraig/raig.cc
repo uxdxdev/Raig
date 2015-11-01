@@ -1,4 +1,4 @@
-#include "Raig.h" // API for developers
+#include "raig.h" // API for developers
 
 extern "C" {
 	#include "../libsocket/Sockets.h"
@@ -10,6 +10,7 @@ using namespace raig;
 class Raig::RaigImpl
 {
 public:
+	// API
 	void connect(char* ipAddress);
 	void sendData(char* dataString);
 	void sendData(int value);
@@ -19,6 +20,7 @@ public:
 
 	// Private members and functions
 	void cleanUp();
+
 	bool isComplete;
 	bool alive;
 
@@ -72,6 +74,9 @@ void Raig::update()
 	m_Impl->update();
 }
 
+
+
+
 /*
  * RaigImpl implementation
  */
@@ -105,13 +110,11 @@ void Raig::RaigImpl::sendData(int value)
 void Raig::RaigImpl::sendData(Packet* packet)
 {
 	Write(iSocketFileDescriptor, packet, sizeof(Packet));
-	printf("Packet sent ok (%d, %d)\n", packet->x, packet->y);
 }
 
 Packet* Raig::RaigImpl::readData()
 {
 	Read(iSocketFileDescriptor, &readPacket, sizeof(Packet));
-	printf("Packet read ok (%d, %d)\n", readPacket.x, readPacket.y);
 	return &readPacket;
 }
 

@@ -1,23 +1,25 @@
-/* Network server for hangman game */
-/* File: hangserver.c */
 
-#include "../includes/Definitions.h"
-#include "../includes/AIManager.h"
-extern "C" {
-	#include "../../libsocket/Sockets.h"
-}
+#include "../includes/raig_server_manager.h"
+#include "../includes/ai_manager.h"
+#include "../includes/raig_main.h"
+
 #include <errno.h>
 #include <signal.h>
 
-int main(int argc, char* argv[]) {
-	int iListenSocketFileDescriptor;
-	char * strServerIPAddress;
-	struct Address sAddress;
-	pid_t childProcessID;
-	int connfd;
-	socklen_t client_len;
+RaigServerManager::RaigServerManager()
+{
+	init("0.0.0.0");
+}
 
-	strServerIPAddress = "0.0.0.0";
+RaigServerManager::~RaigServerManager()
+{
+
+}
+
+void RaigServerManager::init(const char* ipAddress)
+{
+	//strServerIPAddress = ipAddress;
+	strServerIPAddress = (char*)"0.0.0.0";
 
 	printf("Server: initialising\n");
 
@@ -34,7 +36,14 @@ int main(int argc, char* argv[]) {
 	// signal handler for terminated processes
 	Signal(SIGCHLD, (void*)signalHandler);
 
+	// AI Manager
+	m_ai_manager = new AIManager();
+}
+
+void RaigServerManager::start()
+{
 	printf("listening for connections\n");
+
 	for( ; ; ) {
 		client_len = sizeof(sAddress.m_sAddress);
 		// Accept connections from clients
@@ -64,7 +73,7 @@ int main(int argc, char* argv[]) {
 			close(iListenSocketFileDescriptor);
 
 			/* ---------------- Process Client Request ---------------------*/
-			processRequest(connfd, connfd);
+			m_ai_manager->ProcessRequest(connfd, connfd);
 
 			/*
 			 *  On return exit to kill the process. The kernel will then
@@ -73,11 +82,13 @@ int main(int argc, char* argv[]) {
 			 */
 			exit(0);
 		}
-
-		close(connfd);
 	}
-	return 0;
 }
 
+void RaigServerManager::cleanUp()
+{
+	close(connfd);
+	//delete sAddress;
+	delete m_ai_manager;
 
-
+}
