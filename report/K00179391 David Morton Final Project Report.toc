@@ -20,29 +20,29 @@
 \contentsline {subsection}{\numberline {4.2}Class Diagram}{11}
 \contentsline {subsection}{\numberline {4.3}Sequence Diagram}{11}
 \contentsline {section}{\numberline {5}Example of use}{11}
-\contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{13}
-\contentsline {subsection}{\numberline {6.1}Introduction}{13}
-\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{13}
-\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{13}
-\contentsline {subsection}{\numberline {6.2}Client API Design}{14}
-\contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{14}
-\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{14}
-\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{15}
-\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{15}
-\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{15}
-\contentsline {subsection}{\numberline {6.4}Server System Design}{15}
-\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{15}
-\contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{16}
-\contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{18}
-\contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{18}
-\contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{18}
-\contentsline {subsubsection}{\numberline {6.5.2}Brute force}{18}
-\contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{18}
-\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{18}
-\contentsline {subsection}{\numberline {6.7}Summary}{19}
-\contentsline {section}{\numberline {7}User manual (where appropriate)}{19}
-\contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{19}
-\contentsline {section}{References}{20}
-\contentsline {section}{Appendices}{21}
-\contentsline {section}{\numberline {A}Graph Appendix}{21}
-\contentsline {section}{\numberline {B}Another Appendix}{21}
+\contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{12}
+\contentsline {subsection}{\numberline {6.1}Introduction}{12}
+\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{12}
+\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{12}
+\contentsline {subsection}{\numberline {6.2}Client API Design}{13}
+\contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{13}
+\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{13}
+\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{14}
+\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{14}
+\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{14}
+\contentsline {subsection}{\numberline {6.4}Server System Design}{14}
+\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{14}
+\contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{15}
+\contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{17}
+\contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{17}
+\contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{17}
+\contentsline {subsubsection}{\numberline {6.5.2}Brute force}{17}
+\contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{17}
+\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{17}
+\contentsline {subsection}{\numberline {6.7}Summary}{18}
+\contentsline {section}{\numberline {7}User manual (where appropriate)}{18}
+\contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{18}
+\contentsline {section}{References}{19}
+\contentsline {section}{Appendices}{20}
+\contentsline {section}{\numberline {A}Graph Appendix}{20}
+\contentsline {section}{\numberline {B}Another Appendix}{20}

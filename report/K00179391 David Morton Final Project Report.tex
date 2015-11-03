@@ -38,7 +38,8 @@
   commentstyle=\color{greencomments},
   keywordstyle=\color{bluekeywords},
   stringstyle=\color{redstrings},
-  basicstyle=\ttfamily,
+  basicstyle=\ttfamily\scriptsize,
+  tabsize=4,
   numbers=left,
   stepnumber=1,    
   firstnumber=1,
@@ -204,7 +205,6 @@ And this is a reference to the figure in Figure \ref{fig:example figure and capt
 \subsection{Introduction}
 
 Describe how the solution was implemented and any problems particular to this stage.
-
 Client side API\\
 Sockets layer\\
 Server side application\\
@@ -223,17 +223,19 @@ RAII\\
 \subsection{Client API Design}
 \label{section:clientapidesign}
 
-The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answwer. While implementing the API the developer needs options or weigths that may determine what path is choosen for a particular situation. 
+The API should be designed with developers in mind and must be intuitive to use. If a developer wants a path from A to B on their map, the API must allow the developer to quiery the service and recieve the answer. While implementing the API the developer needs options or weights that may determine what path is choosen for a particular situation. 
 
 \subsubsection{Pimpl Idiom}
 
-The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer in the API header file is used to reference an implementation class that is created in the constructor of the interface class when it is instatiated by the client.
 
-This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be a simple as possible to support ease of use. 
+A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+
+This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be as simple as possible to support ease of use. 
 
 \subsubsection{Game Representation}
 
-Custom structs and contraining how the game will be presented to the AI
+Custom structs constraining how the game will be presented to the AI
 
 
 \subsection{BSD Sockets Layer}
