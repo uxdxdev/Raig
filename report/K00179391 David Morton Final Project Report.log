@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  1 NOV 2015 15:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  4 NOV 2015 07:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -567,86 +567,86 @@ File: Figures/lit_logo.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/lit_logo.jpg used on input line 196.
 (pdftex.def)             Requested size: 452.9679pt x 123.06013pt.
  [11]
-Underfull \hbox (badness 10000) in paragraph at lines 209--213
+Underfull \hbox (badness 10000) in paragraph at lines 207--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--223
+Underfull \hbox (badness 10000) in paragraph at lines 218--222
 
  []
 
-[12 <./Figures/lit_logo.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 247--248
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 252--253
+[12 <./Figures/lit_logo.jpg>] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
 
  []
 
 [14]
 
 LaTeX Warning: Reference `lst:server listen' on page 15 undefined on input line
- 287.
+ 300.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
 [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 328--333
+Underfull \hbox (badness 10000) in paragraph at lines 341--346
 
  []
 
 [18]
-Underfull \hbox (badness 1436) in paragraph at lines 368--369
+Underfull \hbox (badness 1436) in paragraph at lines 381--382
 []\OT1/cmr/m/n/12 Distributed Pro-cess-ing . 2015. Dis-tributed Pro-cess-ing . 
 [ON-LINE] Avail-able
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--369
+Underfull \hbox (badness 10000) in paragraph at lines 381--382
 \OT1/cmr/m/n/12 at: \OT1/cmr/m/it/12 http://docs.oracle.com/cd/A87860[]01/doc/s
 erver.817/a76965/c29dstpr.htm\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 4752) in paragraph at lines 371--372
+Underfull \hbox (badness 4752) in paragraph at lines 384--385
 []\OT1/cmr/m/n/12 World of War-craft - Wikipedia, the free en-cy-clo-pe-dia. 20
 15. World of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 371--372
+Underfull \hbox (badness 10000) in paragraph at lines 384--385
 \OT1/cmr/m/n/12 War-craft - Wikipedia, the free en-cy-clo-pe-dia. [ON-LINE] Ava
 il-able at:
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 374--375
+Underfull \hbox (badness 1117) in paragraph at lines 387--388
 \OT1/cmr/m/it/12 latency-can-make-even-fast-internet-connections-feel-slow/. \O
 T1/cmr/m/n/12 [Ac-cessed 10 Oc-to-ber
  []
@@ -660,10 +660,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 6473 strings out of 493117
- 94310 string characters out of 6135433
+ 6494 strings out of 493117
+ 94560 string characters out of 6135433
  215800 words of memory out of 5000000
- 9830 multiletter control sequences out of 15000+600000
+ 9851 multiletter control sequences out of 15000+600000
  9792 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,18n,58p,2355b,1313s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -676,7 +676,7 @@ r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
 Output written on "K00179391 David Morton Final Project Report.pdf" (22 pages, 
-269129 bytes).
+270871 bytes).
 PDF statistics:
  132 PDF objects out of 1000 (max. 8388607)
  93 compressed objects within 1 object stream

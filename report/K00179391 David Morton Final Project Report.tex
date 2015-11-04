@@ -216,7 +216,7 @@ Client server model\\
 
 \subsubsection{Design Patterns}
 Observer pattern\\
-Stradegy pattern\\
+Strategy pattern\\
 Lazy loading\\
 RAII\\
 
@@ -227,11 +227,26 @@ The API should be designed with developers in mind and must be intuitive to use.
 
 \subsubsection{Pimpl Idiom}
 
-The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer in the API header file is used to reference an implementation class that is created in the constructor of the interface class when it is instatiated by the client.
+The Pimpl idiom is a design pattern used to hide the implemenation details of an API. A pointer in the interface class of the API allows access to the implementation details defined in the associated .cpp file. The implemenation details can be compiled into a library and linked at runtime which abstracts the implementation details from the users. A pointer to an object defined inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. This technique can be used with proprietary code and prevents users from casually reading the header file to find out how the system is coded. 
 
-A pointer to an object contained inside the .cpp implementation file removes any of the declarations and includes needed for the API header file. The implementation code is then stored in a library and the client can then link against the library when building their system. This technique can be used with proprietary code and prevents users from casually reading he header file to find out how the system is coded. 
+\begin{figure}[H]
+\begin{lstlisting}
+class Raig
+{
+public:
+	Raig();
+	~Raig();
+	void connect(char* IpAddress);
+private:
+	class RaigImpl; 
+	std::unique_ptr<RaigImpl> m_Impl;
+};
+\end{lstlisting}
+	\caption{Pimpl idiom implementation in the client API header file}
+	\label{code:pimplidiom}
+\end{figure}
 
-This technique is used in the client side API for RAIG to simplify the interface for the user. APIs should be as simple as possible to support ease of use. 
+
 
 \subsubsection{Game Representation}
 
@@ -262,7 +277,6 @@ Moving the graph search and processing to the server is a huge benefit to game d
 Two ways to handle multiple clients connecting to a server are to \textit{fork()} a new process for each client, or using the \textit{select()} function to listen for active file descriptors. Both methods have there advantages and limitations. Forking a process to handle a client request or using select to handle requests starts with creating a listening socket on the server. 
 
 \begin{figure}[H]
-
 \begin{lstlisting}
 sock = socket(AF_INET, SOCK_STREAM, 0); 
 if (sock < 0) {

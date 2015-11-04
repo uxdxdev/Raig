@@ -26,7 +26,7 @@
 \contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{12}
 \contentsline {subsection}{\numberline {6.2}Client API Design}{13}
 \contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{13}
-\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{13}
+\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{14}
 \contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{14}
 \contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{14}
 \contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{14}

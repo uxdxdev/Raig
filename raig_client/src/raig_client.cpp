@@ -1,18 +1,16 @@
 #include "../../libraig/raig.h"
 
-using namespace raig;
-
 int main(int argc, char* argv[])
 {
 	char buffer[255];
-	Packet packet;
+	raig::Packet packet;
 	packet.x = 0;
 	packet.y = 0;
 	packet.completeFlag = 0;
 
-	Packet* readPacket;
+	raig::Packet* readPacket;
 
-	Raig* raig = new Raig();
+	raig::Raig* raig = new raig::Raig();
 	raig->connect((char*)"127.0.0.1");
 
 	while(packet.completeFlag == 0)
