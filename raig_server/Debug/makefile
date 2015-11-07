@@ -44,7 +44,7 @@ all: raig_server
 raig_server: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o "raig_server" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L/home/david/workspace/raig/libsocket -L/home/david/workspace/raig/libraig -o "raig_server" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

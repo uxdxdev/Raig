@@ -1,5 +1,5 @@
 # Build script for Linux systems
 
-gcc -c -Wall -Werror -fpic raig.cc
-gcc -shared -o libraig.so raig.o
+g++ -std=c++11 -c -Wall -Werror -fpic raig.cc
+g++ -std=c++11 -shared -o libs/libraig.so raig.o -L../libsocket/libs -lsocket
 sudo cp libs/libraig.so /usr/lib

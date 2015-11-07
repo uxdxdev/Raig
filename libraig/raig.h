@@ -1,7 +1,7 @@
 #ifndef _RAIG_RAIG_H
 #define _RAIG_RAIG_H
 
-#include <memory.h>
+#include <memory>
 #include <iostream>
 
 #define LINESIZE 80

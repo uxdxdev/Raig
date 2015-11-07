@@ -9,7 +9,7 @@
 #include "../includes/raig_main.h"
 
 extern "C" {
-	#include "../../libsocket/Sockets.h"
+	#include "../../libsocket/socket.h"
 }
 
 using namespace raig;
