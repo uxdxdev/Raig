@@ -32,13 +32,14 @@ void AddressIPX(const char* nodeAddress, const char* service, const struct addri
 // will also handle any errors that occur
 void Connect(int socketFileDescriptor, const struct sockaddr* socketAddress, socklen_t socketSize);
 
-// Select wraps the select function call and handles any errors that may occur.
 // The Select wrapper function needs the max number of file descriptors,
 // the read set of descriptors, the write set, and the time interval to wait before
 // returning from the function. Select will multiplex I/O from many s
 int Select(int maxFileDescriptorsPlus1, fd_set *readFileDescriptorSet, fd_set *writeFileDescriptorSet, fd_set *exceptFileDescriptorSet, struct timeval *timeout);
 
 ssize_t Read(int fileDescriptor, void *buffer, size_t numberOfBytes);
+
+//
 void Write(int fileDescriptor, void *buffer, size_t numberOfBytes);
 void Shutdown(int fileDescriptor, int shutdownOption);
 int Max(int x, int y);

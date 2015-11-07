@@ -178,7 +178,7 @@ void MultiplexStdinFileDescriptor(FILE* fp, int socketFileDescriptor)
 		{
 			numberOfBytesReceived = Read(fileno(fp), buffer, MAX_BUF_SIZE);
 
-			// if the client is terminated the socket is shutdown
+			// if the client terminated the socket call shutdown
 			if( numberOfBytesReceived == 0 )
 			{
 				//printf("Client has terminated the connection");
