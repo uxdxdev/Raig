@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 SEP 2015 21:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  10 OCT 2015 13:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -133,33 +133,40 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<Figures/lit_logo.jpg, id=1, 604.2575pt x 166.6225pt>
+<Figures/lit_logo.jpg, id=1, 602.25pt x 163.61125pt>
 File: Figures/lit_logo.jpg Graphic file (type jpg)
 
 <use Figures/lit_logo.jpg>
 Package pdftex.def Info: Figures/lit_logo.jpg used on input line 6.
-(pdftex.def)             Requested size: 195.0pt x 53.7703pt.
+(pdftex.def)             Requested size: 195.0pt x 52.9758pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 28.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 28.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 28.
  [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figur
 es/lit_logo.jpg>] (./reportTitlePage.aux) ) 
 Here is how much of TeX's memory you used:
- 1494 strings out of 493117
- 21618 string characters out of 6135433
+ 1513 strings out of 493117
+ 21822 string characters out of 6135433
  78330 words of memory out of 5000000
- 4971 multiletter control sequences out of 15000+600000
- 6391 words of font info for 23 fonts, out of 8000000 for 9000
+ 4983 multiletter control sequences out of 15000+600000
+ 9176 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,4n,23p,243b,146s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2014/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on reportTitlePage.pdf (1 page, 113065 bytes).
+ts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti12.pfb>
+Output written on reportTitlePage.pdf (1 page, 115319 bytes).
 PDF statistics:
- 25 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 29 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

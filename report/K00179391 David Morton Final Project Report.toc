@@ -1,41 +1,48 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Introduction}{3}
-\contentsline {subsection}{\numberline {1.1}Technologies}{3}
-\contentsline {section}{\numberline {2}Problem Definition and Background}{3}
-\contentsline {subsection}{\numberline {2.1}Background}{3}
-\contentsline {subsection}{\numberline {2.2}Objectives}{3}
-\contentsline {subsection}{\numberline {2.3}Project Planning}{4}
-\contentsline {section}{\numberline {3}Literature Review and Research}{4}
-\contentsline {subsection}{\numberline {3.1}API Design}{4}
-\contentsline {subsection}{\numberline {3.2}UDP vs TCP}{4}
-\contentsline {subsubsection}{\numberline {3.2.1}Pimpl Idiom}{4}
-\contentsline {subsection}{\numberline {3.3}Server System Design}{4}
-\contentsline {subsubsection}{\numberline {3.3.1}Benefits}{5}
-\contentsline {subsubsection}{\numberline {3.3.2}Efficiencies}{5}
-\contentsline {subsubsection}{\numberline {3.3.3}Fork or Select}{5}
-\contentsline {subsubsection}{\numberline {3.3.4}Round Robin DNS}{7}
-\contentsline {subsection}{\numberline {3.4}Existing Technologies}{7}
-\contentsline {subsection}{\numberline {3.5}Design Patterns}{7}
-\contentsline {subsection}{\numberline {3.6}Artificial Intelligence \& Algorithms}{7}
-\contentsline {subsection}{\numberline {3.7}A* Path finding}{7}
-\contentsline {subsection}{\numberline {3.8}Brute force}{7}
-\contentsline {subsection}{\numberline {3.9}Graph Sturctures}{7}
-\contentsline {subsection}{\numberline {3.10}Documentation}{8}
-\contentsline {subsection}{\numberline {3.11}Testing}{8}
-\contentsline {subsection}{\numberline {3.12}Conclusions}{8}
-\contentsline {section}{\numberline {4}System Design and Configuration}{8}
-\contentsline {subsection}{\numberline {4.1}System Architecture}{8}
-\contentsline {subsection}{\numberline {4.2}Class Diagram}{8}
-\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{8}
-\contentsline {section}{\numberline {5}Example of use}{8}
-\contentsline {subsection}{\numberline {5.1}User Stories}{8}
-\contentsline {section}{\numberline {6}Testing \& Implementation}{8}
-\contentsline {subsection}{\numberline {6.1}Implementation}{8}
-\contentsline {subsection}{\numberline {6.2}Testing}{9}
-\contentsline {subsection}{\numberline {6.3}Future Features}{10}
-\contentsline {section}{\numberline {7}User manual (where appropriate)}{10}
-\contentsline {section}{\numberline {8}Critical analysis and Conclusions}{10}
-\contentsline {section}{References}{11}
-\contentsline {section}{Appendices}{12}
-\contentsline {section}{\numberline {A}Graph Appendix}{12}
-\contentsline {section}{\numberline {B}Another Appendix}{12}
+\contentsline {section}{\numberline {1}Introduction}{5}
+\contentsline {section}{\numberline {2}Problem Definition, Background, and Planning}{8}
+\contentsline {subsection}{\numberline {2.1}Objectives}{9}
+\contentsline {subsection}{\numberline {2.2}Project Planning}{9}
+\contentsline {section}{\numberline {3}Literature Review and Research}{9}
+\contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{10}
+\contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{10}
+\contentsline {subsubsection}{\numberline {3.1.2}Levels of Aritificial Intelligence}{10}
+\contentsline {subsection}{\numberline {3.2}Networked Aritificial Intelligence}{10}
+\contentsline {subsubsection}{\numberline {3.2.1}Distributed Client Side Processing}{10}
+\contentsline {subsubsection}{\numberline {3.2.2}Central Server Architecture}{10}
+\contentsline {subsection}{\numberline {3.3}Current Issues with Aritificial Intelligence in Games}{10}
+\contentsline {subsubsection}{\numberline {3.3.1}Complex Algorithms \& Implementations}{10}
+\contentsline {subsubsection}{\numberline {3.3.2}Network Latency}{10}
+\contentsline {subsubsection}{\numberline {3.3.3}Human Perception}{10}
+\contentsline {subsection}{\numberline {3.4}Conclusions of Research}{10}
+\contentsline {section}{\numberline {4}System Design and Configuration}{10}
+\contentsline {subsection}{\numberline {4.1}System Architecture}{11}
+\contentsline {subsection}{\numberline {4.2}Class Diagram}{11}
+\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{11}
+\contentsline {section}{\numberline {5}Example of use}{11}
+\contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{12}
+\contentsline {subsection}{\numberline {6.1}Introduction}{12}
+\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{12}
+\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{12}
+\contentsline {subsection}{\numberline {6.2}Client API Design}{13}
+\contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{13}
+\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{14}
+\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{14}
+\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{14}
+\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{14}
+\contentsline {subsection}{\numberline {6.4}Server System Design}{14}
+\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{14}
+\contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{15}
+\contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{17}
+\contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{17}
+\contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{17}
+\contentsline {subsubsection}{\numberline {6.5.2}Brute force}{17}
+\contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{17}
+\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{17}
+\contentsline {subsection}{\numberline {6.7}Summary}{18}
+\contentsline {section}{\numberline {7}User manual (where appropriate)}{18}
+\contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{18}
+\contentsline {section}{References}{19}
+\contentsline {section}{Appendices}{20}
+\contentsline {section}{\numberline {A}Graph Appendix}{20}
+\contentsline {section}{\numberline {B}Another Appendix}{20}
