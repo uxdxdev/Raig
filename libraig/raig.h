@@ -33,5 +33,5 @@ private:
 	std::unique_ptr<RaigImpl> m_Impl; // Raig implementation using auto_ptr
 };
 
-}
+} // namespace raig
 #endif
