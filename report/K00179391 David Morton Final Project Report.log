@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.20)  9 NOV 2015 10:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.20)  9 NOV 2015 19:34
 entering extended mode
 **K00179391*David*Morton*Final*Project*Report.tex
 
@@ -531,101 +531,101 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--79
  []
 
 [5] [6] [7] [8]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 101.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 103.
 
  (C:\Miktex\tex\latex\base\omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
- [9] [10]
-<Figures/lit_logo.jpg, id=74, 602.25pt x 163.61125pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 103.
+ [9] [10] [11]
+<Figures/lit_logo.jpg, id=82, 602.25pt x 163.61125pt>
 File: Figures/lit_logo.jpg Graphic file (type jpg)
 
 <use Figures/lit_logo.jpg>
-Package pdftex.def Info: Figures/lit_logo.jpg used on input line 204.
+Package pdftex.def Info: Figures/lit_logo.jpg used on input line 210.
 (pdftex.def)             Requested size: 452.9679pt x 123.06013pt.
- [11]
-Underfull \hbox (badness 10000) in paragraph at lines 215--220
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--226
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--224
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--230
+Underfull \hbox (badness 10000) in paragraph at lines 232--236
 
  []
 
 [12 <C:/projects/workspace/raig/report/Figures/lit_logo.jpg>] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--277
+Underfull \hbox (badness 10000) in paragraph at lines 282--283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
 
  []
 
 [14]
 
 LaTeX Warning: Reference `lst:server listen' on page 15 undefined on input line
- 310.
+ 316.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 312--313
+Underfull \hbox (badness 10000) in paragraph at lines 316--317
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 314--315
+Underfull \hbox (badness 10000) in paragraph at lines 318--319
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 351--356
+Underfull \hbox (badness 10000) in paragraph at lines 357--362
 
  []
 
 [18]
-Underfull \hbox (badness 1436) in paragraph at lines 391--392
+Underfull \hbox (badness 1436) in paragraph at lines 397--398
 []\OT1/cmr/m/n/12 Distributed Pro-cess-ing . 2015. Dis-tributed Pro-cess-ing . 
 [ON-LINE] Avail-able
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 391--392
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 \OT1/cmr/m/n/12 at: \OT1/cmr/m/it/12 http://docs.oracle.com/cd/A87860[]01/doc/s
 erver.817/a76965/c29dstpr.htm\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 4752) in paragraph at lines 394--395
+Underfull \hbox (badness 4752) in paragraph at lines 400--401
 []\OT1/cmr/m/n/12 World of War-craft - Wikipedia, the free en-cy-clo-pe-dia. 20
 15. World of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--395
+Underfull \hbox (badness 10000) in paragraph at lines 400--401
 \OT1/cmr/m/n/12 War-craft - Wikipedia, the free en-cy-clo-pe-dia. [ON-LINE] Ava
 il-able at:
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 397--398
+Underfull \hbox (badness 1117) in paragraph at lines 403--404
 \OT1/cmr/m/it/12 latency-can-make-even-fast-internet-connections-feel-slow/. \O
 T1/cmr/m/n/12 [Ac-cessed 10 Oc-to-ber
  []
@@ -653,7 +653,7 @@ public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb
 blic/amsfonts/cm/cmti12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt8.pfb
 >
 Output written on "K00179391 David Morton Final Project Report.pdf" (22 pages, 
-293360 bytes).
+293683 bytes).
 PDF statistics:
  134 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -3,6 +3,7 @@
 \contentsline {section}{\numberline {2}Problem Definition, Background, and Planning}{8}
 \contentsline {subsection}{\numberline {2.1}Objectives}{9}
 \contentsline {subsection}{\numberline {2.2}Project Planning}{9}
+\contentsline {subsection}{\numberline {2.3}Revision History}{10}
 \contentsline {section}{\numberline {3}Literature Review and Research}{10}
 \contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{10}
 \contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{10}
@@ -15,7 +16,7 @@
 \contentsline {subsubsection}{\numberline {3.3.2}Network Latency}{10}
 \contentsline {subsubsection}{\numberline {3.3.3}Human Perception}{10}
 \contentsline {subsection}{\numberline {3.4}Conclusions of Research}{10}
-\contentsline {section}{\numberline {4}System Design and Configuration}{10}
+\contentsline {section}{\numberline {4}System Design and Configuration}{11}
 \contentsline {subsection}{\numberline {4.1}System Architecture}{11}
 \contentsline {subsection}{\numberline {4.2}Class Diagram}{11}
 \contentsline {subsection}{\numberline {4.3}Sequence Diagram}{11}
@@ -23,7 +24,7 @@
 \contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{12}
 \contentsline {subsection}{\numberline {6.1}Introduction}{12}
 \contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{12}
-\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{12}
+\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{13}
 \contentsline {subsection}{\numberline {6.2}Client API Design}{13}
 \contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{13}
 \contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{14}
@@ -31,7 +32,7 @@
 \contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{14}
 \contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{14}
 \contentsline {subsection}{\numberline {6.4}Server System Design}{14}
-\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{14}
+\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{15}
 \contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{15}
 \contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{17}
 \contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{17}
