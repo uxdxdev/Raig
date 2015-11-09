@@ -75,7 +75,7 @@ This is the abstract.
 \newpage
 
 \section{Introduction}
-\textbf{This section should contain general information on the project and the technology used.}\\
+%This section should contain general information on the project and the technology used.
 
 Artificial Intelligence in games is becoming more and more popular due to new advancements in technology and increasing hardware resources on user devices. Running complex AI on users machines can sometimes be infeasible as the necessary CPU time or speed is just not available. Games are very CPU intensive applications that utilize a systems hardware for graphics rendering, audio output, networking, user inputs, and feedback. Artificial Intelligence can sometimes demand alot of processing in order to accurately generate realistic behaviours that can mimic sentient entities in a game. The type of algorithm needed for a particular behaviour in a game comes down to the knowledge and skill of the developer. This however means that highly skilled developers may attempt to implement a very complex and efficient ai algorithm when it may not be needed at all, and sometimes can produce inferior results compared to a simple animation or pre-defined behaviour. Choosing whether to use an algorithm to generate artificial intelligence or to simply pre-define a behaviour can be very difficult and could result in huge amounts of time and resources being wasted in a feeble attempt to create SkyNet\cite{skynet}. 
 
@@ -95,7 +95,7 @@ For remote AI, similar considerations need to be adhered to when communicating o
 
 \subsection{Objectives}
 
-Explain how you understand the project objective(s), what is to be solved or done, your perception of what has to be accomplished including the scope. 
+%Explain how you understand the project objective(s), what is to be solved or done, your perception of what has to be accomplished including the scope. 
 
 The objectives of the \textit{RAIG} project are to:
 
@@ -108,16 +108,29 @@ The objectives of the \textit{RAIG} project are to:
 
 Creating a remote AI service that is easy to understand is a key component in the RAIG project. Developers need an easier alternative to implementing complex algorithms in their source code. Making the integration of the system seamless and straight forward will simplify the process by providing an intuitive API to build against without needing to worry about the implementation details. 
 
-The API will provide developers with action functions that will be designed around a seperate entity structure. The developer will ask the service for solutions and get data in return that they can use in specific ways in their applications.
+The API will provide developers with action functions that will be designed around a seperate entity structure. The developer will ask the service for solutions and get data in return that they can use in specific ways in their applications. The APIs implementation details will be hidden from the end user using the \textit{PIMPL Idiom} and design pattern. The header file of the API will be included in the developers project with the linker referencing the dynamic library provided. 
 
 The server system will need to scale to users seamlessly. Allowing multiple users to connect and use the service concurrently is fundamental to the projects performance. The server must hold state on each connected client using persistent storage. It must also provide uninterrupted service to clients with a focus on realtime processing of user generated data and network communications. 
 
 The server system is home to the AI manager system. This system must be capable of using developer written Python3 algorithm implementations. Ease of use and extensibilty is a key goal of the RAIG project and also allows for an open development community to form around algorithm implemenations and efficiencies which fosters education and growth. 
 
 \subsection{Project Planning}
-Agile approach, PID, Charter, Phases.
+%Agile approach, PID, Charter, Phases.
+%
+%Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.
 
-Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.
+An Agile approach to managing the project will involve weekly sprints and task planning. At the beginning of each week tasks will be identified and estimates applied in order to gauge rougly how long each will take to complete. \textit{Trello}\cite{trello} will be used to organise key tasks and to show project progress. 
+
+\begin{figure}[H]
+	\centering
+    	\includegraphics[width=\textwidth]{Figures/trellowithtasks}
+	\caption{Trello application used to organize tasks and estimate time needed to complete each one}
+	\label{fig:trellowithtasks}
+\end{figure}
+
+\noindent
+Figure \ref{fig:trellowithtasks} shows lists for the product backlog, current sprint, work in progress, and tasks completed. Agile and the Scrum methodology describes breaking tasks down into measurable chunks that are prioritized and completed during sprints. Sprints are small iterations that usually last one or two weeks. Using Trello with lists of prioritised tasks helps to organise work that needs to be completed and helps with monitoring the progress of the project. \\
+
 
 
 
@@ -339,9 +352,7 @@ This is similar to how a client socket is created and initialized. The main diff
 
 Once the server is running and listening for incoming clients it can handle each client request by forking a process. Forking a process starts with a parent, this parent will create child processes that will execute along side the parent and will communicate with clients using the file descriptors associated with each. When a server accepts a connection is will \textit{fork()}, this will create another process that contains a copy of the data stored in the parent process, along with the newly created file descriptor for the conenction. The parent will then close the file descriptor it has which reduces the reference count to the descriptor by 1. The child process has a copy of this information and so the child can still use the file descriptor to send and receive data. Once the child process is finished with the client communications it closes the socket, reducing the reference count to 0, and exits. The parent must then kill the process in order to aviod creating \textit{zombie} processes that have been allocated system resources but are not being used. Killing a child process involves handling signals from the kernel in the parent that identify the child process being terminated. An advantage to using \textit{fork()} over \textit{select()} is that the process can handle each client individually and does not have to worry about any more incoming connections to the server. A disadvantage to forking is that it has to uses shared memory to communicate with other processes. This can introduce concurrency issues that can be very complex, difficult to understand, and hard to debug if something goes wrong.\\
 
-Another approach to handling client connections is to use \textit{select()}. This method will not create new processes. A single process handles all open file descriptors by looping through them and processing any that are active. The advantages of this approach over forking is that all clients are handled by a single process. This removes the need for shared memory or synchronisation primitives in order to communicate with other processes.\cite{theworldofselect} The disadvantage to using \textit{select()} over forking is that it cannot act like there is only one client at a time. With \textit{fork()} the developer can program the server as if there is only ever going to be one client which makes the code alot less complex. 
-
-
+Another approach to handling client connections is to use \textit{select()}. This method will not create new processes. A single process handles all open file descriptors by looping through them and processing any that are active. The advantages of this approach over forking is that all clients are handled by a single process. This removes the need for shared memory or synchronisation primitives in order to communicate with other processes.\cite{theworldofselect} The disadvantage to using \textit{select()} over forking is that it cannot act like there is only one client at a time. With \textit{fork()} the developer can program the server as if there is only ever going to be one client which makes the code alot less complex. \\
 
 In conclusion, handling multiple clients at the server can be achieved through a variety of different ways 
 
@@ -421,6 +432,9 @@ World of Warcraft - Wikipedia, the free encyclopedia. 2015. World of Warcraft - 
 
 \bibitem{networklatency}
 HTG Explains: How Latency Can Make Even Fast Internet Connections Feel Slow. 2015. [ONLINE] Available at: \textit{http://www.howtogeek.com/138771/htg-explains-how-latency-can-make-even-fast-internet-connections-feel-slow/.} [Accessed 10 October 2015].
+
+\bibitem{trello}
+Trello. 2015. Trello. [ONLINE] Available at: https://trello.com/. [Accessed 09 November 2015].
 
 \end{thebibliography}
 

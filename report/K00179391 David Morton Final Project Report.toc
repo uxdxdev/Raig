@@ -4,46 +4,46 @@
 \contentsline {subsection}{\numberline {2.1}Objectives}{9}
 \contentsline {subsection}{\numberline {2.2}Project Planning}{10}
 \contentsline {subsection}{\numberline {2.3}Revision History}{11}
-\contentsline {section}{\numberline {3}Literature Review and Research}{11}
-\contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{12}
-\contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{12}
-\contentsline {subsubsection}{\numberline {3.1.2}Levels of Aritificial Intelligence}{12}
-\contentsline {subsection}{\numberline {3.2}Networked Aritificial Intelligence}{12}
-\contentsline {subsubsection}{\numberline {3.2.1}Distributed Client Side Processing}{12}
-\contentsline {subsubsection}{\numberline {3.2.2}Central Server Architecture}{12}
-\contentsline {subsection}{\numberline {3.3}Current Issues with Aritificial Intelligence in Games}{12}
-\contentsline {subsubsection}{\numberline {3.3.1}Complex Algorithms \& Implementations}{12}
-\contentsline {subsubsection}{\numberline {3.3.2}Network Latency}{12}
-\contentsline {subsubsection}{\numberline {3.3.3}Human Perception}{12}
-\contentsline {subsection}{\numberline {3.4}Conclusions of Research}{12}
-\contentsline {section}{\numberline {4}System Design and Configuration}{12}
-\contentsline {subsection}{\numberline {4.1}System Architecture}{12}
-\contentsline {subsection}{\numberline {4.2}Class Diagram}{12}
-\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{12}
-\contentsline {section}{\numberline {5}Example of use}{13}
-\contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{14}
-\contentsline {subsection}{\numberline {6.1}Introduction}{14}
-\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{14}
-\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{14}
-\contentsline {subsection}{\numberline {6.2}Client API Design}{15}
-\contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{15}
-\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{15}
-\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{16}
-\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{16}
-\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{16}
-\contentsline {subsection}{\numberline {6.4}Server System Design}{16}
-\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{16}
-\contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{17}
-\contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{19}
-\contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{19}
-\contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{19}
-\contentsline {subsubsection}{\numberline {6.5.2}Brute force}{19}
-\contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{19}
-\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{19}
-\contentsline {subsection}{\numberline {6.7}Summary}{20}
-\contentsline {section}{\numberline {7}User manual (where appropriate)}{20}
-\contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{20}
-\contentsline {section}{References}{21}
-\contentsline {section}{Appendices}{22}
-\contentsline {section}{\numberline {A}Graph Appendix}{22}
-\contentsline {section}{\numberline {B}Another Appendix}{22}
+\contentsline {section}{\numberline {3}Literature Review and Research}{12}
+\contentsline {subsection}{\numberline {3.1}Overview of Aritificial Intelligence in Games}{13}
+\contentsline {subsubsection}{\numberline {3.1.1}Hardware Resources}{13}
+\contentsline {subsubsection}{\numberline {3.1.2}Levels of Aritificial Intelligence}{13}
+\contentsline {subsection}{\numberline {3.2}Networked Aritificial Intelligence}{13}
+\contentsline {subsubsection}{\numberline {3.2.1}Distributed Client Side Processing}{13}
+\contentsline {subsubsection}{\numberline {3.2.2}Central Server Architecture}{13}
+\contentsline {subsection}{\numberline {3.3}Current Issues with Aritificial Intelligence in Games}{13}
+\contentsline {subsubsection}{\numberline {3.3.1}Complex Algorithms \& Implementations}{13}
+\contentsline {subsubsection}{\numberline {3.3.2}Network Latency}{13}
+\contentsline {subsubsection}{\numberline {3.3.3}Human Perception}{13}
+\contentsline {subsection}{\numberline {3.4}Conclusions of Research}{13}
+\contentsline {section}{\numberline {4}System Design and Configuration}{13}
+\contentsline {subsection}{\numberline {4.1}System Architecture}{13}
+\contentsline {subsection}{\numberline {4.2}Class Diagram}{13}
+\contentsline {subsection}{\numberline {4.3}Sequence Diagram}{13}
+\contentsline {section}{\numberline {5}Example of use}{14}
+\contentsline {section}{\numberline {6}Remote Artificial Intelligence for Games}{15}
+\contentsline {subsection}{\numberline {6.1}Introduction}{15}
+\contentsline {subsubsection}{\numberline {6.1.1}Networking Model}{15}
+\contentsline {subsubsection}{\numberline {6.1.2}Design Patterns}{15}
+\contentsline {subsection}{\numberline {6.2}Client API Design}{16}
+\contentsline {subsubsection}{\numberline {6.2.1}Pimpl Idiom}{16}
+\contentsline {subsubsection}{\numberline {6.2.2}Game Representation}{16}
+\contentsline {subsection}{\numberline {6.3}BSD Sockets Layer}{17}
+\contentsline {subsubsection}{\numberline {6.3.1}UDP vs TCP}{17}
+\contentsline {subsubsection}{\numberline {6.3.2}Communication Protocol}{17}
+\contentsline {subsection}{\numberline {6.4}Server System Design}{17}
+\contentsline {subsubsection}{\numberline {6.4.1}Benefits of Remote Processing}{17}
+\contentsline {subsubsection}{\numberline {6.4.2}Fork or Select}{18}
+\contentsline {subsubsection}{\numberline {6.4.3}Round Robin DNS}{20}
+\contentsline {subsection}{\numberline {6.5}Artificial Intelligence \& Algorithms}{20}
+\contentsline {subsubsection}{\numberline {6.5.1}A* Path finding}{20}
+\contentsline {subsubsection}{\numberline {6.5.2}Brute force}{20}
+\contentsline {subsubsection}{\numberline {6.5.3}Graph Sturctures}{20}
+\contentsline {subsection}{\numberline {6.6}Analysis, Testing, and Results}{20}
+\contentsline {subsection}{\numberline {6.7}Summary}{21}
+\contentsline {section}{\numberline {7}User manual (where appropriate)}{21}
+\contentsline {section}{\numberline {8}Critical analysis, Conclusions, and Future Work}{21}
+\contentsline {section}{References}{22}
+\contentsline {section}{Appendices}{23}
+\contentsline {section}{\numberline {A}Graph Appendix}{23}
+\contentsline {section}{\numberline {B}Another Appendix}{23}

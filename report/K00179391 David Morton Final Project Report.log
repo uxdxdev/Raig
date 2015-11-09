@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 NOV 2015 20:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 NOV 2015 20:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,121 +555,134 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@lof=\write5
 \openout5 = `"K00179391 David Morton Final Project Report.lof"'.
 
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
-
- []
-
-[5] [6] [7] [8]
+ [4] [5] [6] [7] [8]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 103.
 
- (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 103.
+ [9]
+<Figures/trellowithtasks.png, id=72, 1135.24126pt x 654.445pt>
+File: Figures/trellowithtasks.png Graphic file (type png)
 
-[9] [10] [11] [12] <Figures/lit_logo.jpg, id=82, 602.25pt x 163.61125pt>
+<use Figures/trellowithtasks.png>
+Package pdftex.def Info: Figures/trellowithtasks.png used on input line 126.
+(pdftex.def)             Requested size: 452.9679pt x 261.12427pt.
+ [10]
+Underfull \hbox (badness 10000) in paragraph at lines 131--133
+
+ []
+
+[11 <./Figures/trellowithtasks.png>] [12] [13]
+<Figures/lit_logo.jpg, id=90, 602.25pt x 163.61125pt>
 File: Figures/lit_logo.jpg Graphic file (type jpg)
 
 <use Figures/lit_logo.jpg>
-Package pdftex.def Info: Figures/lit_logo.jpg used on input line 230.
+Package pdftex.def Info: Figures/lit_logo.jpg used on input line 243.
 (pdftex.def)             Requested size: 452.9679pt x 123.06013pt.
- [13]
-Underfull \hbox (badness 10000) in paragraph at lines 241--246
+ [14]
+Underfull \hbox (badness 10000) in paragraph at lines 254--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--250
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--256
+Underfull \hbox (badness 10000) in paragraph at lines 265--269
 
  []
 
-[14 <./Figures/lit_logo.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 297--298
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 302--303
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--307
+[15 <./Figures/lit_logo.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
 
  []
 
 [16]
-
-LaTeX Warning: Reference `lst:server listen' on page 17 undefined on input line
- 336.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 319--320
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 340--341
+
+LaTeX Warning: Reference `lst:server listen' on page 18 undefined on input line
+ 349.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
 
  []
 
-[18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 377--382
+
+Underfull \hbox (badness 10000) in paragraph at lines 351--352
 
  []
 
-[20]
-Underfull \hbox (badness 1436) in paragraph at lines 417--418
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 353--354
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--356
+
+ []
+
+[19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 388--393
+
+ []
+
+[21]
+Underfull \hbox (badness 1436) in paragraph at lines 428--429
 []\OT1/cmr/m/n/12 Distributed Pro-cess-ing . 2015. Dis-tributed Pro-cess-ing . 
 [ON-LINE] Avail-able
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
+Underfull \hbox (badness 10000) in paragraph at lines 428--429
 \OT1/cmr/m/n/12 at: \OT1/cmr/m/it/12 http://docs.oracle.com/cd/A87860[]01/doc/s
 erver.817/a76965/c29dstpr.htm\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 4752) in paragraph at lines 420--421
+Underfull \hbox (badness 4752) in paragraph at lines 431--432
 []\OT1/cmr/m/n/12 World of War-craft - Wikipedia, the free en-cy-clo-pe-dia. 20
 15. World of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
+Underfull \hbox (badness 10000) in paragraph at lines 431--432
 \OT1/cmr/m/n/12 War-craft - Wikipedia, the free en-cy-clo-pe-dia. [ON-LINE] Ava
 il-able at:
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 423--424
+Underfull \hbox (badness 1117) in paragraph at lines 434--435
 \OT1/cmr/m/it/12 latency-can-make-even-fast-internet-connections-feel-slow/. \O
 T1/cmr/m/n/12 [Ac-cessed 10 Oc-to-ber
  []
 
-[21] [22] (./K00179391 David Morton Final Project Report.aux)
+[22] [23] (./K00179391 David Morton Final Project Report.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6511 strings out of 493117
- 94862 string characters out of 6135433
+ 6518 strings out of 493117
+ 95037 string characters out of 6135433
  215800 words of memory out of 5000000
- 9865 multiletter control sequences out of 15000+600000
+ 9871 multiletter control sequences out of 15000+600000
  9792 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,18n,58p,2355b,1313s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -682,11 +695,11 @@ r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loc
 al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on "K00179391 David Morton Final Project Report.pdf" (24 pages, 
-280603 bytes).
+Output written on "K00179391 David Morton Final Project Report.pdf" (25 pages, 
+537134 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 150 PDF objects out of 1000 (max. 8388607)
+ 104 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
