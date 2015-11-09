@@ -1,23 +1,14 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.20)  9 NOV 2015 19:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  9 NOV 2015 20:15
 entering extended mode
-**K00179391*David*Morton*Final*Project*Report.tex
-
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.tex"
-LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
-abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
-croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
-ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
- lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
-ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
-an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
-ishmax, welsh, loaded.
-(C:\Miktex\tex\latex\base\article.cls
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**"K00179391 David Morton Final Project Report.tex"
+(./K00179391 David Morton Final Project Report.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(C:\Miktex\tex\latex\base\size12.clo
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -31,18 +22,20 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (C:\Miktex\tex\latex\base\inputenc.sty
-Package: inputenc 2008/03/30 v1.1d Input encoding file
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2014/04/30 v1.2b Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(C:\Miktex\tex\latex\base\utf8.def
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
- (C:\Miktex\tex\latex\base\t1enc.dfu
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -192,7 +185,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(C:\Miktex\tex\latex\base\ot1enc.dfu
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -222,7 +215,8 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
- (C:\Miktex\tex\latex\base\omsenc.dfu
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -246,54 +240,50 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(C:\Miktex\tex\latex\preprint\fullpage.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
 )
-(C:\Miktex\tex\generic\babel\babel.sty
-Package: babel 2008/07/08 v3.8m The Babel package
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2014/03/24 3.9k The Babel package
 
-*************************************
-* Local config file bblopts.cfg used
-*
-(C:\Miktex\tex\latex\00miktex\bblopts.cfg
-File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
-)
-(C:\Miktex\tex\generic\babel\english.ldf
-Language: english 2005/03/30 v3.3o English support from the babel system
- (C:\Miktex\tex\generic\babel\babel.def
-File: babel.def 2008/07/08 v3.8m Babel common definitions
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2014/03/24 3.9k Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
-)) (C:\Miktex\tex\latex\graphics\graphicx.sty
-Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Miktex\tex\latex\graphics\keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(C:\Miktex\tex\latex\graphics\graphics.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Miktex\tex\latex\graphics\trig.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(C:\Miktex\tex\latex\00miktex\graphics.cfg
-File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(C:\Miktex\tex\latex\pdftex-def\pdftex.def
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(C:\Miktex\tex\generic\oberdiek\infwarerr.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(C:\Miktex\tex\generic\oberdiek\ltxcmds.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count88
@@ -301,7 +291,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(C:\Miktex\tex\latex\float\float.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count89
 \float@exts=\toks17
@@ -309,16 +299,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks18
 \@floatcapt=\box27
 )
-(C:\Miktex\tex\latex\appendix\appendix.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@pps=\count90
 \c@@ppsavesec=\count91
 \c@@ppsaveapp=\count92
 )
-(C:\Miktex\tex\latex\caption\caption.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-(C:\Miktex\tex\latex\caption\caption3.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen106
@@ -332,17 +322,19 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \c@ContinuedFloat=\count93
 Package caption Info: float package is loaded.
 )
-(C:\Miktex\tex\latex\chngcntr\chngcntr.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2009/09/02 v1.0a change counter resetting
 )
-(C:\Miktex\tex\latex\setspace\setspace.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-(C:\Miktex\tex\latex\pdfpages\pdfpages.sty
-Package: pdfpages 2015/09/18 v0.5d Insert pages of external PDF documents (AM)
- (C:\Miktex\tex\latex\base\ifthen.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2013/08/25 v0.4v Insert pages of external PDF documents (AM)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
-) (C:\Miktex\tex\latex\tools\calc.sty
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count94
 \calc@Bcount=\count95
@@ -350,22 +342,25 @@ Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bdimen=\dimen114
 \calc@Askip=\skip44
 \calc@Bskip=\skip45
-LaTeX Info: Redefining \setlength on input line 76.
-LaTeX Info: Redefining \addtolength on input line 77.
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
 \calc@Ccount=\count96
 \calc@Cskip=\skip46
-) (C:\Miktex\tex\latex\eso-pic\eso-pic.sty
-Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
-(C:\Miktex\tex\generic\oberdiek\atbegshi.sty
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2013/10/06 v2.0d eso-pic (RN)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 
-(C:\Miktex\tex\generic\oberdiek\ifpdf.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 ))
-(C:\Miktex\tex\latex\xcolor\xcolor.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
- (C:\Miktex\tex\latex\00miktex\color.cfg
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -379,52 +374,51 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 ))
-\AM@pagewidth=\dimen115
-\AM@pageheight=\dimen116
- (C:\Miktex\tex\latex\pdfpages\pppdftex.def
-File: pppdftex.def 2015/09/18 v0.5d Pdfpages driver for pdfTeX (AM)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box28
 \AM@toc@title=\toks19
 \c@AM@survey=\count97
 \AM@templatesizebox=\box29
 )
-(C:\Miktex\tex\latex\listings\listings.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count98
 \lst@gtempboxa=\box30
 \lst@token=\toks20
 \lst@length=\count99
-\lst@currlwidth=\dimen117
+\lst@currlwidth=\dimen115
 \lst@column=\count100
 \lst@pos=\count101
-\lst@lostspace=\dimen118
-\lst@width=\dimen119
+\lst@lostspace=\dimen116
+\lst@width=\dimen117
 \lst@newlines=\count102
 \lst@lineno=\count103
-\lst@maxwidth=\dimen120
+\lst@maxwidth=\dimen118
 
-(C:\Miktex\tex\latex\listings\lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 \c@lstnumber=\count104
 \lst@skipnumbers=\count105
 \lst@framebox=\box31
 )
-(C:\Miktex\tex\latex\listings\listings.cfg
-File: listings.cfg 2015/06/04 1.6 listings configuration
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/03/04 1.5c listings configuration
 ))
-Package: listings 2015/06/04 1.6 (Carsten Heinz)
+Package: listings 2014/03/04 1.5c (Carsten Heinz)
 
-(C:\Miktex\tex\latex\listings\lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
-(C:\Miktex\tex\latex\listings\lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
-(C:\Miktex\tex\latex\listings\lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 )
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.aux")
+(./K00179391 David Morton Final Project Report.aux)
+\openout1 = `"K00179391 David Morton Final Project Report.aux"'.
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
 LaTeX Font Info:    ... okay on input line 54.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
@@ -437,35 +431,68 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
 LaTeX Font Info:    ... okay on input line 54.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
 LaTeX Font Info:    ... okay on input line 54.
- (C:\Miktex\tex\context\base\supp-pdf.mkii
+
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count106
-\scratchdimen=\dimen121
+\scratchdimen=\dimen119
 \scratchbox=\box32
 \nofMPsegments=\count107
 \nofMParguments=\count108
 \everyMPshowfont=\toks21
 \MPscratchCnt=\count109
-\MPscratchDim=\dimen122
+\MPscratchDim=\dimen120
 \MPnumerator=\count110
 \makeMPintoPDFobject=\count111
 \everyMPtoPDFconversion=\toks22
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box33
- (C:\Miktex\tex\latex\oberdiek\pdflscape.sty
-Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
-
-(C:\Miktex\tex\latex\graphics\lscape.sty
-Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
-
-(C:\Miktex\tex\generic\ifxetex\ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-))
 \c@lstlisting=\count112
 
 <reportTitlePage.pdf, id=1, 597.50829pt x 845.0471pt>
@@ -505,10 +532,9 @@ Package pdftex.def Info: reportTitlePage.pdf, page1 used on input line 55.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [1
 
- <C:/projects/workspace/raig/report/reportTitlePage.pdf{C:/Miktex/pdftex/config
-/pdftex.map}>] [1]
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.toc"
+ <./reportTitlePage.pdf{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}>] [1]
+(./K00179391 David Morton Final Project Report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -517,14 +543,18 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
  [1])
 \tf@toc=\write3
+\openout3 = `"K00179391 David Morton Final Project Report.toc"'.
+
  [2]
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.lot")
+(./K00179391 David Morton Final Project Report.lot)
 \tf@lot=\write4
+\openout4 = `"K00179391 David Morton Final Project Report.lot"'.
+
  [3]
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.lof")
+(./K00179391 David Morton Final Project Report.lof)
 \tf@lof=\write5
+\openout5 = `"K00179391 David Morton Final Project Report.lof"'.
+
  [4]
 Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
@@ -533,129 +563,130 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--79
 [5] [6] [7] [8]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 103.
 
- (C:\Miktex\tex\latex\base\omscmr.fd
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 103.
- [9] [10] [11]
-<Figures/lit_logo.jpg, id=82, 602.25pt x 163.61125pt>
+
+[9] [10] [11] [12] <Figures/lit_logo.jpg, id=82, 602.25pt x 163.61125pt>
 File: Figures/lit_logo.jpg Graphic file (type jpg)
 
 <use Figures/lit_logo.jpg>
-Package pdftex.def Info: Figures/lit_logo.jpg used on input line 210.
+Package pdftex.def Info: Figures/lit_logo.jpg used on input line 230.
 (pdftex.def)             Requested size: 452.9679pt x 123.06013pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 221--226
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+ [13]
+Underfull \hbox (badness 10000) in paragraph at lines 241--246
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--236
-
- []
-
-[12 <C:/projects/workspace/raig/report/Figures/lit_logo.jpg>] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--283
+Underfull \hbox (badness 10000) in paragraph at lines 252--256
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 286--287
-
- []
-
-[14]
-
-LaTeX Warning: Reference `lst:server listen' on page 15 undefined on input line
- 316.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 316--317
+[14 <./Figures/lit_logo.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--321
+Underfull \hbox (badness 10000) in paragraph at lines 306--307
 
  []
 
-[16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 357--362
+[16]
+
+LaTeX Warning: Reference `lst:server listen' on page 17 undefined on input line
+ 336.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 
  []
 
-[18]
-Underfull \hbox (badness 1436) in paragraph at lines 397--398
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--339
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
+
+ []
+
+[18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 377--382
+
+ []
+
+[20]
+Underfull \hbox (badness 1436) in paragraph at lines 417--418
 []\OT1/cmr/m/n/12 Distributed Pro-cess-ing . 2015. Dis-tributed Pro-cess-ing . 
 [ON-LINE] Avail-able
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 417--418
 \OT1/cmr/m/n/12 at: \OT1/cmr/m/it/12 http://docs.oracle.com/cd/A87860[]01/doc/s
 erver.817/a76965/c29dstpr.htm\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 4752) in paragraph at lines 400--401
+Underfull \hbox (badness 4752) in paragraph at lines 420--421
 []\OT1/cmr/m/n/12 World of War-craft - Wikipedia, the free en-cy-clo-pe-dia. 20
 15. World of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 420--421
 \OT1/cmr/m/n/12 War-craft - Wikipedia, the free en-cy-clo-pe-dia. [ON-LINE] Ava
 il-able at:
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 403--404
+Underfull \hbox (badness 1117) in paragraph at lines 423--424
 \OT1/cmr/m/it/12 latency-can-make-even-fast-internet-connections-feel-slow/. \O
 T1/cmr/m/n/12 [Ac-cessed 10 Oc-to-ber
  []
 
-[19] [20]
-("C:\projects\workspace\raig\report\K00179391 David Morton Final Project Report
-.aux")
+[21] [22] (./K00179391 David Morton Final Project Report.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6132 strings out of 493921
- 86002 string characters out of 3154596
- 206812 words of memory out of 3000000
- 9334 multiletter control sequences out of 15000+200000
- 9792 words of font info for 35 fonts, out of 3000000 for 9000
- 841 hyphenation exceptions out of 8191
- 37i,18n,58p,2353b,1313s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Miktex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Miktex/fonts/type1/p
-ublic/amsfonts/cm/cmbx12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmcsc10.
-pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Miktex/fonts/type1/
-public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/pu
-blic/amsfonts/cm/cmti12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmtt8.pfb
->
-Output written on "K00179391 David Morton Final Project Report.pdf" (22 pages, 
-293683 bytes).
+ 6511 strings out of 493117
+ 94862 string characters out of 6135433
+ 215800 words of memory out of 5000000
+ 9865 multiletter control sequences out of 15000+600000
+ 9792 words of font info for 35 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 39i,18n,58p,2355b,1313s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on "K00179391 David Morton Final Project Report.pdf" (24 pages, 
+280603 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
+ 142 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

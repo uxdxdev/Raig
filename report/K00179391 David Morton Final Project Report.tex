@@ -100,19 +100,39 @@ Explain how you understand the project objective(s), what is to be solved or don
 The objectives of the \textit{RAIG} project are to:
 
 \begin{itemize}
-\item{Create a remote Artificial Intelligence service for game developers}
-\item{Provide an Application Programming Interface that can be integrated into new and existing projects}
-
+\item{Design and develop a remote Artificial Intelligence service for game developers}
+\item{Provide an Application Programming Interface that can be integrated into new and existing projects that will communicate with the remote AI service}
+\item{Design and build a server system that can scale to multiple users efficiently without administration or extra work effort}
+\item{Create a modular algorithm manager that can process Python3 source code to allow earier integration of algorithm implementations created by developers}
 \end{itemize}
+
+Creating a remote AI service that is easy to understand is a key component in the RAIG project. Developers need an easier alternative to implementing complex algorithms in their source code. Making the integration of the system seamless and straight forward will simplify the process by providing an intuitive API to build against without needing to worry about the implementation details. 
+
+The API will provide developers with action functions that will be designed around a seperate entity structure. The developer will ask the service for solutions and get data in return that they can use in specific ways in their applications.
+
+The server system will need to scale to users seamlessly. Allowing multiple users to connect and use the service concurrently is fundamental to the projects performance. The server must hold state on each connected client using persistent storage. It must also provide uninterrupted service to clients with a focus on realtime processing of user generated data and network communications. 
+
+The server system is home to the AI manager system. This system must be capable of using developer written Python3 algorithm implementations. Ease of use and extensibilty is a key goal of the RAIG project and also allows for an open development community to form around algorithm implemenations and efficiencies which fosters education and growth. 
 
 \subsection{Project Planning}
 Agile approach, PID, Charter, Phases.
 
 Provide a plan for the project timeline implementation including key tasks, deadlines and outputs.
 
+
+
 \subsection{Revision History}
 
-...
+\subsubsection*{Version 0.1}
+
+Initial draft of the project report contains most of the key headings related to research and the technologies being used in the project. 
+
+\subsubsection*{Version 0.2}
+
+Additions made to include implementation headings and areas that need to be included in the final report.
+
+\subsubsection*{Version 0.3}
+
 
 \section{Literature Review and Research}
 Outline the literature reviewed and research completed to inform the completion of your project.  This should include commentary on current and emerging technologies/systems, key data, information, source, code etc. which was sourced as part of your research.  Where relevant indicate any conclusions or recommendations arising from your research
