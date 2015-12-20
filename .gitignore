@@ -6,3 +6,5 @@ build/
 cmake_install.cmake
 external/
 raig
+.cproject
+.project

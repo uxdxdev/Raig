@@ -18,6 +18,10 @@ ExternalProject_Add(libraig
    SOURCE_DIR ${CMAKE_BINARY_DIR}/external/libraig
 )
 
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
+
 if(UNIX AND NOT APPLE)
   set(PROJECT_LINK_LIBS libsocket.so libraig.so)
 else()

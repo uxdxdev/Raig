@@ -1,9 +1,3 @@
-#include <syslog.h> // syslog()
-#include <string.h> // strlen()
-#include <unistd.h> // gethostname(), write()
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
 #include "../includes/AIManager.h"
 
 extern "C" {

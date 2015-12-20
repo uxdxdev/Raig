@@ -1,9 +1,5 @@
-
 #include "../includes/NetworkManager.h"
 #include "../includes/AIManager.h"
-
-#include <errno.h>
-#include <signal.h>
 
 NetworkManager::NetworkManager()
 {
@@ -21,16 +17,16 @@ void NetworkManager::Init(const char* ipAddress)
 
 	printf("Server: initialising\n");
 
-  // Create a connection for the server
-  m_iListenSocketFileDescriptor = m_RaigAI->InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
+	// Create a connection for the server
+	m_iListenSocketFileDescriptor = m_RaigAI->InitConnection(NULL, (char*)"1071", TYPE_SERVER, SOCK_STREAM);
 
-  // Listen for incoming TCP connections and set max limit of
-  // listen queue
-  m_RaigAI->ListenForConnections(m_iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
+	// Listen for incoming TCP connections and set max limit of
+	// listen queue
+	m_RaigAI->ListenForConnections(m_iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
 
-  // Signal handler for terminated processes
-  // Only needed when forking processes
-  m_RaigAI->CreateSignalHandler();
+	// Signal handler for terminated processes
+	// Only needed when forking processes
+	m_RaigAI->CreateSignalHandler();
 
 	// AI Manager
 	m_AIManager = new AIManager();
