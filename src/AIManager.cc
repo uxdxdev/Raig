@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
-#include "../includes/ai_manager.h"
-#include "../includes/raig_main.h"
+#include "../includes/AIManager.h"
 
 extern "C" {
 	#include "../external/libsocket/include/socket.h"
@@ -49,8 +48,3 @@ void AIManager::InitializePacket(Packet* packet)
 	packet->completeFlag = 0;
 	// set other packet parameters
 }
-
-
-
-
-

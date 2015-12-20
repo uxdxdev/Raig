@@ -24,7 +24,7 @@ else()
   set(PROJECT_LINK_LIBS libsocket.dylib libraig.dylib)
 endif()
 
-set(SOURCES src/ai_manager.cc src/raig_main.cc src/raig_server_manager.cc)
+set(SOURCES src/AIManager.cc src/main.cc src/NetworkManager.cc)
 
 link_directories(external/libraig/)
 link_directories(external/libsocket/)
