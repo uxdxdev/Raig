@@ -23,17 +23,17 @@ void RaigServerManager::init(const char* ipAddress)
 
 	printf("Server: initialising\n");
 
-    // Create a connection for the server
-    iListenSocketFileDescriptor = InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
+  // Create a connection for the server
+  iListenSocketFileDescriptor = InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
 
-    // Listen for incoming TCP connections and set max limit of
-    // listen queue
-    ListenForConnections(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
-    
-    // Signal handler for terminated processes
-    // Only needed when forking processes
-    CreateSignalHandler();
-    
+  // Listen for incoming TCP connections and set max limit of
+  // listen queue
+  ListenForConnections(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
+
+  // Signal handler for terminated processes
+  // Only needed when forking processes
+  CreateSignalHandler();
+
 	//iListenSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
 
 	// Use command line input to pass in the hostname and service port number.
@@ -54,27 +54,27 @@ void RaigServerManager::init(const char* ipAddress)
 void RaigServerManager::start()
 {
 	printf("listening for connections\n");
-		
+
     // Accept all incoming TCP connections and return a file descriptor
     // used to communicate with the client.
-    connfd = AcceptGameConnection(iListenSocketFileDescriptor, &sAddress);
-    
+    connfd = AcceptConnection(iListenSocketFileDescriptor, &sAddress);
+
     // There was no error in AcceptGameConnection()! Woo! Create a child process
     // to handle game for each client
     if( (childProcessID = fork()) == 0)
     {
         // CHILD
         //printf("child %d created\n", childProcessID);
-        
+
         // Close the parents listen file descriptor in the child
         close(iListenSocketFileDescriptor);
-        
+
         printf("Server starting a new connection\n");
-        
+
         m_ai_manager->ProcessRequest(connfd, connfd);
-        
+
         printf("Disconnecting...\n");
-        
+
         /*
          *  On return exit to kill the process. The kernel will then
          *  send a signal to the parent which is caught by the parents
@@ -82,7 +82,7 @@ void RaigServerManager::start()
          */
         exit(0);
     }
-    
+
     close(connfd);
 }
 
