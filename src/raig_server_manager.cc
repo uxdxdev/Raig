@@ -23,18 +23,29 @@ void RaigServerManager::init(const char* ipAddress)
 
 	printf("Server: initialising\n");
 
-	iListenSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
+    // Create a connection for the server
+    iListenSocketFileDescriptor = InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
+
+    // Listen for incoming TCP connections and set max limit of
+    // listen queue
+    ListenForConnections(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
+    
+    // Signal handler for terminated processes
+    // Only needed when forking processes
+    CreateSignalHandler();
+    
+	//iListenSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
 
 	// Use command line input to pass in the hostname and service port number.
 	// AddressIPX("www.google.com", "1071", struct addrinfo *hints, struct addrinfo** result);
-	Address(AF_INET, (struct Address*) &sAddress, strServerIPAddress, HANGMAN_TCP_PORT);
+	//Address(AF_INET, (struct Address*) &sAddress, strServerIPAddress, HANGMAN_TCP_PORT);
 
-	Bind(iListenSocketFileDescriptor, (struct sockaddr *) &sAddress.m_sAddress, sizeof(sAddress.m_sAddress));
+	//Bind(iListenSocketFileDescriptor, (struct sockaddr *) &sAddress.m_sAddress, sizeof(sAddress.m_sAddress));
 
-	Listen(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
+	//Listen(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
 
 	// signal handler for terminated processes
-	Signal(SIGCHLD, (void*)signalHandler);
+	//Signal(SIGCHLD, (void*)SignalHandler);
 
 	// AI Manager
 	m_ai_manager = new AIManager();
@@ -43,46 +54,36 @@ void RaigServerManager::init(const char* ipAddress)
 void RaigServerManager::start()
 {
 	printf("listening for connections\n");
-
-	for( ; ; ) {
-		client_len = sizeof(sAddress.m_sAddress);
-		// Accept connections from clients
-		if ((connfd = accept(iListenSocketFileDescriptor, (struct sockaddr *) &sAddress.m_sAddress, &client_len)) < 0)
-		{
-			// There was an error (interrupt)
-			if( errno == EINTR )
-			{
-				// Try another Accept() in the event of a system call interrupt
-				continue;
-			}
-			else
-			{
-				// There was an error other than an interrupt so close the Parent process
-				perror("Accept error");
-				exit(3);
-			}
-		}
-
-		// There was no error in Accept()! Woo! Create a child process
-		if( (childProcessID = fork()) == 0)
-		{
-			// CHILD
-			//printf("child %d created\n", childProcessID);
-
-			// close the parents listen file descriptor in the child
-			close(iListenSocketFileDescriptor);
-
-			/* ---------------- Process Client Request ---------------------*/
-			m_ai_manager->ProcessRequest(connfd, connfd);
-
-			/*
-			 *  On return exit to kill the process. The kernel will then
-			 *  send a signal to the parent which is caught by the parents
-			 *  signalHandler() set in Signal()
-			 */
-			exit(0);
-		}
-	}
+		
+    // Accept all incoming TCP connections and return a file descriptor
+    // used to communicate with the client.
+    connfd = AcceptGameConnection(iListenSocketFileDescriptor, &sAddress);
+    
+    // There was no error in AcceptGameConnection()! Woo! Create a child process
+    // to handle game for each client
+    if( (childProcessID = fork()) == 0)
+    {
+        // CHILD
+        //printf("child %d created\n", childProcessID);
+        
+        // Close the parents listen file descriptor in the child
+        close(iListenSocketFileDescriptor);
+        
+        printf("Server starting a new connection\n");
+        
+        m_ai_manager->ProcessRequest(connfd, connfd);
+        
+        printf("Disconnecting...\n");
+        
+        /*
+         *  On return exit to kill the process. The kernel will then
+         *  send a signal to the parent which is caught by the parents
+         *  SignalHandler() set in Signal()
+         */
+        exit(0);
+    }
+    
+    close(connfd);
 }
 
 void RaigServerManager::cleanUp()

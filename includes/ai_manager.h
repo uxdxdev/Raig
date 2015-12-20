@@ -1,7 +1,7 @@
 #ifndef INCLUDES_AI_MANAGER_H_
 #define INCLUDES_AI_MANAGER_H_
 
-#include "../../libraig/raig.h"
+#include "../external/libraig/include/raig.h"
 
 class AIManager
 {

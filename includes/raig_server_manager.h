@@ -2,7 +2,7 @@
 #define INCLUDES_RAIG_SERVER_MANAGER_H_
 
 extern "C" {
-	#include "../../libsocket/socket.h"
+	#include "../external/libsocket/include/socket.h"
 }
 
 class AIManager;

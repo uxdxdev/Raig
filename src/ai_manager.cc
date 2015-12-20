@@ -5,11 +5,10 @@
 #include <stdio.h>
 #include <errno.h>
 #include "../includes/ai_manager.h"
-
 #include "../includes/raig_main.h"
 
 extern "C" {
-	#include "../../libsocket/socket.h"
+	#include "../external/libsocket/include/socket.h"
 }
 
 using namespace raig;
