@@ -18,21 +18,22 @@ RaigServerManager::~RaigServerManager()
 
 void RaigServerManager::init(const char* ipAddress)
 {
+	m_RaigAI = new raig::Raig();
 	//strServerIPAddress = ipAddress;
 	strServerIPAddress = (char*)"0.0.0.0";
 
 	printf("Server: initialising\n");
 
   // Create a connection for the server
-  iListenSocketFileDescriptor = InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
+  iListenSocketFileDescriptor = m_RaigAI->InitConnection(NULL, "1071", TYPE_SERVER, SOCK_STREAM);
 
   // Listen for incoming TCP connections and set max limit of
   // listen queue
-  ListenForConnections(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
+  m_RaigAI->ListenForConnections(iListenSocketFileDescriptor, MAX_LISTEN_QUEUE_SIZE);
 
   // Signal handler for terminated processes
   // Only needed when forking processes
-  CreateSignalHandler();
+  m_RaigAI->CreateSignalHandler();
 
 	//iListenSocketFileDescriptor = Socket(AF_INET, SOCK_STREAM, 0);
 
@@ -57,7 +58,7 @@ void RaigServerManager::start()
 
     // Accept all incoming TCP connections and return a file descriptor
     // used to communicate with the client.
-    connfd = AcceptConnection(iListenSocketFileDescriptor, &sAddress);
+    connfd = m_RaigAI->AcceptConnection(iListenSocketFileDescriptor, &sAddress);
 
     // There was no error in AcceptGameConnection()! Woo! Create a child process
     // to handle game for each client
@@ -91,5 +92,5 @@ void RaigServerManager::cleanUp()
 	close(connfd);
 	//delete sAddress;
 	delete m_ai_manager;
-
+	delete m_RaigAI;
 }

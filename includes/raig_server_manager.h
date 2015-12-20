@@ -23,6 +23,7 @@ private:
 	int connfd;
 	socklen_t client_len;
 
+	raig::Raig* m_RaigAI;
 	AIManager* m_ai_manager;
 };
 
