@@ -1,5 +1,5 @@
-#ifndef INCLUDES_RAIG_SERVER_MANAGER_H_
-#define INCLUDES_RAIG_SERVER_MANAGER_H_
+#ifndef NETWORK_MANAGER_H_
+#define NETWORK_MANAGER_H_
 
 #include "../external/libraig/include/raig.h"
 
@@ -30,4 +30,4 @@ private:
 
 };
 
-#endif /* INCLUDES_RAIG_SERVER_MANAGER_H_ */
+#endif /* NETWORK_MANAGER_H_ */

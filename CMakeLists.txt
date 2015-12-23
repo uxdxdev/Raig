@@ -28,10 +28,10 @@ else()
   set(PROJECT_LINK_LIBS libsocket.dylib libraig.dylib)
 endif()
 
-set(SOURCES src/AIManager.cc src/main.cc src/NetworkManager.cc)
+set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc)
 
 link_directories(external/libraig/)
-link_directories(external/libsocket/)
+link_directories(external/libraig/external/libsocket/)
 
 add_executable(raig ${SOURCES})
 

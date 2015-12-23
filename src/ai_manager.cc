@@ -1,4 +1,4 @@
-#include "../includes/AIManager.h"
+#include "../include/ai_manager.h"
 
 extern "C" {
 	#include "../external/libsocket/include/socket.h"

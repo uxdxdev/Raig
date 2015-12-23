@@ -1,5 +1,5 @@
-#ifndef INCLUDES_AI_MANAGER_H_
-#define INCLUDES_AI_MANAGER_H_
+#ifndef AI_MANAGER_H_
+#define AI_MANAGER_H_
 
 #include "../external/libraig/include/raig.h"
 

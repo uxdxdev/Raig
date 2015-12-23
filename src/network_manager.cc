@@ -1,5 +1,6 @@
-#include "../includes/NetworkManager.h"
-#include "../includes/AIManager.h"
+#include "../include/network_manager.h"
+
+#include "../include/ai_manager.h"
 
 NetworkManager::NetworkManager()
 {

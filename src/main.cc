@@ -1,4 +1,4 @@
-#include "../includes/NetworkManager.h"
+#include "../include/network_manager.h"
 
 int main(int argc, char* argv[])
 {
