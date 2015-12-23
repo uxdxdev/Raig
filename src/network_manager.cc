@@ -66,11 +66,12 @@ void NetworkManager::Start()
 	       *  send a signal to the parent which is caught by the parents
 	       *  SignalHandler() set in Signal()
 	       */
+              close(m_iConnfd);
 	      exit(0);
 	    }
 
-	    close(m_iConnfd);
-		}
+        close(m_iConnfd);
+    }
 }
 
 void NetworkManager::CleanUp()
