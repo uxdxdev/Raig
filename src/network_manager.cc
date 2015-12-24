@@ -9,17 +9,15 @@ NetworkManager::NetworkManager()
 
 NetworkManager::~NetworkManager()
 {
-
+	CleanUp();
 }
 
 void NetworkManager::Init(const char* ipAddress)
 {
-	m_RaigAI = new raig::Raig();
-
 	printf("Server: initialising\n");
 
 	// Create a connection for the server
-	m_iListenSocketFileDescriptor = m_RaigAI->InitConnection(NULL, (char*)"27000", TYPE_SERVER, SOCK_STREAM);
+	m_iListenSocketFileDescriptor = Connection(NULL, (char*)"27000", TYPE_SERVER, SOCK_STREAM);
 
 	// Listen for incoming TCP connections and set max limit of
 	// listen queue
@@ -56,7 +54,8 @@ void NetworkManager::Start()
 
 	      printf("Server starting a new connection\n");
 
-	      m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
+	      //m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
+	      m_AIManager->ProcessRequest(m_iConnfd);
 
 	      printf("Disconnecting...\n");
 
@@ -77,5 +76,4 @@ void NetworkManager::CleanUp()
 	close(m_iConnfd);
 	//delete sAddress;
 	delete m_AIManager;
-	delete m_RaigAI;
 }

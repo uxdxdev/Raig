@@ -19,7 +19,6 @@ public:
 	void CleanUp();
 
 private:
-	raig::Raig *m_RaigAI;
 	AIManager *m_AIManager;
 
 	int m_iListenSocketFileDescriptor;
