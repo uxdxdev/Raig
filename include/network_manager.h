@@ -14,19 +14,28 @@ class NetworkManager
 public:
 	NetworkManager();
 	~NetworkManager();
-	void Init(const char* ipAddress);
+	void Init();
 	void Start();
 	void CleanUp();
 
 private:
+
+	// AI algorithm Manager
 	AIManager *m_AIManager;
 
+	// Server listen file descriptor
 	int m_iListenSocketFileDescriptor;
-	struct Address m_sAddress;
-	pid_t m_ChildProcessID;
-	int m_iConnfd;
-	socklen_t m_ClientLen;
 
+	// Client address structure
+	struct Address m_sAddress;
+
+	// New process id for use with fork
+	pid_t m_ChildProcessID;
+
+	// New connection file descriptor
+	int m_iConnfd;
+
+	socklen_t m_ClientLen;
 };
 
 #endif /* NETWORK_MANAGER_H_ */

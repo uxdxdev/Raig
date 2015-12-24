@@ -4,7 +4,7 @@
 
 NetworkManager::NetworkManager()
 {
-	Init("0.0.0.0");
+	Init();
 }
 
 NetworkManager::~NetworkManager()
@@ -12,7 +12,7 @@ NetworkManager::~NetworkManager()
 	CleanUp();
 }
 
-void NetworkManager::Init(const char* ipAddress)
+void NetworkManager::Init()
 {
 	printf("Server: initialising\n");
 
@@ -37,38 +37,38 @@ void NetworkManager::Start()
 	{
 		printf("listening for connections\n");
 
-	  // Accept all incoming TCP connections and return a file descriptor
-	  // used to communicate with the client.
-	  m_iConnfd = Accept(m_iListenSocketFileDescriptor, &m_sAddress);
-	  printf("Accepted connection from client\n");
+		// Accept all incoming TCP connections and return a file descriptor
+		// used to communicate with the client.
+		m_iConnfd = Accept(m_iListenSocketFileDescriptor, &m_sAddress);
+		printf("Accepted connection from client\n");
 
-	  // There was no error in AcceptGameConnection()! Woo! Create a child process
-	  // to handle game for each client
-	  if( (m_ChildProcessID = fork()) == 0)
-	  {
-	      // CHILD
-	      //printf("child %d created\n", childProcessID);
+		// There was no error in AcceptGameConnection()! Woo! Create a child process
+		// to handle game for each client
+		if( (m_ChildProcessID = fork()) == 0)
+		{
+			// CHILD
+			//printf("child %d created\n", childProcessID);
 
-	      // Close the parents listen file descriptor in the child
-	      close(m_iListenSocketFileDescriptor);
+			// Close the parents listen file descriptor in the child
+			close(m_iListenSocketFileDescriptor);
 
-	      printf("Server starting a new connection\n");
+			printf("Server starting a new connection\n");
 
-	      //m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
-	      m_AIManager->ProcessRequest(m_iConnfd);
+			//m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
+			m_AIManager->ProcessRequest(m_iConnfd);
 
-	      printf("Disconnecting...\n");
+			printf("Disconnecting...\n");
 
-	      /*
-	       *  On return exit to kill the process. The kernel will then
-	       *  send a signal to the parent which is caught by the parents
-	       *  SignalHandler() set in Signal()
-	       */
-          close(m_iConnfd);
-          exit(0);
-      }
-      close(m_iConnfd);
-    }
+			/*
+			*  On return exit to kill the process. The kernel will then
+			*  send a signal to the parent which is caught by the parents
+			*  SignalHandler() set in Signal()
+			*/
+			close(m_iConnfd);
+			exit(0);
+		}
+		close(m_iConnfd);
+	}
 }
 
 void NetworkManager::CleanUp()
