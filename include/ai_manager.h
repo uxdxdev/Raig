@@ -2,6 +2,8 @@
 #define AI_MANAGER_H_
 
 #include "../external/libraig/include/raig.h"
+#include "pathfinding.h"
+#include "vector3.h"
 
 class AIManager
 {
@@ -9,7 +11,8 @@ public:
 	AIManager();
 	~AIManager();
 
-	void Init();
+	void CreateGameWorld(int worldSize);
+	void InitPathfinding();
 	void ProcessRequest(int in, int out);
 	void ProcessRequest(int socketFileDescriptor);
 
@@ -29,6 +32,8 @@ private:
 	bool m_bIsRequestComplete = false;
 
 	int numberOfNodesInPath = 0;
+	Pathfinding *m_pPathfinding;
+	GameWorld *m_pGameWorld;
 };
 
 #endif /* INCLUDES_AI_MANAGER_H_ */

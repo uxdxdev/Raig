@@ -11,12 +11,31 @@ AIManager::AIManager()
 	m_iSocketFileDescriptor = -1;
 	m_bIsPathComplete = false;
 	m_bIsRequestComplete = false;
+	m_pGameWorld = NULL;
+	m_pPathfinding = NULL;
+
+	CreateGameWorld(8);
+	InitPathfinding();
+
 	sprintf(m_cBuffer, "idle_");
 }
 
 AIManager::~AIManager()
 {
 
+}
+
+void AIManager::CreateGameWorld(int worldSize)
+{
+	m_pGameWorld = new GameWorld(worldSize);
+}
+
+void AIManager::InitPathfinding()
+{
+	if(m_pGameWorld != NULL)
+	{
+		m_pPathfinding = new Pathfinding(m_pGameWorld);
+	}
 }
 
 void AIManager::ProcessRequest(int in, int out)
@@ -131,6 +150,8 @@ int AIManager::readBuffer()
 				sourceLocationY,
 				destinationLocationX,
 				destinationLocationY);
+
+		m_pPathfinding->
 	}
 
 	return receivedBytes;
