@@ -13,10 +13,20 @@ public:
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
 	Vector3 NextPathPos();
-	void ResetPath(){ m_bInitializedStartGoal = false; }
+
+	// Reset the path found
+	void ResetPath()
+	{
+		m_eState = IDLE;
+		m_bInitializedStartGoal = false;
+	}
+
+	// Print the path stored in the pathToGoal vector
 	void PrintPath()
 	{
 		printf("Called PrintPath()\n");
+		printf("--Pathfinder Status--\n");
+		printf("State: %d\n", m_eState);
 		printf("-----PATH Start-----\n");
 
 		for(int i = 0; i < m_vPathToGoal.size(); i++)
@@ -32,7 +42,20 @@ public:
 	void ClearVisitedList() { m_vVisitedList.clear(); }
 	void ClearPathToGoal() { m_vPathToGoal.clear(); }
 	bool m_bInitializedStartGoal;
-	bool m_bFoundGoal;
+
+	enum State{
+		IDLE,
+		PROCESSING,
+		REQUEST_COMPLETE
+	};
+
+	// Get pathfinder state
+	State GetState(){ return m_eState; }
+	std::vector<Vector3*> GetPathToGoal()
+	{
+		m_eState = IDLE;
+		return m_vPathToGoal;
+	}
 
 private:
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
@@ -50,6 +73,8 @@ private:
 	std::vector<Vector3*> m_vPathToGoal;
 
 	GameWorld *m_pGameWorld;
+
+	State m_eState;
 };
 
 #endif

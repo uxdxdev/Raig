@@ -9,7 +9,9 @@ public:
 
 	Vector3()
 	{
-
+		m_iX = 0;
+		m_iY = 0;
+		m_iZ = 0;
 	}
 
 	Vector3(int x, int y, int z)

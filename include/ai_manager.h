@@ -15,12 +15,14 @@ public:
 	void InitPathfinding();
 	void ProcessRequest(int in, int out);
 	void ProcessRequest(int socketFileDescriptor);
-
+	void SendPathToClient();
 	int readBuffer();
 
 	void update();
 
 	int sendBuffer();
+
+	void ClearBuffer();
 
 	void InitializePacket(raig::Packet* packet);
 
@@ -34,6 +36,16 @@ private:
 	int numberOfNodesInPath;
 	Pathfinding *m_pPathfinding;
 	GameWorld *m_pGameWorld;
+
+	std::vector<Vector3*> m_vPathToGoal;
+	int m_iPathIndex;
+
+	enum State{
+		IDLE,
+		SENDING_PATH
+	};
+
+	State m_eState;
 };
 
 #endif /* INCLUDES_AI_MANAGER_H_ */

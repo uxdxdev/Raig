@@ -13,6 +13,8 @@ AIManager::AIManager()
 	m_bIsRequestComplete = false;
 	m_pGameWorld = NULL;
 	m_pPathfinding = NULL;
+	m_iPathIndex = -1;
+	m_eState = IDLE;
 
 	CreateGameWorld(8);
 	InitPathfinding();
@@ -103,13 +105,14 @@ int AIManager::readBuffer()
 
 	// Store network data in buffer and return pointer
 	receivedBytes = Recv(m_iSocketFileDescriptor, m_cBuffer, MAX_BUF_SIZE, flags);
+	//printf("Buffer: %s\n", m_cBuffer);
 
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
 
-	if(strcmp(statusFlag, "idle") == 0)
+	if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
-		// Client is running but has not sent a query yet
-		//printf("Client is idle....\n");
+		// Call find path with NULL vectors to continue the path finding
+		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
 	}
 	else if(strcmp(statusFlag, "path") == 0)
 	{
@@ -119,16 +122,16 @@ int AIManager::readBuffer()
 		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
 
 		char *sourceX = strtok((char*)NULL, "_"); // X coordinate
-		char *sourceY = strtok((char*)NULL, "_"); // Y coordinate
+		char *sourceZ = strtok((char*)NULL, "_"); // Z coordinate
 		char *destinationX = strtok((char*)NULL, "_"); // X coordinate
-		char *destinationY = strtok((char*)NULL, "_"); // Y coordinate
+		char *destinationZ = strtok((char*)NULL, "_"); // Z coordinate
 
 		std::string sequenceNumberId(sequenceNumber); // char array to string
 
 		int sourceLocationX = std::atoi(sourceX); // char array to int
-		int sourceLocationZ = std::atoi(sourceY); // char array to int
+		int sourceLocationZ = std::atoi(sourceZ); // char array to int
 		int destinationLocationX = std::atoi(destinationX); // char array to int
-		int destinationLocationZ = std::atoi(destinationY); // char array to int
+		int destinationLocationZ = std::atoi(destinationZ); // char array to int
 
 
 		Location sourceLocation = {
@@ -156,7 +159,6 @@ int AIManager::readBuffer()
 		Vector3 goal(destinationLocationX, 0, destinationLocationZ);
 
 		m_pPathfinding->FindPath(start, goal);
-
 	}
 
 	return receivedBytes;
@@ -170,6 +172,32 @@ void AIManager::update()
 	// AI Manager will read from the database and send each node back to
 	// the client
 
+	if(m_pPathfinding->GetState() == Pathfinding::IDLE) // AIManager is idle
+	{
+		ClearBuffer();
+	}
+	else if(m_pPathfinding->GetState() == Pathfinding::PROCESSING) // Pathfinder is processing a request
+	{
+		ClearBuffer();
+	}
+	else if(m_pPathfinding->GetState() == Pathfinding::REQUEST_COMPLETE) // Pathfinder has finished the request
+	{
+		printf("Pathfinder REQUEST_COMPLETE\n");
+		// Get the path from the pathfinder and tell the
+		// AIManager to send it to the client, node by node.
+		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
+		m_pPathfinding->PrintPath();
+		m_eState = AIManager::SENDING_PATH;
+	}
+
+	// AI Manager state management
+	if(m_eState == AIManager::SENDING_PATH)
+	{
+		SendPathToClient();
+	}
+
+
+	/*
 	if(!m_bIsRequestComplete)
 	{
 		numberOfNodesInPath++;
@@ -188,11 +216,47 @@ void AIManager::update()
 			m_bIsRequestComplete = true;
 			numberOfNodesInPath = 0;
 
-			m_pPathfinding->PrintPath();
+			//m_pPathfinding->PrintPath();
 
 		}
-	}
+	}*/
 
+}
+
+void AIManager::SendPathToClient()
+{
+	m_iPathIndex++;
+
+	if(m_vPathToGoal.empty()) // Path is empty, should not get to here
+	{
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
+	}
+	else if(m_vPathToGoal.size() == 1) // Only one node in the path
+	{
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
+	}
+	else if(m_iPathIndex < m_vPathToGoal.size() - 1) // More than one node in the path
+	{
+		sprintf(m_cBuffer, "node_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		return;
+	}
+	else if(m_iPathIndex == m_vPathToGoal.size() - 1) // Last node in the path
+	{
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
+	}
+}
+
+void AIManager::ClearBuffer()
+{
+	sprintf(m_cBuffer, "null_");
 }
 
 void AIManager::InitializePacket(Packet* packet)
