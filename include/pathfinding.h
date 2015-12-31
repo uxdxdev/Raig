@@ -24,7 +24,6 @@ public:
 	// Print the path stored in the pathToGoal vector
 	void PrintPath()
 	{
-		printf("Called PrintPath()\n");
 		printf("--Pathfinder Status--\n");
 		printf("State: %d\n", m_eState);
 		printf("-----PATH Start-----\n");

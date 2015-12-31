@@ -18,8 +18,7 @@ AIManager::AIManager()
 
 	CreateGameWorld(8);
 	InitPathfinding();
-
-	sprintf(m_cBuffer, "idle_");
+	ClearBuffer();
 }
 
 AIManager::~AIManager()
@@ -161,6 +160,7 @@ void AIManager::update()
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
 		m_pPathfinding->PrintPath();
+		m_pPathfinding->ResetPath();
 		m_eState = AIManager::SENDING_PATH;
 	}
 

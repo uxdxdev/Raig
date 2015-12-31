@@ -18,25 +18,23 @@ Pathfinding::~Pathfinding(void)
 
 void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 {
-	//printf("Called FindPath()\n");
 	if(!m_bInitializedStartGoal)
 	{
-		printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
+		//printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
 
-		// set to unsigned int
-		for(int i = 0; i < m_vOpenList.size(); i++)
+		for(unsigned int i = 0; i < m_vOpenList.size(); i++)
 		{
 			delete m_vOpenList[i];
 		}
 		m_vOpenList.clear();
 
-		for(int i = 0; i < m_vVisitedList.size(); i++)
+		for(unsigned int i = 0; i < m_vVisitedList.size(); i++)
 		{
 			delete m_vVisitedList[i];
 		}
 		m_vVisitedList.clear();
 
-		for(int i = 0; i < m_vPathToGoal.size(); i++)
+		for(unsigned int i = 0; i < m_vPathToGoal.size(); i++)
 		{
 			delete m_vPathToGoal[i];
 		}
@@ -65,8 +63,7 @@ void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 
 void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
 {
-	printf("Called SetStartAndGoal()\n");
-
+	//printf("Called SetStartAndGoal()\n");
 	m_StartCell = new SearchCell(start.m_iCoordinateX, start.m_iCoordinateZ, NULL, m_pGameWorld->GetWorldSize());
 	m_GoalCell = new SearchCell(goal.m_iCoordinateX, goal.m_iCoordinateZ, &goal, m_pGameWorld->GetWorldSize());
 
@@ -74,15 +71,14 @@ void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
 	m_StartCell->H = m_StartCell->ManhattanDistance(m_GoalCell);
 	m_StartCell->m_pParent = 0;
 
-	printf("StartCell X:%d Z:%d GoalCell X:%d Z:%d\n", m_StartCell->m_iCoordinateX, m_StartCell->m_iCoordinateZ, m_GoalCell->m_iCoordinateX, m_GoalCell->m_iCoordinateZ);
-	printf("StartCell G:%f H:%f\n", m_StartCell->G, m_StartCell->H);
+	//printf("StartCell X:%d Z:%d GoalCell X:%d Z:%d\n", m_StartCell->m_iCoordinateX, m_StartCell->m_iCoordinateZ, m_GoalCell->m_iCoordinateX, m_GoalCell->m_iCoordinateZ);
+	//printf("StartCell G:%f H:%f\n", m_StartCell->G, m_StartCell->H);
 
 	m_vOpenList.push_back(m_StartCell);
 }
 
 SearchCell *Pathfinding::GetNextCell()
 {
-
 	float bestF = 99999.0f;
 	int cellIndex = -1;
 	SearchCell *nextCell = NULL;
@@ -103,14 +99,14 @@ SearchCell *Pathfinding::GetNextCell()
 		m_vOpenList.erase(m_vOpenList.begin() + cellIndex);
 	}
 
-	printf("Called GetNextCell() : X:%d Z:%d\n", nextCell->m_iCoordinateX, nextCell->m_iCoordinateZ);
+	//printf("Called GetNextCell() : X:%d Z:%d\n", nextCell->m_iCoordinateX, nextCell->m_iCoordinateZ);
 
 	return nextCell;
 }
 
 void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 {
-	printf("Called PathOpened() : X%d Z:%d\n", x, z);
+	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
 	if(x < 0 || x > m_pGameWorld->GetWorldSize() - 1 || z < 0 || z > m_pGameWorld->GetWorldSize() - 1)
 	{
@@ -139,7 +135,7 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 	newChild->G = newCost;
 	newChild->H = parent->ManhattanDistance(m_GoalCell);
 
-	printf("New child ID %d X%d Z:%d G:%f H:%f\n",newChild->m_iId, newChild->m_iCoordinateX, newChild->m_iCoordinateZ, newChild->G, newChild->H);
+	//printf("New child ID %d X%d Z:%d G:%f H:%f\n",newChild->m_iId, newChild->m_iCoordinateX, newChild->m_iCoordinateZ, newChild->G, newChild->H);
 
 	for(int i = 0; i < m_vOpenList.size(); i++)
 	{
@@ -161,7 +157,6 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 		}
 	}
 
-
 	m_vOpenList.push_back(newChild);
 }
 
@@ -179,7 +174,7 @@ void Pathfinding::ContinuePath()
 	// If we have reached the goal cell
 	if(currentCell->m_iId == m_GoalCell->m_iId)
 	{
-		printf("Goal cell reached\n");
+		//printf("Goal cell reached\n");
 
 		m_GoalCell->m_pParent = currentCell->m_pParent;
 
