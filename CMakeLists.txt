@@ -29,7 +29,7 @@ else()
   set(PROJECT_LINK_LIBS libsocket.dylib libraig.dylib)
 endif()
 
-set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc)
+set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding.cc include/pathfinding.h include/game_world.h include/search_cell.h include/vector3.h)
 
 link_directories(external/libraig/)
 link_directories(external/libraig/external/libsocket/)

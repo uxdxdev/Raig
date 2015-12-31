@@ -11,12 +11,33 @@ AIManager::AIManager()
 	m_iSocketFileDescriptor = -1;
 	m_bIsPathComplete = false;
 	m_bIsRequestComplete = false;
+	m_pGameWorld = NULL;
+	m_pPathfinding = NULL;
+	m_iPathIndex = -1;
+	m_eState = IDLE;
+
+	CreateGameWorld(8);
+	InitPathfinding();
+
 	sprintf(m_cBuffer, "idle_");
 }
 
 AIManager::~AIManager()
 {
 
+}
+
+void AIManager::CreateGameWorld(int worldSize)
+{
+	m_pGameWorld = new GameWorld(worldSize);
+}
+
+void AIManager::InitPathfinding()
+{
+	if(m_pGameWorld != NULL)
+	{
+		m_pPathfinding = new Pathfinding(m_pGameWorld);
+	}
 }
 
 void AIManager::ProcessRequest(int in, int out)
@@ -64,7 +85,7 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 	}
 }
 
-// Receive messages from the server using libsocket TODO: create wrapper in libsocket for revfrom()
+// Receive messages from the server using libsocket
 int AIManager::sendBuffer()
 {
 	size_t size = strlen(m_cBuffer) + 1;
@@ -76,61 +97,50 @@ int AIManager::sendBuffer()
 	return bytesSents;
 }
 
-// Receive data from the connected server using recvfrom()
+// Receive data from the connected server using libsocket
 int AIManager::readBuffer()
 {
 	int flags = 0;
 	int receivedBytes = 0;
 
-	// Store network data in buffer and return pointer
 	receivedBytes = Recv(m_iSocketFileDescriptor, m_cBuffer, MAX_BUF_SIZE, flags);
 
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
 
-	if(strcmp(statusFlag, "idle") == 0)
+	if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
-		// Client is running but has not sent a query yet
-		//printf("Client is idle....\n");
+		// Call find path with arbitrary vectors to continue the path finding
+		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
 	}
-	else if(strcmp(statusFlag, "path") == 0)
+	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == Pathfinding::IDLE)
 	{
 		m_bIsRequestComplete = false;
 
-		// Parse the buffer and construct the path vector
+		// Parse the buffer and construct the source and destination vector positions
 		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
+		char *sourceX = strtok((char*)NULL, "_");
+		char *sourceZ = strtok((char*)NULL, "_");
+		char *destinationX = strtok((char*)NULL, "_");
+		char *destinationZ = strtok((char*)NULL, "_");
 
-		char *sourceX = strtok((char*)NULL, "_"); // X coordinate
-		char *sourceY = strtok((char*)NULL, "_"); // Y coordinate
-		char *destinationX = strtok((char*)NULL, "_"); // X coordinate
-		char *destinationY = strtok((char*)NULL, "_"); // Y coordinate
-
-		std::string sequenceNumberId(sequenceNumber); // char array to string
-
+		std::string sequenceNumberId(sequenceNumber);
 		int sourceLocationX = std::atoi(sourceX); // char array to int
-		int sourceLocationY = std::atoi(sourceY); // char array to int
+		int sourceLocationZ = std::atoi(sourceZ); // char array to int
 		int destinationLocationX = std::atoi(destinationX); // char array to int
-		int destinationLocationY = std::atoi(destinationY); // char array to int
-
-
-		Location sourceLocation = {
-				sequenceNumberId,
-				sourceLocationX,
-				sourceLocationY
-		};
-
-		Location destinationLocation = {
-				sequenceNumberId,
-				destinationLocationX,
-				destinationLocationY
-		};
+		int destinationLocationZ = std::atoi(destinationZ); // char array to int
 
 		// DO something with the clients request
-		printf("\nPath request ID %s from Client:\nSource X:%d Y:%d to Destination X:%d Y:%d\n",
+		printf("\n---Path request ID %s---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
 				sequenceNumberId.c_str(),
 				sourceLocationX,
-				sourceLocationY,
+				sourceLocationZ,
 				destinationLocationX,
-				destinationLocationY);
+				destinationLocationZ);
+
+		Vector3 start(sourceLocationX, 0, sourceLocationZ);
+		Vector3 goal(destinationLocationX, 0, destinationLocationZ);
+
+		m_pPathfinding->FindPath(start, goal);
 	}
 
 	return receivedBytes;
@@ -138,12 +148,29 @@ int AIManager::readBuffer()
 
 void AIManager::update()
 {
-	// Use A* algorithm to find path between source and destination
-	// Idea could be to use a separate process to calculate path and
-	// store the results in a database. When the path is complete the
-	// AI Manager will read from the database and send each node back to
-	// the client
+	if(m_pPathfinding->GetState() == Pathfinding::IDLE) // AIManager is idle
+	{
+		ClearBuffer();
+	}
+	else if(m_pPathfinding->GetState() == Pathfinding::PROCESSING) // Pathfinder is processing a request
+	{
+		ClearBuffer();
+	}
+	else if(m_pPathfinding->GetState() == Pathfinding::REQUEST_COMPLETE) // Pathfinder has finished the request
+	{
+		printf("Pathfinding REQUEST_COMPLETE\n");
+		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
+		m_pPathfinding->PrintPath();
+		m_eState = AIManager::SENDING_PATH;
+	}
 
+	if(m_eState == AIManager::SENDING_PATH)
+	{
+		SendPathToClient();
+	}
+
+
+	/*
 	if(!m_bIsRequestComplete)
 	{
 		numberOfNodesInPath++;
@@ -161,8 +188,48 @@ void AIManager::update()
 			m_bIsPathComplete = false;
 			m_bIsRequestComplete = true;
 			numberOfNodesInPath = 0;
+
+			//m_pPathfinding->PrintPath();
+
 		}
+	}*/
+
+}
+
+void AIManager::SendPathToClient()
+{
+	m_iPathIndex++;
+
+	if(m_vPathToGoal.empty()) // Path is empty, should not get to here
+	{
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
 	}
+	else if(m_vPathToGoal.size() == 1) // Only one node in the path
+	{
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
+	}
+	else if(m_iPathIndex < m_vPathToGoal.size() - 1) // More than one node in the path
+	{
+		sprintf(m_cBuffer, "node_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		return;
+	}
+	else if(m_iPathIndex == m_vPathToGoal.size() - 1) // Last node in the path
+	{
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		m_iPathIndex = -1;
+		m_eState = AIManager::IDLE;
+		return;
+	}
+}
+
+void AIManager::ClearBuffer()
+{
+	sprintf(m_cBuffer, "null_");
 }
 
 void AIManager::InitializePacket(Packet* packet)
