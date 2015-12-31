@@ -85,7 +85,7 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 	}
 }
 
-// Receive messages from the server using libsocket TODO: create wrapper in libsocket for revfrom()
+// Receive messages from the server using libsocket
 int AIManager::sendBuffer()
 {
 	size_t size = strlen(m_cBuffer) + 1;
@@ -97,57 +97,40 @@ int AIManager::sendBuffer()
 	return bytesSents;
 }
 
-// Receive data from the connected server using recvfrom()
+// Receive data from the connected server using libsocket
 int AIManager::readBuffer()
 {
 	int flags = 0;
 	int receivedBytes = 0;
 
-	// Store network data in buffer and return pointer
 	receivedBytes = Recv(m_iSocketFileDescriptor, m_cBuffer, MAX_BUF_SIZE, flags);
-	//printf("Buffer: %s\n", m_cBuffer);
 
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
 
 	if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
-		// Call find path with NULL vectors to continue the path finding
+		// Call find path with arbitrary vectors to continue the path finding
 		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
 	}
-	else if(strcmp(statusFlag, "path") == 0)
+	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == Pathfinding::IDLE)
 	{
 		m_bIsRequestComplete = false;
 
-		// Parse the buffer and construct the path vector
+		// Parse the buffer and construct the source and destination vector positions
 		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
+		char *sourceX = strtok((char*)NULL, "_");
+		char *sourceZ = strtok((char*)NULL, "_");
+		char *destinationX = strtok((char*)NULL, "_");
+		char *destinationZ = strtok((char*)NULL, "_");
 
-		char *sourceX = strtok((char*)NULL, "_"); // X coordinate
-		char *sourceZ = strtok((char*)NULL, "_"); // Z coordinate
-		char *destinationX = strtok((char*)NULL, "_"); // X coordinate
-		char *destinationZ = strtok((char*)NULL, "_"); // Z coordinate
-
-		std::string sequenceNumberId(sequenceNumber); // char array to string
-
+		std::string sequenceNumberId(sequenceNumber);
 		int sourceLocationX = std::atoi(sourceX); // char array to int
 		int sourceLocationZ = std::atoi(sourceZ); // char array to int
 		int destinationLocationX = std::atoi(destinationX); // char array to int
 		int destinationLocationZ = std::atoi(destinationZ); // char array to int
 
-
-		Location sourceLocation = {
-				sequenceNumberId,
-				sourceLocationX,
-				sourceLocationZ
-		};
-
-		Location destinationLocation = {
-				sequenceNumberId,
-				destinationLocationX,
-				destinationLocationZ
-		};
-
 		// DO something with the clients request
-		printf("\nPath request ID %s from Client:\nSource X:%d Y:%d to Destination X:%d Y:%d\n",
+		printf("\n---Path request ID %s---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
 				sequenceNumberId.c_str(),
 				sourceLocationX,
 				sourceLocationZ,
@@ -155,7 +138,6 @@ int AIManager::readBuffer()
 				destinationLocationZ);
 
 		Vector3 start(sourceLocationX, 0, sourceLocationZ);
-
 		Vector3 goal(destinationLocationX, 0, destinationLocationZ);
 
 		m_pPathfinding->FindPath(start, goal);
@@ -166,12 +148,6 @@ int AIManager::readBuffer()
 
 void AIManager::update()
 {
-	// Use A* algorithm to find path between source and destination
-	// Idea could be to use a separate process to calculate path and
-	// store the results in a database. When the path is complete the
-	// AI Manager will read from the database and send each node back to
-	// the client
-
 	if(m_pPathfinding->GetState() == Pathfinding::IDLE) // AIManager is idle
 	{
 		ClearBuffer();
@@ -182,15 +158,12 @@ void AIManager::update()
 	}
 	else if(m_pPathfinding->GetState() == Pathfinding::REQUEST_COMPLETE) // Pathfinder has finished the request
 	{
-		printf("Pathfinder REQUEST_COMPLETE\n");
-		// Get the path from the pathfinder and tell the
-		// AIManager to send it to the client, node by node.
+		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
 		m_pPathfinding->PrintPath();
 		m_eState = AIManager::SENDING_PATH;
 	}
 
-	// AI Manager state management
 	if(m_eState == AIManager::SENDING_PATH)
 	{
 		SendPathToClient();

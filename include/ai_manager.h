@@ -12,19 +12,24 @@ public:
 	~AIManager();
 
 	void CreateGameWorld(int worldSize);
-	void InitPathfinding();
-	void ProcessRequest(int in, int out);
-	void ProcessRequest(int socketFileDescriptor);
-	void SendPathToClient();
-	int readBuffer();
 
-	void update();
+	void InitPathfinding();
+
+	void ProcessRequest(int in, int out);
+
+	void ProcessRequest(int socketFileDescriptor);
+
+	void SendPathToClient();
+
+	int readBuffer();
 
 	int sendBuffer();
 
 	void ClearBuffer();
 
 	void InitializePacket(raig::Packet* packet);
+
+	void update();
 
 private:
 	// Network buffer
