@@ -2,9 +2,15 @@
 #define VECTOR3
 
 struct Vector3{
+public:
 	int m_iX;
 	int m_iY;
 	int m_iZ;
+
+	Vector3()
+	{
+
+	}
 
 	Vector3(int x, int y, int z)
 	{
@@ -14,4 +20,4 @@ struct Vector3{
 	}
 };
 
-#endif VECTOR3
+#endif

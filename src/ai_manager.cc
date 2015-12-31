@@ -126,32 +126,37 @@ int AIManager::readBuffer()
 		std::string sequenceNumberId(sequenceNumber); // char array to string
 
 		int sourceLocationX = std::atoi(sourceX); // char array to int
-		int sourceLocationY = std::atoi(sourceY); // char array to int
+		int sourceLocationZ = std::atoi(sourceY); // char array to int
 		int destinationLocationX = std::atoi(destinationX); // char array to int
-		int destinationLocationY = std::atoi(destinationY); // char array to int
+		int destinationLocationZ = std::atoi(destinationY); // char array to int
 
 
 		Location sourceLocation = {
 				sequenceNumberId,
 				sourceLocationX,
-				sourceLocationY
+				sourceLocationZ
 		};
 
 		Location destinationLocation = {
 				sequenceNumberId,
 				destinationLocationX,
-				destinationLocationY
+				destinationLocationZ
 		};
 
 		// DO something with the clients request
 		printf("\nPath request ID %s from Client:\nSource X:%d Y:%d to Destination X:%d Y:%d\n",
 				sequenceNumberId.c_str(),
 				sourceLocationX,
-				sourceLocationY,
+				sourceLocationZ,
 				destinationLocationX,
-				destinationLocationY);
+				destinationLocationZ);
 
-		m_pPathfinding->
+		Vector3 start(sourceLocationX, 0, sourceLocationZ);
+
+		Vector3 goal(destinationLocationX, 0, destinationLocationZ);
+
+		m_pPathfinding->FindPath(start, goal);
+
 	}
 
 	return receivedBytes;
@@ -182,8 +187,12 @@ void AIManager::update()
 			m_bIsPathComplete = false;
 			m_bIsRequestComplete = true;
 			numberOfNodesInPath = 0;
+
+			m_pPathfinding->PrintPath();
+
 		}
 	}
+
 }
 
 void AIManager::InitializePacket(Packet* packet)

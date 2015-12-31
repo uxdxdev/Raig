@@ -46,4 +46,4 @@ public:
 	}
 };
 
-#endif SEARCH_CELL_H
+#endif

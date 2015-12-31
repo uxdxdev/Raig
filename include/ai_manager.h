@@ -28,10 +28,10 @@ private:
 	// Network buffer
 	char m_cBuffer[255];
 	int m_iSocketFileDescriptor;
-	bool m_bIsPathComplete = false;
-	bool m_bIsRequestComplete = false;
+	bool m_bIsPathComplete;
+	bool m_bIsRequestComplete;
 
-	int numberOfNodesInPath = 0;
+	int numberOfNodesInPath;
 	Pathfinding *m_pPathfinding;
 	GameWorld *m_pGameWorld;
 };

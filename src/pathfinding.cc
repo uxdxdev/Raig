@@ -1,7 +1,9 @@
-#include "include/pathfinding.h"
+#include "../include/pathfinding.h"
 
 Pathfinding::Pathfinding(GameWorld *gameWorld)
 {
+	printf("ctor Pathfinding()\n");
+
 	m_GoalCell = NULL;
 	m_StartCell = NULL;
 	m_pGameWorld = gameWorld;
@@ -16,8 +18,11 @@ Pathfinding::~Pathfinding(void)
 
 void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 {
+	printf("Called FindPath()\n");
 	if(!m_bInitializedStartGoal)
 	{
+		printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
+
 		// set to unsigned int
 		for(int i = 0; i < m_vOpenList.size(); i++)
 		{
@@ -59,6 +64,8 @@ void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 
 void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
 {
+	printf("Called SetStartAndGoal()\n");
+
 	m_StartCell = new SearchCell(start.m_iCoordinateX, start.m_iCoordinateZ, NULL, m_pGameWorld->GetWorldSize());
 	m_GoalCell = new SearchCell(goal.m_iCoordinateX, goal.m_iCoordinateZ, &goal, m_pGameWorld->GetWorldSize());
 
@@ -66,11 +73,15 @@ void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
 	m_StartCell->H = m_StartCell->ManhattanDistance(m_GoalCell);
 	m_StartCell->m_pParent = 0;
 
+	printf("StartCell X:%d Z:%d GoalCell X:%d Z:%d\n", m_StartCell->m_iCoordinateX, m_StartCell->m_iCoordinateZ, m_GoalCell->m_iCoordinateX, m_GoalCell->m_iCoordinateZ);
+	printf("StartCell G:%f H:%f\n", m_StartCell->G, m_StartCell->H);
+
 	m_vOpenList.push_back(m_StartCell);
 }
 
 SearchCell *Pathfinding::GetNextCell()
 {
+
 	float bestF = 99999.0f;
 	int cellIndex = -1;
 	SearchCell *nextCell = NULL;
@@ -91,18 +102,27 @@ SearchCell *Pathfinding::GetNextCell()
 		m_vOpenList.erase(m_vOpenList.begin() + cellIndex);
 	}
 
+	printf("Called GetNextCell() : X:%d Z:%d\n", nextCell->m_iCoordinateX, nextCell->m_iCoordinateZ);
+
 	return nextCell;
 }
 
 void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 {
-	// Walls etc.
+	printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
-	if(m_pGameWorld->GetCellState(x, z) == CELL_BLOCKED)
+	if(x < 0 || x > m_pGameWorld->GetWorldSize() - 1 || z < 0 || z > m_pGameWorld->GetWorldSize() - 1)
 	{
+		// Out of bounds
 		return;
 	}
 
+	// Walls etc.
+	if(m_pGameWorld->GetCellState(x, z) == CELL_BLOCKED)
+	{
+		printf("CELL_BLOCKED X:%d Z:%d", x, z);
+		return;
+	}
 
 	int id = z * m_pGameWorld->GetWorldSize() + x;
 
@@ -114,9 +134,13 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 		}
 	}
 
+	printf("Not on visited list, processing new child search cell\n");
+
 	SearchCell *newChild = new SearchCell(x, z, parent, m_pGameWorld->GetWorldSize());
 	newChild->G = newCost;
 	newChild->H = parent->ManhattanDistance(m_GoalCell);
+
+	printf("New child ID %d X%d Z:%d G:%f H:%f\n",newChild->m_iId, newChild->m_iCoordinateX, newChild->m_iCoordinateZ, newChild->G, newChild->H);
 
 	for(int i = 0; i < m_vOpenList.size(); i++)
 	{
@@ -138,70 +162,75 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 		}
 	}
 
+
 	m_vOpenList.push_back(newChild);
 }
 
 void Pathfinding::ContinuePath()
 {
-	for(int x = 0; x < 4; x++)
+	printf("Called ContinuePath()\n");
+
+	if(m_vOpenList.empty())
 	{
-		if(m_vOpenList.empty())
-		{
-			return;
-		}
-
-		SearchCell *currentCell = GetNextCell();
-
-		// If we have reached the goal cell
-		if(currentCell->m_iId == m_GoalCell->m_iId)
-		{
-			m_GoalCell->m_pParent = currentCell->m_pParent;
-
-			SearchCell *getPath;
-
-			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
-			{
-				m_vPathToGoal.push_back(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE));
-			}
-
-			m_bFoundGoal = true;
-			return;
-		}
-		else
-		{
-			// right side
-			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// left side
-			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// top cell
-			PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
-
-			// bottom cell
-			PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
-
-			// topleft diagonal
-			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-			// topright diagonal
-			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-			// bottom left diagonal
-			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-			// bottom right
-			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-			for(int i = 0; i < m_vOpenList.size(); i++)
-			{
-				if(currentCell->m_iId == m_vOpenList[i]->m_iId)
-				{
-					m_vOpenList.erase(m_vOpenList.begin() + i);
-				}
-			}
-		}
+		return;
 	}
+
+	SearchCell *currentCell = GetNextCell();
+
+	// If we have reached the goal cell
+	if(currentCell->m_iId == m_GoalCell->m_iId)
+	{
+		printf("Goal cell reached\n");
+
+		m_GoalCell->m_pParent = currentCell->m_pParent;
+
+		SearchCell *getPath;
+
+		for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
+		{
+			m_vPathToGoal.push_back(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE));
+		}
+
+		m_bFoundGoal = true;
+		return;
+	}
+	else
+	{
+
+		// right side
+		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+		// left side
+		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+		// top cell
+		PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
+
+		// bottom cell
+		PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
+
+		// topleft diagonal
+		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+		// topright diagonal
+		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+		// bottom left diagonal
+		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+		// bottom right
+		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+		for(int i = 0; i < m_vOpenList.size(); i++)
+		{
+			if(currentCell->m_iId == m_vOpenList[i]->m_iId)
+			{
+				m_vOpenList.erase(m_vOpenList.begin() + i);
+			}
+		}
+
+	}
+
 }
 
 

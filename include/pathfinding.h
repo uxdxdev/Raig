@@ -7,11 +7,26 @@
 #include <vector>
 
 class Pathfinding{
+public:
 	Pathfinding(GameWorld *gameWorld);
 	~Pathfinding(void);
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
 	Vector3 NextPathPos();
+	void ResetPath(){ m_bInitializedStartGoal = false; }
+	void PrintPath()
+	{
+		printf("Called PrintPath()\n");
+		printf("-----PATH Start-----\n");
+
+		for(int i = 0; i < m_vPathToGoal.size(); i++)
+		{
+			printf("(%d, %d)\n", m_vPathToGoal[i]->m_iX, m_vPathToGoal[i]->m_iZ);
+		}
+
+		printf("-----PATH End-----\n");
+
+	}
 
 	void ClearOpenList() { m_vOpenList.clear(); }
 	void ClearVisitedList() { m_vVisitedList.clear(); }
@@ -37,4 +52,4 @@ private:
 	GameWorld *m_pGameWorld;
 };
 
-#endif PATHFINDING_CELL_H
+#endif

@@ -2,6 +2,7 @@
 #define GAME_WORLD
 
 #include "search_cell.h"
+#include <vector>
 
 #define CELL_SIZE 1
 
@@ -11,9 +12,13 @@ enum CellState{
 };
 
 class GameWorld{
+public:
 	GameWorld(int worldSize)
 	{
+		printf("ctor GameWorld()\n");
+
 		m_iWorldSize = worldSize;
+		m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
 		// initialize grid
 	}
 
@@ -29,6 +34,6 @@ class GameWorld{
 private:
 
 	int m_iWorldSize;
-	SearchCell m_Grid[m_iWorldSize][m_iWorldSize];
+	std::vector< std::vector<int> > m_Grid;
 };
-#endif GAME_WORLD
+#endif
