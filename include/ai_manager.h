@@ -35,11 +35,11 @@ private:
 	char m_cBuffer[255];
 	int m_iSocketFileDescriptor;
 	bool m_bIsPathComplete;
-	bool m_bIsRequestComplete;
-	int numberOfNodesInPath;
+
 	std::unique_ptr<Pathfinding> m_pPathfinding;
 
 	std::vector<Vector3*> m_vPathToGoal;
+
 	int m_iPathIndex;
 
 	enum State{

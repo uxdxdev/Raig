@@ -10,13 +10,9 @@ AIManager::AIManager()
 {
 	m_iSocketFileDescriptor = -1;
 	m_bIsPathComplete = false;
-	m_bIsRequestComplete = false;
-	//m_pGameWorld = NULL;
-	//m_pPathfinding = NULL;
 	m_iPathIndex = -1;
 	m_eState = IDLE;
 
-	InitPathfinding(50);
 	ClearBuffer();
 }
 
@@ -100,15 +96,20 @@ int AIManager::readBuffer()
 
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
 
-	if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
+	if(strcmp(statusFlag, "gameworld") == 0)
+	{
+		char *gameWorldSize = strtok((char*)NULL, "_");
+		int gridSize = std::atoi(gameWorldSize); // char array to int
+		InitPathfinding(gridSize);
+		ClearBuffer();
+	}
+	else if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
 		// Call find path with arbitrary vectors to continue the path finding
 		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
 	}
 	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == Pathfinding::IDLE)
 	{
-		m_bIsRequestComplete = false;
-
 		// Parse the buffer and construct the source and destination vector positions
 		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
 		char *sourceX = strtok((char*)NULL, "_");
