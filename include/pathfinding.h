@@ -7,9 +7,11 @@
 #include <vector>
 
 class Pathfinding{
+
 public:
 	Pathfinding(int worldSize);
 	virtual ~Pathfinding();
+	void CleanUp();
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
 
@@ -48,28 +50,29 @@ public:
 	// Returns a pointer to the m_vPathToGoal vector
 	std::vector<Vector3*> *GetPathToGoal();
 
-private:
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
 	void PathOpened(int x, int z, float newCost, SearchCell *parent);
-	SearchCell *GetNextCell();
 
 	// Search world and find target position
 	// Set G and H values
 	void ContinuePath();
 
-	SearchCell *m_StartCell;
-	SearchCell *m_GoalCell;
+	SearchCell *GetNextCell();
 
+private:
 	std::vector<SearchCell*> m_vOpenList;
 	std::vector<SearchCell*> m_vVisitedList;
 	std::vector<Vector3*> m_vPathToGoal;
+
+	//
+	SearchCell *m_StartCell;
+	SearchCell *m_GoalCell;
 
 	std::unique_ptr<GameWorld> m_pGameWorld;
 
 	State m_eState;
 
 	bool m_bInitializedStartGoal;
-
 };
 
 #endif

@@ -14,6 +14,35 @@ Pathfinding::Pathfinding(int worldSize)
 Pathfinding::~Pathfinding()
 {
 	printf("dtor ~Pathfinding()\n");
+	CleanUp();
+}
+
+void Pathfinding::CleanUp()
+{
+	// Delete all objects pointed to by the stored pointers in the vector.
+	// Clear each vector for every new request
+	for(unsigned int i = 0; i < m_vOpenList.size(); i++)
+	{
+		delete m_vOpenList[i];
+	}
+	m_vOpenList.clear();
+
+	for(unsigned int i = 0; i < m_vVisitedList.size(); i++)
+	{
+		delete m_vVisitedList[i];
+	}
+	m_vVisitedList.clear();
+
+	for(unsigned int i = 0; i < m_vPathToGoal.size(); i++)
+	{
+		delete m_vPathToGoal[i];
+	}
+	m_vPathToGoal.clear();
+
+	// m_GoalCell memory needs to be released on each path request otherwise
+	// a leak would be created each time a new goal cell in created. The m_StartCell
+	// is stored in the m_vOpenList and is deleted when the vector is cleaned
+	delete m_GoalCell;
 }
 
 void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
@@ -21,24 +50,7 @@ void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 	if(!m_bInitializedStartGoal)
 	{
 		//printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
-
-		for(unsigned int i = 0; i < m_vOpenList.size(); i++)
-		{
-			delete m_vOpenList[i];
-		}
-		m_vOpenList.clear();
-
-		for(unsigned int i = 0; i < m_vVisitedList.size(); i++)
-		{
-			delete m_vVisitedList[i];
-		}
-		m_vVisitedList.clear();
-
-		for(unsigned int i = 0; i < m_vPathToGoal.size(); i++)
-		{
-			delete m_vPathToGoal[i];
-		}
-		m_vPathToGoal.clear();
+		CleanUp();
 
 		// Initialize start
 		SearchCell start;
