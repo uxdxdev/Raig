@@ -28,8 +28,7 @@ void NetworkManager::Init()
 	// Only needed when forking processes
 	Signal(SIGCHLD, (void*)SignalHandler);
 
-	// AI Manager
-	m_AIManager = new AIManager();
+
 }
 
 void NetworkManager::Start()
@@ -54,6 +53,9 @@ void NetworkManager::Start()
 			close(m_iListenSocketFileDescriptor);
 
 			printf("Server starting a new connection\n");
+
+			// AI Manager
+			m_AIManager = new AIManager();
 
 			//m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
 			m_AIManager->ProcessRequest(m_iConnfd);

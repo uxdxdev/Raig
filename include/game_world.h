@@ -6,11 +6,6 @@
 
 #define CELL_SIZE 1
 
-enum CellState{
-	CELL_OPEN,
-	CELL_BLOCKED
-};
-
 class GameWorld{
 public:
 	GameWorld(int worldSize)
@@ -30,7 +25,14 @@ public:
 	int GetWorldSize(){ return m_iWorldSize; }
 	int GetCellX(int x){ return x / CELL_SIZE; }
 	int GetCellZ(int z){ return z / CELL_SIZE; }
+
+	enum CellState{
+		CELL_OPEN,
+		CELL_BLOCKED
+	};
+
 	int GetCellState(int x, int z){ return m_Grid[x][z]; }
+
 private:
 
 	int m_iWorldSize;

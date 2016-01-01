@@ -127,7 +127,7 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 	}
 
 	// Walls etc.
-	if(m_pGameWorld->GetCellState(x, z) == CELL_BLOCKED)
+	if(m_pGameWorld->GetCellState(x, z) == GameWorld::CELL_BLOCKED)
 	{
 		printf("CELL_BLOCKED X:%d Z:%d", x, z);
 		return;

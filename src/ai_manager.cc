@@ -16,11 +16,6 @@ AIManager::AIManager()
 	ClearBuffer();
 }
 
-AIManager::~AIManager()
-{
-	printf("dtor ~AIManager()\n");
-}
-
 void AIManager::InitPathfinding(int worldSize)
 {
 	if(m_pPathfinding == nullptr)
@@ -29,6 +24,7 @@ void AIManager::InitPathfinding(int worldSize)
 	}
 }
 
+/*
 void AIManager::ProcessRequest(int in, int out)
 {
 
@@ -57,6 +53,7 @@ void AIManager::ProcessRequest(int in, int out)
 		printf("Packet sent to client :\nx %d\ny %d\nexit %d\nstring %s\n", packetOut.x, packetOut.y, packetOut.completeFlag, packetOut.stringData);
 	}
 }
+*/
 
 void AIManager::ProcessRequest(int socketFileDescriptor)
 {
@@ -65,17 +62,17 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 	while(1)
 	{
 		// Read
-		readBuffer();
+		ReadBuffer();
 
-		update();
+		Update();
 
 		// Send
-		sendBuffer();
+		SendBuffer();
 	}
 }
 
 // Receive messages from the server using libsocket
-int AIManager::sendBuffer()
+int AIManager::SendBuffer()
 {
 	size_t size = strlen(m_cBuffer) + 1;
 	int flags = 0;
@@ -87,7 +84,7 @@ int AIManager::sendBuffer()
 }
 
 // Receive data from the connected server using libsocket
-int AIManager::readBuffer()
+int AIManager::ReadBuffer()
 {
 	int flags = 0;
 	int receivedBytes = 0;
@@ -140,7 +137,7 @@ int AIManager::readBuffer()
 	return receivedBytes;
 }
 
-void AIManager::update()
+void AIManager::Update()
 {
 	if(m_pPathfinding->GetState() == Pathfinding::IDLE) // AIManager is idle
 	{

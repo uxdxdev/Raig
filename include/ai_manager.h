@@ -10,30 +10,31 @@ class AIManager
 {
 public:
 	AIManager();
-	virtual ~AIManager();
 
-	void InitPathfinding(int worldSize);
-
-	void ProcessRequest(int in, int out);
+	//void ProcessRequest(int in, int out);
 
 	void ProcessRequest(int socketFileDescriptor);
 
-	void SendPathToClient();
+private:
+	int ReadBuffer();
 
-	int readBuffer();
-
-	int sendBuffer();
+	int SendBuffer();
 
 	void ClearBuffer();
 
 	void InitializePacket(raig::Packet* packet);
 
-	void update();
+	void Update();
 
-private:
+	void InitPathfinding(int worldSize);
+
+	void SendPathToClient();
+
 	// Network buffer
 	char m_cBuffer[255];
+
 	int m_iSocketFileDescriptor;
+
 	bool m_bIsPathComplete;
 
 	std::unique_ptr<Pathfinding> m_pPathfinding;
@@ -53,4 +54,4 @@ private:
 	State m_eState;
 };
 
-#endif /* INCLUDES_AI_MANAGER_H_ */
+#endif
