@@ -11,31 +11,25 @@ AIManager::AIManager()
 	m_iSocketFileDescriptor = -1;
 	m_bIsPathComplete = false;
 	m_bIsRequestComplete = false;
-	m_pGameWorld = NULL;
-	m_pPathfinding = NULL;
+	//m_pGameWorld = NULL;
+	//m_pPathfinding = NULL;
 	m_iPathIndex = -1;
 	m_eState = IDLE;
 
-	CreateGameWorld(8);
-	InitPathfinding();
+	InitPathfinding(50);
 	ClearBuffer();
 }
 
 AIManager::~AIManager()
 {
-
+	printf("dtor ~AIManager()\n");
 }
 
-void AIManager::CreateGameWorld(int worldSize)
+void AIManager::InitPathfinding(int worldSize)
 {
-	m_pGameWorld = new GameWorld(worldSize);
-}
-
-void AIManager::InitPathfinding()
-{
-	if(m_pGameWorld != NULL)
+	if(m_pPathfinding == nullptr)
 	{
-		m_pPathfinding = new Pathfinding(m_pGameWorld);
+		m_pPathfinding = std::unique_ptr<Pathfinding> (new Pathfinding(worldSize));
 	}
 }
 
@@ -168,32 +162,6 @@ void AIManager::update()
 	{
 		SendPathToClient();
 	}
-
-
-	/*
-	if(!m_bIsRequestComplete)
-	{
-		numberOfNodesInPath++;
-
-		sprintf(m_cBuffer, "node_%d_3_5", numberOfNodesInPath);
-
-		if(numberOfNodesInPath > 4)
-		{
-			m_bIsPathComplete = true;
-		}
-
-		if(m_bIsPathComplete)
-		{
-			sprintf(m_cBuffer, "done_%d_5_8", numberOfNodesInPath);
-			m_bIsPathComplete = false;
-			m_bIsRequestComplete = true;
-			numberOfNodesInPath = 0;
-
-			//m_pPathfinding->PrintPath();
-
-		}
-	}*/
-
 }
 
 void AIManager::SendPathToClient()

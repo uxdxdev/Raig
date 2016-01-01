@@ -9,6 +9,7 @@ NetworkManager::NetworkManager()
 
 NetworkManager::~NetworkManager()
 {
+	printf("dtor ~NetworkManager()");
 	CleanUp();
 }
 
@@ -74,6 +75,4 @@ void NetworkManager::Start()
 void NetworkManager::CleanUp()
 {
 	close(m_iConnfd);
-	//delete sAddress;
-	delete m_AIManager;
 }

@@ -32,6 +32,10 @@ public:
 		H = 0;
 	}
 
+	virtual ~SearchCell()
+	{
+	}
+
 	float GetF()
 	{
 		return G + H;

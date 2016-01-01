@@ -13,7 +13,7 @@ class NetworkManager
 {
 public:
 	NetworkManager();
-	~NetworkManager();
+	virtual ~NetworkManager();
 	void Init();
 	void Start();
 	void CleanUp();

@@ -1,19 +1,19 @@
 #include "../include/pathfinding.h"
 
-Pathfinding::Pathfinding(GameWorld *gameWorld)
+Pathfinding::Pathfinding(int worldSize)
 {
 	printf("ctor Pathfinding()\n");
 
 	m_GoalCell = NULL;
 	m_StartCell = NULL;
-	m_pGameWorld = gameWorld;
+	m_pGameWorld = std::unique_ptr<GameWorld> (new GameWorld(worldSize));
 	m_bInitializedStartGoal = false;
 	m_eState = IDLE;
 }
 
 Pathfinding::~Pathfinding(void)
 {
-
+	printf("dtor ~Pathfinding()\n");
 }
 
 void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)

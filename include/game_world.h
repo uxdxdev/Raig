@@ -22,9 +22,9 @@ public:
 		// initialize grid
 	}
 
-	~GameWorld()
+	virtual ~GameWorld()
 	{
-		//delete[] m_Grid;
+		printf("dtor ~GameWorld()\n");
 	}
 
 	int GetWorldSize(){ return m_iWorldSize; }

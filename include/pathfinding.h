@@ -8,8 +8,8 @@
 
 class Pathfinding{
 public:
-	Pathfinding(GameWorld *gameWorld);
-	~Pathfinding(void);
+	Pathfinding(int worldSize);
+	virtual ~Pathfinding(void);
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
 	Vector3 NextPathPos();
@@ -67,11 +67,12 @@ private:
 
 	SearchCell *m_StartCell;
 	SearchCell *m_GoalCell;
+
 	std::vector<SearchCell*> m_vOpenList;
 	std::vector<SearchCell*> m_vVisitedList;
 	std::vector<Vector3*> m_vPathToGoal;
 
-	GameWorld *m_pGameWorld;
+	std::unique_ptr<GameWorld> m_pGameWorld;
 
 	State m_eState;
 };

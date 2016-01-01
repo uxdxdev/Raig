@@ -20,6 +20,10 @@ public:
 		m_iY = y;
 		m_iZ = z;
 	}
+
+	virtual ~Vector3()
+	{
+	}
 };
 
 #endif

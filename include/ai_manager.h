@@ -1,6 +1,7 @@
 #ifndef AI_MANAGER_H_
 #define AI_MANAGER_H_
 
+#include <memory>
 #include "../external/libraig/include/raig.h"
 #include "pathfinding.h"
 #include "vector3.h"
@@ -9,11 +10,9 @@ class AIManager
 {
 public:
 	AIManager();
-	~AIManager();
+	virtual ~AIManager();
 
-	void CreateGameWorld(int worldSize);
-
-	void InitPathfinding();
+	void InitPathfinding(int worldSize);
 
 	void ProcessRequest(int in, int out);
 
@@ -37,10 +36,8 @@ private:
 	int m_iSocketFileDescriptor;
 	bool m_bIsPathComplete;
 	bool m_bIsRequestComplete;
-
 	int numberOfNodesInPath;
-	Pathfinding *m_pPathfinding;
-	GameWorld *m_pGameWorld;
+	std::unique_ptr<Pathfinding> m_pPathfinding;
 
 	std::vector<Vector3*> m_vPathToGoal;
 	int m_iPathIndex;
