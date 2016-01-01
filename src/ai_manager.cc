@@ -169,27 +169,27 @@ void AIManager::SendPathToClient()
 {
 	m_iPathIndex++;
 
-	if(m_vPathToGoal.empty()) // Path is empty, should not get to here
+	if(m_vPathToGoal->empty()) // Path is empty, should not get to here
 	{
 		m_iPathIndex = -1;
 		m_eState = AIManager::IDLE;
 		return;
 	}
-	else if(m_vPathToGoal.size() == 1) // Only one node in the path
+	else if(m_vPathToGoal->size() == 1) // Only one node in the path
 	{
-		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		m_iPathIndex = -1;
 		m_eState = AIManager::IDLE;
 		return;
 	}
-	else if(m_iPathIndex < m_vPathToGoal.size() - 1) // More than one node in the path
+	else if(m_iPathIndex < m_vPathToGoal->size() - 1) // More than one node in the path
 	{
-		sprintf(m_cBuffer, "node_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		sprintf(m_cBuffer, "node_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		return;
 	}
-	else if(m_iPathIndex == m_vPathToGoal.size() - 1) // Last node in the path
+	else if(m_iPathIndex == m_vPathToGoal->size() - 1) // Last node in the path
 	{
-		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, m_vPathToGoal[m_iPathIndex]->m_iX, m_vPathToGoal[m_iPathIndex]->m_iZ);
+		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		m_iPathIndex = -1;
 		m_eState = AIManager::IDLE;
 		return;

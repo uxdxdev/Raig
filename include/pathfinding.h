@@ -9,17 +9,12 @@
 class Pathfinding{
 public:
 	Pathfinding(int worldSize);
-	virtual ~Pathfinding(void);
+	virtual ~Pathfinding();
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
-	Vector3 NextPathPos();
 
 	// Reset the path found
-	void ResetPath()
-	{
-		m_eState = IDLE;
-		m_bInitializedStartGoal = false;
-	}
+	void ResetPath();
 
 	// Print the path stored in the pathToGoal vector
 	void PrintPath()
@@ -40,7 +35,6 @@ public:
 	void ClearOpenList() { m_vOpenList.clear(); }
 	void ClearVisitedList() { m_vVisitedList.clear(); }
 	void ClearPathToGoal() { m_vPathToGoal.clear(); }
-	bool m_bInitializedStartGoal;
 
 	enum State{
 		IDLE,
@@ -50,11 +44,9 @@ public:
 
 	// Get pathfinder state
 	State GetState(){ return m_eState; }
-	std::vector<Vector3*> GetPathToGoal()
-	{
-		m_eState = IDLE;
-		return m_vPathToGoal;
-	}
+
+	// Returns a pointer to the m_vPathToGoal vector
+	std::vector<Vector3*> *GetPathToGoal();
 
 private:
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
@@ -75,6 +67,9 @@ private:
 	std::unique_ptr<GameWorld> m_pGameWorld;
 
 	State m_eState;
+
+	bool m_bInitializedStartGoal;
+
 };
 
 #endif

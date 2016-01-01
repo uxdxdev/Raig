@@ -11,7 +11,7 @@ Pathfinding::Pathfinding(int worldSize)
 	m_eState = IDLE;
 }
 
-Pathfinding::~Pathfinding(void)
+Pathfinding::~Pathfinding()
 {
 	printf("dtor ~Pathfinding()\n");
 }
@@ -190,7 +190,6 @@ void Pathfinding::ContinuePath()
 	}
 	else
 	{
-
 		// right side
 		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
 
@@ -222,28 +221,21 @@ void Pathfinding::ContinuePath()
 				m_vOpenList.erase(m_vOpenList.begin() + i);
 			}
 		}
-
 	}
-
 }
 
-
-// Not used
-Vector3 Pathfinding::NextPathPos()
+std::vector<Vector3*> *Pathfinding::GetPathToGoal()
 {
-	int index = 1;
-	Vector3 nextPosition;
-	nextPosition.m_iX = m_vPathToGoal[m_vPathToGoal.size() - index]->m_iX + (CELL_SIZE/2);
-	nextPosition.m_iZ = m_vPathToGoal[m_vPathToGoal.size() - index]->m_iZ + (CELL_SIZE/2);
-
-	if(index < m_vPathToGoal.size())
-	{
-		//if((nextCell - object->Position()).Length() < object->GetRadius())
-		{
-			//m_vPathToGoal.erase(m_vPathToGoal.end() - index);
-		}
-	}
-
-	return nextPosition;
+	// Once the path to goal has been accessed the pathfinder
+	// can be reset to IDLE in order to process more requests
+	m_eState = IDLE;
+	return &m_vPathToGoal;
 }
+
+void Pathfinding::ResetPath()
+{
+	m_eState = IDLE;
+	m_bInitializedStartGoal = false;
+}
+
 

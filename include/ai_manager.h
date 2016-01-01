@@ -38,7 +38,10 @@ private:
 
 	std::unique_ptr<Pathfinding> m_pPathfinding;
 
-	std::vector<Vector3*> m_vPathToGoal;
+	// Path to goal vector owned by m_pPathfinding object.
+	// Must deference pointer to vector before accessing
+	// any elements stored inside.
+	std::vector<Vector3*> *m_vPathToGoal;
 
 	int m_iPathIndex;
 
