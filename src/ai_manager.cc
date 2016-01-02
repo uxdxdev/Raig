@@ -100,7 +100,7 @@ int AIManager::ReadBuffer()
 		InitPathfinding(gridSize);
 		ClearBuffer();
 	}
-	else if(strcmp(statusFlag, "null") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
+	else if(strcmp(statusFlag, "0") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
 		// Call find path with arbitrary vectors to continue the path finding
 		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
@@ -195,7 +195,7 @@ void AIManager::SendPathToClient()
 
 void AIManager::ClearBuffer()
 {
-	sprintf(m_cBuffer, "null_");
+	sprintf(m_cBuffer, "0_");
 }
 
 void AIManager::InitializePacket(Packet* packet)

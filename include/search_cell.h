@@ -2,8 +2,9 @@
 #define SEARCH_CELL_H
 
 #include <math.h>
+#include <stdio.h>
 
-struct SearchCell{
+class SearchCell{
 public:
 	int m_iCoordinateX;
 	int m_iCoordinateZ;
@@ -34,12 +35,17 @@ public:
 
 	virtual ~SearchCell()
 	{
-
+		printf("dtor SearchCell() ID: %d\n", m_iId);
 	}
 
 	float GetF()
 	{
 		return G + H;
+	}
+
+	void SetId(int id)
+	{
+		m_iId = (m_iCoordinateZ * id + m_iCoordinateX);
 	}
 
 	float ManhattanDistance(SearchCell *nodeEnd)

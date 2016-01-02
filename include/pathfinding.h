@@ -12,7 +12,7 @@ class Pathfinding{
 public:
 	Pathfinding(int worldSize);
 	virtual ~Pathfinding();
-	void CleanUp();
+
 
 	void FindPath(Vector3 currentPos, Vector3 targetPos);
 
@@ -33,19 +33,6 @@ public:
 
 	}
 
-	void PrintStatus(std::string message)
-	{
-		printf("--Pathfinder Status--\n");
-		printf("State: %d\nOpen List: %d\nClosed List: %d\nPath list: %d\n", m_eState, (int)m_vOpenList.size(), (int)m_vVisitedList.size(), (int)m_vPathToGoal.size());
-		printf("Search Cell: %d\n", ((m_StartCell) ? m_StartCell->m_iId : -1));
-		printf("Goal Cell: %d\n", ((m_GoalCell) ? m_GoalCell->m_iId : -1));
-		printf("Message: %s\n", message.c_str());
-	}
-
-	void ClearOpenList() { m_vOpenList.clear(); }
-	void ClearVisitedList() { m_vVisitedList.clear(); }
-	void ClearPathToGoal() { m_vPathToGoal.clear(); }
-
 	enum State{
 		IDLE,
 		PROCESSING,
@@ -58,8 +45,21 @@ public:
 	// Returns a pointer to the m_vPathToGoal vector
 	std::vector<Vector3*> *GetPathToGoal();
 
+private:
+	void ClearOpenList();
+	void ClearClosedList();
+	void ClearPathToGoal();
+	void CleanUp();
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
 	void PathOpened(int x, int z, float newCost, SearchCell *parent);
+
+	void PrintStatus(std::string message)
+	{
+		printf("--Pathfinder Status--\n");
+		printf("State: %d\nOpen List: %d\nClosed List: %d\nPath list: %d\n", m_eState, (int)m_vOpenList.size(), (int)m_vClosedList.size(), (int)m_vPathToGoal.size());
+		printf("Goal Cell: %d\n", ((m_GoalCell) ? m_GoalCell->m_iId : -1));
+		printf("Message: %s\n\n", message.c_str());
+	}
 
 	// Search world and find target position
 	// Set G and H values
@@ -67,13 +67,11 @@ public:
 
 	SearchCell *GetNextCell();
 
-private:
 	std::vector<SearchCell*> m_vOpenList;
-	std::vector<SearchCell*> m_vVisitedList;
+	std::vector<SearchCell*> m_vClosedList;
 
 	std::vector<Vector3*> m_vPathToGoal;
 
-	SearchCell *m_StartCell;
 	SearchCell *m_GoalCell;
 
 	std::unique_ptr<GameWorld> m_pGameWorld;
