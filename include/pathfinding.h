@@ -5,6 +5,7 @@
 #include "search_cell.h"
 #include "game_world.h"
 #include <vector>
+#include <string>
 
 class Pathfinding{
 
@@ -21,8 +22,6 @@ public:
 	// Print the path stored in the pathToGoal vector
 	void PrintPath()
 	{
-		printf("--Pathfinder Status--\n");
-		printf("State: %d\n", m_eState);
 		printf("-----PATH Start-----\n");
 
 		for(int i = 0; i < m_vPathToGoal.size(); i++)
@@ -32,6 +31,15 @@ public:
 
 		printf("-----PATH End-----\n");
 
+	}
+
+	void PrintStatus(std::string message)
+	{
+		printf("--Pathfinder Status--\n");
+		printf("State: %d\nOpen List: %d\nClosed List: %d\nPath list: %d\n", m_eState, (int)m_vOpenList.size(), (int)m_vVisitedList.size(), (int)m_vPathToGoal.size());
+		printf("Search Cell: %d\n", ((m_StartCell) ? m_StartCell->m_iId : -1));
+		printf("Goal Cell: %d\n", ((m_GoalCell) ? m_GoalCell->m_iId : -1));
+		printf("Message: %s\n", message.c_str());
 	}
 
 	void ClearOpenList() { m_vOpenList.clear(); }
@@ -62,9 +70,9 @@ public:
 private:
 	std::vector<SearchCell*> m_vOpenList;
 	std::vector<SearchCell*> m_vVisitedList;
+
 	std::vector<Vector3*> m_vPathToGoal;
 
-	//
 	SearchCell *m_StartCell;
 	SearchCell *m_GoalCell;
 

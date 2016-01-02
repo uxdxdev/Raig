@@ -34,6 +34,7 @@ public:
 
 	virtual ~SearchCell()
 	{
+
 	}
 
 	float GetF()

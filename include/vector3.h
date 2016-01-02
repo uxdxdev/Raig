@@ -23,6 +23,7 @@ public:
 
 	virtual ~Vector3()
 	{
+
 	}
 };
 

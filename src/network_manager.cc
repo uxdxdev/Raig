@@ -27,8 +27,6 @@ void NetworkManager::Init()
 	// Signal handler for terminated processes
 	// Only needed when forking processes
 	Signal(SIGCHLD, (void*)SignalHandler);
-
-
 }
 
 void NetworkManager::Start()
@@ -55,9 +53,10 @@ void NetworkManager::Start()
 			printf("Server starting a new connection\n");
 
 			// AI Manager
-			m_AIManager = new AIManager();
+			m_AIManager = std::unique_ptr<AIManager>(new AIManager());
 
 			//m_AIManager->ProcessRequest(m_iConnfd, m_iConnfd);
+
 			m_AIManager->ProcessRequest(m_iConnfd);
 
 			printf("Disconnecting...\n");

@@ -11,6 +11,11 @@ class AIManager
 public:
 	AIManager();
 
+	virtual ~AIManager()
+	{
+
+	}
+
 	//void ProcessRequest(int in, int out);
 
 	void ProcessRequest(int socketFileDescriptor);

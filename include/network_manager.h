@@ -21,7 +21,7 @@ public:
 private:
 
 	// AI algorithm Manager
-	AIManager *m_AIManager;
+	std::unique_ptr<AIManager> m_AIManager;
 
 	// Server listen file descriptor
 	int m_iListenSocketFileDescriptor;
