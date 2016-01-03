@@ -1,7 +1,7 @@
-#ifndef VECTOR3
-#define VECTOR3
+#ifndef VECTOR3_H_
+#define VECTOR3_H_
 
-struct Vector3{
+class Vector3{
 public:
 	int m_iX;
 	int m_iY;

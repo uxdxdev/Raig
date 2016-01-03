@@ -47,7 +47,7 @@ private:
 	// Path to goal vector owned by m_pPathfinding object.
 	// Must deference pointer to vector before accessing
 	// any elements stored inside.
-	std::vector<Vector3*> *m_vPathToGoal;
+	std::vector<std::shared_ptr<Vector3> > *m_vPathToGoal;
 
 	int m_iPathIndex;
 

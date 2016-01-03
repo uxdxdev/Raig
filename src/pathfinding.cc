@@ -54,12 +54,12 @@ void Pathfinding::ClearPathToGoal()
 {
 	for(unsigned int i = 0; i < m_vPathToGoal.size(); i++)
 	{
-		delete m_vPathToGoal[i];
+		//delete m_vPathToGoal[i];
 	}
 	m_vPathToGoal.clear();
 }
 
-void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
+void Pathfinding::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
 {
 	if(!m_bInitializedStartGoal)
 	{
@@ -68,13 +68,13 @@ void Pathfinding::FindPath(Vector3 currentPos, Vector3 targetPos)
 
 		// Initialize start
 		SearchCell start;
-		start.m_iCoordinateX = m_pGameWorld->GetCellX(currentPos.m_iX);
-		start.m_iCoordinateZ = m_pGameWorld->GetCellZ(currentPos.m_iZ);
+		start.m_iCoordinateX = m_pGameWorld->GetCellX(currentPos->m_iX);
+		start.m_iCoordinateZ = m_pGameWorld->GetCellZ(currentPos->m_iZ);
 
 		// Initialize goal
 		SearchCell goal;
-		goal.m_iCoordinateX = m_pGameWorld->GetCellX(targetPos.m_iX);
-		goal.m_iCoordinateZ = m_pGameWorld->GetCellZ(targetPos.m_iZ);
+		goal.m_iCoordinateX = m_pGameWorld->GetCellX(targetPos->m_iX);
+		goal.m_iCoordinateZ = m_pGameWorld->GetCellZ(targetPos->m_iZ);
 
 		SetStartAndGoal(start, goal);
 		m_bInitializedStartGoal = true;
@@ -210,7 +210,7 @@ void Pathfinding::ContinuePath()
 
 		for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
 		{
-			m_vPathToGoal.push_back(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE));
+			m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
 		}
 
 		m_eState = REQUEST_COMPLETE;
@@ -252,7 +252,7 @@ void Pathfinding::ContinuePath()
 	}
 }
 
-std::vector<Vector3*> *Pathfinding::GetPathToGoal()
+std::vector<std::shared_ptr<Vector3> > *Pathfinding::GetPathToGoal()
 {
 	// Once the path to goal has been accessed the pathfinder
 	// can be reset to IDLE in order to process more requests

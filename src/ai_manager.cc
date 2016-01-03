@@ -103,7 +103,7 @@ int AIManager::ReadBuffer()
 	else if(strcmp(statusFlag, "0") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
 	{
 		// Call find path with arbitrary vectors to continue the path finding
-		m_pPathfinding->FindPath(Vector3(0, 0, 0), Vector3(0, 0, 0));
+		m_pPathfinding->FindPath(std::shared_ptr<Vector3>(new Vector3(0, 0, 0)), std::shared_ptr<Vector3>(new Vector3(0, 0, 0)));
 	}
 	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == Pathfinding::IDLE)
 	{
@@ -128,8 +128,8 @@ int AIManager::ReadBuffer()
 				destinationLocationX,
 				destinationLocationZ);
 
-		Vector3 start(sourceLocationX, 0, sourceLocationZ);
-		Vector3 goal(destinationLocationX, 0, destinationLocationZ);
+		std::shared_ptr<Vector3> start(new Vector3(sourceLocationX, 0, sourceLocationZ));
+		std::shared_ptr<Vector3> goal(new Vector3(destinationLocationX, 0, destinationLocationZ));
 
 		m_pPathfinding->FindPath(start, goal);
 	}

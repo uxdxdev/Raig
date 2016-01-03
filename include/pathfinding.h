@@ -1,11 +1,11 @@
 #ifndef PATHFINDING_CELL_H
 #define PATHFINDING_CELL_H
 
-#include "vector3.h"
 #include "search_cell.h"
 #include "game_world.h"
 #include <vector>
 #include <string>
+#include "vector3.h"
 
 class Pathfinding{
 
@@ -14,7 +14,7 @@ public:
 	virtual ~Pathfinding();
 
 
-	void FindPath(Vector3 currentPos, Vector3 targetPos);
+	void FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos);
 
 	// Reset the path found
 	void ResetPath();
@@ -43,7 +43,7 @@ public:
 	State GetState(){ return m_eState; }
 
 	// Returns a pointer to the m_vPathToGoal vector
-	std::vector<Vector3*> *GetPathToGoal();
+	std::vector<std::shared_ptr<Vector3> > *GetPathToGoal();
 
 private:
 	void ClearOpenList();
@@ -70,7 +70,7 @@ private:
 	std::vector<SearchCell*> m_vOpenList;
 	std::vector<SearchCell*> m_vClosedList;
 
-	std::vector<Vector3*> m_vPathToGoal;
+	std::vector<std::shared_ptr<Vector3> > m_vPathToGoal;
 
 	SearchCell *m_GoalCell;
 
