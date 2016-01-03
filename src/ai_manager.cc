@@ -4,7 +4,7 @@ extern "C" {
 	#include "../external/libsocket/include/socket.h"
 }
 
-using namespace raig;
+#include <stdlib.h>
 
 AIManager::AIManager()
 {
@@ -20,7 +20,7 @@ void AIManager::InitPathfinding(int worldSize)
 {
 	if(m_pPathfinding == nullptr)
 	{
-		m_pPathfinding = std::unique_ptr<Pathfinding> (new Pathfinding(worldSize));
+		m_pPathfinding = std::unique_ptr<AStar> (new AStar(worldSize));
 	}
 }
 
@@ -96,16 +96,16 @@ int AIManager::ReadBuffer()
 	if(strcmp(statusFlag, "gameworld") == 0)
 	{
 		char *gameWorldSize = strtok((char*)NULL, "_");
-		int gridSize = std::atoi(gameWorldSize); // char array to int
+		int gridSize = atoi(gameWorldSize); // char array to int
 		InitPathfinding(gridSize);
 		ClearBuffer();
 	}
-	else if(strcmp(statusFlag, "0") == 0 && m_pPathfinding->GetState() == Pathfinding::PROCESSING)
+	else if(strcmp(statusFlag, "0") == 0 && m_pPathfinding->GetState() == AStar::PROCESSING)
 	{
 		// Call find path with arbitrary vectors to continue the path finding
 		m_pPathfinding->FindPath(std::shared_ptr<Vector3>(new Vector3(0, 0, 0)), std::shared_ptr<Vector3>(new Vector3(0, 0, 0)));
 	}
-	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == Pathfinding::IDLE)
+	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == AStar::IDLE)
 	{
 		// Parse the buffer and construct the source and destination vector positions
 		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
@@ -115,10 +115,10 @@ int AIManager::ReadBuffer()
 		char *destinationZ = strtok((char*)NULL, "_");
 
 		std::string sequenceNumberId(sequenceNumber);
-		int sourceLocationX = std::atoi(sourceX); // char array to int
-		int sourceLocationZ = std::atoi(sourceZ); // char array to int
-		int destinationLocationX = std::atoi(destinationX); // char array to int
-		int destinationLocationZ = std::atoi(destinationZ); // char array to int
+		int sourceLocationX = atoi(sourceX); // char array to int
+		int sourceLocationZ = atoi(sourceZ); // char array to int
+		int destinationLocationX = atoi(destinationX); // char array to int
+		int destinationLocationZ = atoi(destinationZ); // char array to int
 
 		// DO something with the clients request
 		printf("\n---Path request ID %s---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
@@ -139,15 +139,15 @@ int AIManager::ReadBuffer()
 
 void AIManager::Update()
 {
-	if(m_pPathfinding->GetState() == Pathfinding::IDLE) // AIManager is idle
+	if(m_pPathfinding->GetState() == AStar::IDLE) // AIManager is idle
 	{
 		ClearBuffer();
 	}
-	else if(m_pPathfinding->GetState() == Pathfinding::PROCESSING) // Pathfinder is processing a request
+	else if(m_pPathfinding->GetState() == AStar::PROCESSING) // Pathfinder is processing a request
 	{
 		ClearBuffer();
 	}
-	else if(m_pPathfinding->GetState() == Pathfinding::REQUEST_COMPLETE) // Pathfinder has finished the request
+	else if(m_pPathfinding->GetState() == AStar::REQUEST_COMPLETE) // Pathfinder has finished the request
 	{
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
@@ -198,6 +198,7 @@ void AIManager::ClearBuffer()
 	sprintf(m_cBuffer, "0_");
 }
 
+/*
 void AIManager::InitializePacket(Packet* packet)
 {
 	packet->x = 0;
@@ -205,3 +206,4 @@ void AIManager::InitializePacket(Packet* packet)
 	packet->completeFlag = 0;
 	// set other packet parameters
 }
+*/

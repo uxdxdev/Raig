@@ -1,7 +1,7 @@
 #ifndef NETWORK_MANAGER_H_
 #define NETWORK_MANAGER_H_
 
-#include "../external/libraig/include/raig.h"
+#include <memory>
 
 extern "C" {
 	#include "../external/libsocket/include/socket.h"

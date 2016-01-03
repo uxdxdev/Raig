@@ -10,32 +10,22 @@ ExternalProject_Add(libsocket
     SOURCE_DIR ${CMAKE_BINARY_DIR}/external/libsocket
 )
 
-ExternalProject_Add(libraig
-   PREFIX ${CMAKE_BINARY_DIR}/build/libraig
-   GIT_REPOSITORY https://github.com/damorton/libraig.git
-   GIT_TAG develop
-   INSTALL_COMMAND ""
-   BINARY_DIR ${CMAKE_BINARY_DIR}/external/libraig
-   SOURCE_DIR ${CMAKE_BINARY_DIR}/external/libraig
-)
-
 if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
 if(UNIX AND NOT APPLE)
-  set(PROJECT_LINK_LIBS libsocket.so libraig.so)
+  set(PROJECT_LINK_LIBS libsocket.so)
 else()
-  set(PROJECT_LINK_LIBS libsocket.dylib libraig.dylib)
+  set(PROJECT_LINK_LIBS libsocket.dylib)
 endif()
 
-set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding.cc include/pathfinding.h include/game_world.h include/search_cell.h include/vector3.h)
+set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding_astar.cc include/pathfinding_astar.h include/game_world.h include/search_cell.h include/vector3.h)
 
-link_directories(external/libraig/)
-link_directories(external/libraig/external/libsocket/)
+link_directories(external/libsocket/)
 
 add_executable(raig ${SOURCES})
 
-add_dependencies(raig libsocket libraig)
+add_dependencies(raig libsocket)
 
 target_link_libraries(raig ${PROJECT_LINK_LIBS})

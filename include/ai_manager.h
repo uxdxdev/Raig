@@ -2,8 +2,7 @@
 #define AI_MANAGER_H_
 
 #include <memory>
-#include "../external/libraig/include/raig.h"
-#include "pathfinding.h"
+#include "pathfinding_astar.h"
 #include "vector3.h"
 
 class AIManager
@@ -27,7 +26,7 @@ private:
 
 	void ClearBuffer();
 
-	void InitializePacket(raig::Packet* packet);
+	//void InitializePacket(raig::Packet* packet);
 
 	void Update();
 
@@ -42,7 +41,7 @@ private:
 
 	bool m_bIsPathComplete;
 
-	std::unique_ptr<Pathfinding> m_pPathfinding;
+	std::unique_ptr<AStar> m_pPathfinding;
 
 	// Path to goal vector owned by m_pPathfinding object.
 	// Must deference pointer to vector before accessing

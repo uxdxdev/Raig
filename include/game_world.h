@@ -14,7 +14,6 @@ public:
 
 		m_iWorldSize = worldSize;
 		m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
-		// initialize grid
 	}
 
 	virtual ~GameWorld()

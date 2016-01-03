@@ -1,6 +1,6 @@
-#include "../include/pathfinding.h"
+#include "../include/pathfinding_astar.h"
 
-Pathfinding::Pathfinding(int worldSize)
+AStar::AStar(int worldSize)
 {
 	printf("ctor Pathfinding()\n");
 
@@ -10,13 +10,13 @@ Pathfinding::Pathfinding(int worldSize)
 	m_eState = IDLE;
 }
 
-Pathfinding::~Pathfinding()
+AStar::~AStar()
 {
 	printf("dtor ~Pathfinding()\n");
 	CleanUp();
 }
 
-void Pathfinding::CleanUp()
+void AStar::CleanUp()
 {
 	PrintStatus("Before CleanUp()");
 
@@ -32,7 +32,7 @@ void Pathfinding::CleanUp()
 	PrintStatus("After CleanUp()");
 }
 
-void Pathfinding::ClearOpenList()
+void AStar::ClearOpenList()
 {
 	for(unsigned int i = 0; i < m_vOpenList.size(); i++)
 	{
@@ -41,7 +41,7 @@ void Pathfinding::ClearOpenList()
 	m_vOpenList.clear();
 }
 
-void Pathfinding::ClearClosedList()
+void AStar::ClearClosedList()
 {
 	for(unsigned int i = 0; i < m_vClosedList.size(); i++)
 	{
@@ -50,7 +50,7 @@ void Pathfinding::ClearClosedList()
 	m_vClosedList.clear();
 }
 
-void Pathfinding::ClearPathToGoal()
+void AStar::ClearPathToGoal()
 {
 	for(unsigned int i = 0; i < m_vPathToGoal.size(); i++)
 	{
@@ -59,7 +59,7 @@ void Pathfinding::ClearPathToGoal()
 	m_vPathToGoal.clear();
 }
 
-void Pathfinding::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
+void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
 {
 	if(!m_bInitializedStartGoal)
 	{
@@ -89,7 +89,7 @@ void Pathfinding::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<
 	}
 }
 
-void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
+void AStar::SetStartAndGoal(SearchCell start, SearchCell goal)
 {
 	//printf("Called SetStartAndGoal()\n");
 	m_GoalCell = new SearchCell(goal.m_iCoordinateX, goal.m_iCoordinateZ, &goal, m_pGameWorld->GetWorldSize());
@@ -105,7 +105,7 @@ void Pathfinding::SetStartAndGoal(SearchCell start, SearchCell goal)
 	m_vOpenList.push_back(new SearchCell(startCell));
 }
 
-SearchCell *Pathfinding::GetNextCell()
+SearchCell *AStar::GetNextCell()
 {
 	float bestF = 99999.0f;
 	int cellIndex = -1;
@@ -132,7 +132,7 @@ SearchCell *Pathfinding::GetNextCell()
 	return nextCell;
 }
 
-void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
+void AStar::PathOpened(int x, int z, float newCost, SearchCell *parent)
 {
 	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
@@ -188,7 +188,7 @@ void Pathfinding::PathOpened(int x, int z, float newCost, SearchCell *parent)
 	m_vOpenList.push_back(newChild);
 }
 
-void Pathfinding::ContinuePath()
+void AStar::ContinuePath()
 {
 	//printf("Called ContinuePath()\n");
 
@@ -252,7 +252,7 @@ void Pathfinding::ContinuePath()
 	}
 }
 
-std::vector<std::shared_ptr<Vector3> > *Pathfinding::GetPathToGoal()
+std::vector<std::shared_ptr<Vector3> > *AStar::GetPathToGoal()
 {
 	// Once the path to goal has been accessed the pathfinder
 	// can be reset to IDLE in order to process more requests
@@ -260,7 +260,7 @@ std::vector<std::shared_ptr<Vector3> > *Pathfinding::GetPathToGoal()
 	return &m_vPathToGoal;
 }
 
-void Pathfinding::ResetPath()
+void AStar::ResetPath()
 {
 	m_eState = IDLE;
 	m_bInitializedStartGoal = false;

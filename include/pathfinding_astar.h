@@ -7,11 +7,11 @@
 #include <string>
 #include "vector3.h"
 
-class Pathfinding{
+class AStar{
 
 public:
-	Pathfinding(int worldSize);
-	virtual ~Pathfinding();
+	AStar(int worldSize);
+	virtual ~AStar();
 
 
 	void FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos);
