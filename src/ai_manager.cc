@@ -5,6 +5,7 @@ extern "C" {
 }
 
 #include <stdlib.h>
+#include <cstring>
 
 AIManager::AIManager()
 {
