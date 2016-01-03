@@ -18,7 +18,7 @@ AStar::~AStar()
 
 void AStar::CleanUp()
 {
-	PrintStatus("Before CleanUp()");
+	//PrintStatus("Before CleanUp()");
 
 	// Delete all objects pointed to by the stored pointers in the vector.
 	// Clear each vector for every new request
@@ -29,7 +29,7 @@ void AStar::CleanUp()
 	delete m_GoalCell;
 	m_GoalCell = NULL;
 
-	PrintStatus("After CleanUp()");
+	//PrintStatus("After CleanUp()");
 }
 
 void AStar::ClearOpenList()
@@ -80,7 +80,7 @@ void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector
 		m_bInitializedStartGoal = true;
 		m_eState = PROCESSING;
 
-		PrintStatus("Start Goal Initialized");
+		PrintStatus("Request initialization complete");
 	}
 
 	if(m_bInitializedStartGoal)

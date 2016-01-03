@@ -152,7 +152,7 @@ void AIManager::Update()
 	{
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
-		m_pPathfinding->PrintPath();
+		//m_pPathfinding->PrintPath();
 		m_pPathfinding->ResetPath();
 		m_eState = AIManager::SENDING_PATH;
 	}
