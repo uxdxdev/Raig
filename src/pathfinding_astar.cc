@@ -190,63 +190,66 @@ void AStar::PathOpened(int x, int z, float newCost, SearchCell *parent)
 
 void AStar::ContinuePath()
 {
-	//printf("Called ContinuePath()\n");
-
-	if(m_vOpenList.empty())
+	for(int i = 0; i < 4; i++)
 	{
-		return;
-	}
+		//printf("Called ContinuePath()\n");
 
-	SearchCell *currentCell = GetNextCell();
-
-	// If we have reached the goal cell
-	if(currentCell->m_iId == m_GoalCell->m_iId)
-	{
-		//printf("Goal cell reached\n");
-
-		m_GoalCell->m_pParent = currentCell->m_pParent;
-
-		SearchCell *getPath;
-
-		for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
+		if(m_vOpenList.empty())
 		{
-			m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
+			return;
 		}
 
-		m_eState = REQUEST_COMPLETE;
-		return;
-	}
-	else
-	{
-		// right side
-		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+		SearchCell *currentCell = GetNextCell();
 
-		// left side
-		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-		// top cell
-		PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
-
-		// bottom cell
-		PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
-
-		// topleft diagonal
-		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-		// topright diagonal
-		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-		// bottom left diagonal
-		PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-		// bottom right
-		PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-		for(int i = 0; i < m_vOpenList.size(); i++)
+		// If we have reached the goal cell
+		if(currentCell->m_iId == m_GoalCell->m_iId)
 		{
-			if(currentCell->m_iId == m_vOpenList[i]->m_iId)
+			//printf("Goal cell reached\n");
+
+			m_GoalCell->m_pParent = currentCell->m_pParent;
+
+			SearchCell *getPath;
+
+			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
 			{
-				m_vOpenList.erase(m_vOpenList.begin() + i);
+				m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
+			}
+
+			m_eState = REQUEST_COMPLETE;
+			return;
+		}
+		else
+		{
+			// right side
+			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+			// left side
+			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+			// top cell
+			PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
+
+			// bottom cell
+			PathOpened(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
+
+			// topleft diagonal
+			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+			// topright diagonal
+			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+			// bottom left diagonal
+			PathOpened(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+			// bottom right
+			PathOpened(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+			for(int i = 0; i < m_vOpenList.size(); i++)
+			{
+				if(currentCell->m_iId == m_vOpenList[i]->m_iId)
+				{
+					m_vOpenList.erase(m_vOpenList.begin() + i);
+				}
 			}
 		}
 	}
