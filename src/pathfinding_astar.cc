@@ -2,7 +2,7 @@
 
 AStar::AStar(int worldSize)
 {
-	printf("ctor Pathfinding()\n");
+	//printf("ctor Pathfinding()\n");
 
 	m_GoalCell = NULL;
 	m_pGameWorld = std::unique_ptr<GameWorld> (new GameWorld(worldSize));
@@ -12,7 +12,7 @@ AStar::AStar(int worldSize)
 
 AStar::~AStar()
 {
-	printf("dtor ~Pathfinding()\n");
+	//printf("dtor ~Pathfinding()\n");
 	CleanUp();
 }
 

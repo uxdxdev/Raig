@@ -35,7 +35,7 @@ public:
 
 	virtual ~SearchCell()
 	{
-		printf("dtor SearchCell() ID: %d\n", m_iId);
+		//printf("dtor SearchCell() ID: %d\n", m_iId);
 	}
 
 	float GetF()

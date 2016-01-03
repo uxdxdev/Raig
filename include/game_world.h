@@ -10,7 +10,7 @@ class GameWorld{
 public:
 	GameWorld(int worldSize)
 	{
-		printf("ctor GameWorld()\n");
+		//printf("ctor GameWorld()\n");
 
 		m_iWorldSize = worldSize;
 		m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
@@ -18,7 +18,7 @@ public:
 
 	virtual ~GameWorld()
 	{
-		printf("dtor ~GameWorld()\n");
+		//printf("dtor ~GameWorld()\n");
 	}
 
 	int GetWorldSize(){ return m_iWorldSize; }
