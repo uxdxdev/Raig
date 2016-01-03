@@ -1,10 +1,11 @@
 #ifndef PATHFINDING_CELL_H
 #define PATHFINDING_CELL_H
 
-#include "search_cell.h"
-#include "game_world.h"
 #include <vector>
 #include <string>
+#include <memory>
+#include "search_cell.h"
+#include "game_world.h"
 #include "vector3.h"
 
 class AStar{
