@@ -82,6 +82,9 @@ int AIManager::SendBuffer()
 	bytesSent = Send(m_iSocketFileDescriptor, m_cBuffer, size, flags);
 	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cBuffer, bytesSent);
 	ClearBuffer();
+
+	sleep(1);
+
 	return bytesSent;
 }
 
@@ -160,13 +163,13 @@ void AIManager::Update()
 	if(m_eState == AIManager::SENDING_PATH)
 	{
 		SendPathToClient();
-		printf("Called SendPathToClient() OK\n");
+		//printf("Called SendPathToClient() OK\n");
 	}
 }
 
 void AIManager::SendPathToClient()
 {
-	printf("Called SendPathToClient()\n");
+	//printf("Called SendPathToClient()\n");
 	m_iPathIndex++;
 
 	if(m_vPathToGoal->empty()) // Path is empty, should not get to here
