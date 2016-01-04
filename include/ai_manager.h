@@ -5,6 +5,10 @@
 #include "pathfinding_astar.h"
 #include "vector3.h"
 
+struct Buffer{
+	char storage[255];
+};
+
 class AIManager
 {
 public:
@@ -35,7 +39,9 @@ private:
 	void SendPathToClient();
 
 	// Network buffer
-	char m_cBuffer[255];
+	char m_cSendBuffer[255];
+
+	char m_cRecvBuffer[255];
 
 	int m_iSocketFileDescriptor;
 

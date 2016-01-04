@@ -75,15 +75,15 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 // Receive messages from the server using libsocket
 int AIManager::SendBuffer()
 {
-	size_t size = strlen(m_cBuffer) + 1;
+	size_t size = strlen(m_cSendBuffer) + 1;
 	int flags = 0;
 	int bytesSent = 0;
 
-	bytesSent = Send(m_iSocketFileDescriptor, m_cBuffer, size, flags);
-	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cBuffer, bytesSent);
+	bytesSent = Send(m_iSocketFileDescriptor, m_cSendBuffer, size, flags);
+	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
 	ClearBuffer();
 
-	sleep(1);
+	//sleep(1);
 
 	return bytesSent;
 }
@@ -94,8 +94,20 @@ int AIManager::ReadBuffer()
 	//printf("Called ReadBuffer() buffer BEFORE: %s\n", m_cBuffer);
 	int flags = 0;
 	int receivedBytes = 0;
-
-	receivedBytes = Recv(m_iSocketFileDescriptor, m_cBuffer, MAX_BUF_SIZE, flags);
+	int err;
+	receivedBytes = Recv(m_iSocketFileDescriptor, m_cRecvBuffer, MAX_BUF_SIZE, flags);
+	err = errno;
+	if (receivedBytes < 0)
+	{
+	   if ((err == EAGAIN) || (err == EWOULDBLOCK))
+	   {
+		  //printf("non-blocking operation returned EAGAIN or EWOULDBLOCK\n");
+	   }
+	   else
+	   {
+		  //printf("recv returned unrecoverable error(errno=%d)\n", err);
+	   }
+	}
 	//printf("Called ReadBuffer() buffer AFTER: %s\n", m_cBuffer);
 	return receivedBytes;
 }
@@ -106,7 +118,7 @@ void AIManager::Update()
 	ReadBuffer();
 
 	// Check the buffer for incoming commands
-	char *statusFlag = strtok((char*)m_cBuffer, "_");
+	char *statusFlag = strtok((char*)m_cRecvBuffer, "_");
 
 	if(strcmp(statusFlag, "gameworld") == 0)
 	{
@@ -180,7 +192,7 @@ void AIManager::SendPathToClient()
 	}
 	else if(m_vPathToGoal->size() == 1) // Only one node in the path
 	{
-		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		m_iPathIndex = -1;
 		m_eState = AIManager::IDLE;
@@ -188,13 +200,13 @@ void AIManager::SendPathToClient()
 	}
 	else if(m_iPathIndex < m_vPathToGoal->size() - 1) // More than one node in the path
 	{
-		sprintf(m_cBuffer, "node_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "node_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		return;
 	}
 	else if(m_iPathIndex == m_vPathToGoal->size() - 1) // Last node in the path
 	{
-		sprintf(m_cBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		m_iPathIndex = -1;
 		m_eState = AIManager::IDLE;
@@ -204,7 +216,8 @@ void AIManager::SendPathToClient()
 
 void AIManager::ClearBuffer()
 {
-	sprintf(m_cBuffer, "0_");
+	sprintf(m_cSendBuffer, "0_");
+	sprintf(m_cRecvBuffer, "0_");
 }
 
 /*
