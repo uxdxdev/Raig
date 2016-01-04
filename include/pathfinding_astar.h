@@ -46,6 +46,8 @@ public:
 	// Returns a pointer to the m_vPathToGoal vector
 	std::vector<std::shared_ptr<Vector3> > *GetPathToGoal();
 
+	void Update();
+
 private:
 	void ClearOpenList();
 	void ClearClosedList();

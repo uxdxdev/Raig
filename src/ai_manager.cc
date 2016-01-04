@@ -109,7 +109,7 @@ void AIManager::Update()
 	else if(strcmp(statusFlag, "0") == 0 && m_pPathfinding->GetState() == AStar::PROCESSING)
 	{
 		// Call find path with arbitrary vectors to continue the path finding
-		m_pPathfinding->FindPath(std::shared_ptr<Vector3>(new Vector3(0, 0, 0)), std::shared_ptr<Vector3>(new Vector3(0, 0, 0)));
+		m_pPathfinding->Update();
 	}
 	else if(strcmp(statusFlag, "path") == 0 && m_pPathfinding->GetState() == AStar::IDLE)
 	{
