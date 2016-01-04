@@ -42,6 +42,7 @@ public:
 
 	// Get pathfinder state
 	State GetState(){ return m_eState; }
+	void SetState(State state){ m_eState = state; }
 
 	// Returns a pointer to the m_vPathToGoal vector
 	std::vector<std::shared_ptr<Vector3> > *GetPathToGoal();
