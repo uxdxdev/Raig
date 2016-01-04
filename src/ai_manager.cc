@@ -63,7 +63,7 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 	while(1)
 	{
 		// Read
-		ReadBuffer();
+		//ReadBuffer();
 
 		Update();
 
@@ -100,6 +100,7 @@ int AIManager::ReadBuffer()
 void AIManager::Update()
 {
 	// Incoming messages
+	ReadBuffer();
 
 	// Check the buffer for incoming commands
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
