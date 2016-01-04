@@ -92,6 +92,11 @@ int AIManager::ReadBuffer()
 
 	receivedBytes = Recv(m_iSocketFileDescriptor, m_cBuffer, MAX_BUF_SIZE, flags);
 
+	return receivedBytes;
+}
+
+void AIManager::Update()
+{
 	char *statusFlag = strtok((char*)m_cBuffer, "_");
 
 	if(strcmp(statusFlag, "gameworld") == 0)
@@ -135,11 +140,6 @@ int AIManager::ReadBuffer()
 		m_pPathfinding->FindPath(start, goal);
 	}
 
-	return receivedBytes;
-}
-
-void AIManager::Update()
-{
 	if(m_pPathfinding->GetState() == AStar::IDLE) // AIManager is idle
 	{
 		ClearBuffer();
