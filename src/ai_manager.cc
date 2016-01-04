@@ -77,11 +77,12 @@ int AIManager::SendBuffer()
 {
 	size_t size = strlen(m_cBuffer) + 1;
 	int flags = 0;
-	int bytesSents = 0;
+	int bytesSent = 0;
 
-	bytesSents = Send(m_iSocketFileDescriptor, m_cBuffer, size, flags);
+	bytesSent = Send(m_iSocketFileDescriptor, m_cBuffer, size, flags);
+	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cBuffer, bytesSent);
 	ClearBuffer();
-	return bytesSents;
+	return bytesSent;
 }
 
 // Receive data from the connected server using libsocket
