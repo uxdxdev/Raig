@@ -13,6 +13,7 @@ AIManager::AIManager()
 	m_bIsPathComplete = false;
 	m_iPathIndex = -1;
 	m_eState = IDLE;
+	m_iRequestId = 0;
 
 	ClearBuffer();
 }
@@ -137,7 +138,7 @@ void AIManager::Update()
 	else if(statusCode == PacketCode::PATH && m_pPathfinding->GetState() == AStar::IDLE)
 	{
 		// Parse the buffer and construct the source and destination vector positions
-		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
+		//char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
 		char *sourceX = strtok((char*)NULL, "_");
 		char *sourceZ = strtok((char*)NULL, "_");
 		char *destinationX = strtok((char*)NULL, "_");
@@ -150,8 +151,8 @@ void AIManager::Update()
 		int destinationLocationZ = atoi(destinationZ); // char array to int
 
 		// DO something with the clients request
-		printf("\n---Path request ID %s---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
-				sequenceNumber,
+		printf("\n---Path request ID %d---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
+				m_iRequestId,
 				sourceLocationX,
 				sourceLocationZ,
 				destinationLocationX,
@@ -162,6 +163,7 @@ void AIManager::Update()
 
 		m_pPathfinding->FindPath(start, goal);
 		ClearBuffer();
+		m_iRequestId++;
 		// Pathfinding set to PROCESSING
 	}
 	/*

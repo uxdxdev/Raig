@@ -68,6 +68,8 @@ private:
 	};
 
 	State m_eState;
+
+	int m_iRequestId;
 };
 
 #endif
