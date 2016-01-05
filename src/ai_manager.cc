@@ -92,10 +92,12 @@ int AIManager::SendBuffer()
 int AIManager::ReadBuffer()
 {
 	//printf("Called ReadBuffer() buffer BEFORE: %s\n", m_cBuffer);
+	size_t size = sizeof(m_cRecvBuffer);
 	int flags = 0;
 	int receivedBytes = 0;
 	int err;
-	receivedBytes = Recv(m_iSocketFileDescriptor, m_cRecvBuffer, MAX_BUF_SIZE, flags);
+	receivedBytes = Recv(m_iSocketFileDescriptor, m_cRecvBuffer, size, flags);
+
 	err = errno;
 	if (receivedBytes < 0)
 	{
@@ -108,7 +110,11 @@ int AIManager::ReadBuffer()
 		  //printf("recv returned unrecoverable error(errno=%d)\n", err);
 	   }
 	}
-	//printf("Called ReadBuffer() buffer AFTER: %s\n", m_cBuffer);
+
+	if(strcmp(m_cRecvBuffer, "4") != 0)
+	{
+		printf("Called ReadBuffer() buffer: %s\n", m_cRecvBuffer);
+	}
 	return receivedBytes;
 }
 
@@ -119,7 +125,46 @@ void AIManager::Update()
 
 	// Check the buffer for incoming commands
 	char *statusFlag = strtok((char*)m_cRecvBuffer, "_");
+	int statusCode = atoi(statusFlag); // Convert to integer
+	//printf("Called Update() statusCode: %d\n", statusCode);
+	if(statusCode == PacketCode::GAMEWORLD)
+	{
+		char *gameWorldSize = strtok((char*)NULL, "_");
+		int gridSize = atoi(gameWorldSize); // char array to int
+		InitPathfinding(gridSize);
+		ClearBuffer();
+	}
+	else if(statusCode == PacketCode::PATH && m_pPathfinding->GetState() == AStar::IDLE)
+	{
+		// Parse the buffer and construct the source and destination vector positions
+		char *sequenceNumber = strtok((char*)NULL, "_"); // Tokenize the string using '_' as delimiter
+		char *sourceX = strtok((char*)NULL, "_");
+		char *sourceZ = strtok((char*)NULL, "_");
+		char *destinationX = strtok((char*)NULL, "_");
+		char *destinationZ = strtok((char*)NULL, "_");
 
+		//std::string sequenceNumberId(sequenceNumber);
+		int sourceLocationX = atoi(sourceX); // char array to int
+		int sourceLocationZ = atoi(sourceZ); // char array to int
+		int destinationLocationX = atoi(destinationX); // char array to int
+		int destinationLocationZ = atoi(destinationZ); // char array to int
+
+		// DO something with the clients request
+		printf("\n---Path request ID %s---\nSource X:%d Z:%d to Destination X:%d Z:%d\n",
+				sequenceNumber,
+				sourceLocationX,
+				sourceLocationZ,
+				destinationLocationX,
+				destinationLocationZ);
+
+		std::shared_ptr<Vector3> start(new Vector3(sourceLocationX, 0, sourceLocationZ));
+		std::shared_ptr<Vector3> goal(new Vector3(destinationLocationX, 0, destinationLocationZ));
+
+		m_pPathfinding->FindPath(start, goal);
+		ClearBuffer();
+		// Pathfinding set to PROCESSING
+	}
+	/*
 	if(strcmp(statusFlag, "gameworld") == 0)
 	{
 		char *gameWorldSize = strtok((char*)NULL, "_");
@@ -157,6 +202,7 @@ void AIManager::Update()
 		ClearBuffer();
 		// Pathfinding set to PROCESSING
 	}
+	*/
 
 	// Pathfinding state
 	if(m_pPathfinding->GetState() == AStar::PROCESSING) // Pathfinder is processing a request
@@ -169,10 +215,10 @@ void AIManager::Update()
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
 		m_pPathfinding->PrintPath();
 		m_pPathfinding->ResetPath();
-		m_eState = AIManager::SENDING_PATH;
+		m_eState = State::SENDING_PATH;
 	}
 
-	if(m_eState == AIManager::SENDING_PATH)
+	if(m_eState == State::SENDING_PATH)
 	{
 		SendPathToClient();
 		//printf("Called SendPathToClient() OK\n");
@@ -187,37 +233,37 @@ void AIManager::SendPathToClient()
 	if(m_vPathToGoal->empty()) // Path is empty, should not get to here
 	{
 		m_iPathIndex = -1;
-		m_eState = AIManager::IDLE;
+		m_eState = State::IDLE;
 		return;
 	}
 	else if(m_vPathToGoal->size() == 1) // Only one node in the path
 	{
-		sprintf(m_cSendBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", PacketCode::END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		m_iPathIndex = -1;
-		m_eState = AIManager::IDLE;
+		m_eState = State::IDLE;
 		return;
 	}
 	else if(m_iPathIndex < m_vPathToGoal->size() - 1) // More than one node in the path
 	{
-		sprintf(m_cSendBuffer, "node_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", PacketCode::NODE, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		return;
 	}
 	else if(m_iPathIndex == m_vPathToGoal->size() - 1) // Last node in the path
 	{
-		sprintf(m_cSendBuffer, "done_%d_%d_%d", m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", PacketCode::END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
 		SendBuffer(); // Send node to client
 		m_iPathIndex = -1;
-		m_eState = AIManager::IDLE;
+		m_eState = State::IDLE;
 		return;
 	}
 }
 
 void AIManager::ClearBuffer()
 {
-	sprintf(m_cSendBuffer, "0_");
-	sprintf(m_cRecvBuffer, "0_");
+	sprintf(m_cSendBuffer, "%d", PacketCode::EMPTY);
+	sprintf(m_cRecvBuffer, "%d", PacketCode::EMPTY);
 }
 
 /*

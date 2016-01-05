@@ -5,9 +5,7 @@
 #include "pathfinding_astar.h"
 #include "vector3.h"
 
-struct Buffer{
-	char storage[255];
-};
+#define MAX_BUFFER_SIZE 18
 
 class AIManager
 {
@@ -39,9 +37,9 @@ private:
 	void SendPathToClient();
 
 	// Network buffer
-	char m_cSendBuffer[255];
+	char m_cSendBuffer[MAX_BUFFER_SIZE];
 
-	char m_cRecvBuffer[255];
+	char m_cRecvBuffer[MAX_BUFFER_SIZE];
 
 	int m_iSocketFileDescriptor;
 
@@ -59,6 +57,14 @@ private:
 	enum State{
 		IDLE,
 		SENDING_PATH
+	};
+
+	enum PacketCode{
+		GAMEWORLD,
+		PATH,
+		NODE,
+		END,
+		EMPTY
 	};
 
 	State m_eState;
