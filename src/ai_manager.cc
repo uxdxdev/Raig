@@ -66,7 +66,10 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 		// Read
 		//ReadBuffer();
 
-		Update();
+		if(Update() == 0)
+		{
+			return;
+		}
 
 		// Send
 		//SendBuffer();
@@ -119,10 +122,13 @@ int AIManager::ReadBuffer()
 	return receivedBytes;
 }
 
-void AIManager::Update()
+int AIManager::Update()
 {
 	// Incoming messages
-	ReadBuffer();
+	if(ReadBuffer() == 0)
+	{
+		return 0;
+	}
 
 	// Check the buffer for incoming commands
 	char *statusFlag = strtok((char*)m_cRecvBuffer, "_");
@@ -225,6 +231,8 @@ void AIManager::Update()
 		SendPathToClient();
 		//printf("Called SendPathToClient() OK\n");
 	}
+
+	return 1;
 }
 
 void AIManager::SendPathToClient()

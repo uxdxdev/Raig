@@ -30,7 +30,7 @@ private:
 
 	//void InitializePacket(raig::Packet* packet);
 
-	void Update();
+	int Update();
 
 	void InitPathfinding(int worldSize);
 
