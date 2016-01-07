@@ -25,44 +25,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_NETWORK_MANAGER_H_
-#define _INCLUDE_NETWORK_MANAGER_H_
+#ifndef _INCLUDE_GAME_WORLD_H_
+#define _INCLUDE_GAME_WORLD_H_
 
-#include <memory>
+#include "search_cell.h"
+#include <vector>
 
-extern "C" {
-	#include "../external/libsocket/include/socket.h"
-}
+#define CELL_SIZE 1
 
-class AIManager;
-
-class NetworkManager
-{
+class GameWorld{
 public:
-	NetworkManager();
-	virtual ~NetworkManager();
-	void Init();
-	void Start();
-	void CleanUp();
+	GameWorld(int worldSize)
+	{
+		//printf("ctor GameWorld()\n");
+
+		m_iWorldSize = worldSize;
+		m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
+	}
+
+	virtual ~GameWorld()
+	{
+		//printf("dtor ~GameWorld()\n");
+	}
+
+	int GetWorldSize(){ return m_iWorldSize; }
+	int GetCellX(int x){ return x / CELL_SIZE; }
+	int GetCellZ(int z){ return z / CELL_SIZE; }
+
+	enum CellState{
+		CELL_OPEN,
+		CELL_BLOCKED
+	};
+
+	int GetCellState(int x, int z){ return m_Grid[x][z]; }
 
 private:
 
-	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
-
-	// Server listen file descriptor
-	int m_iListenSocketFileDescriptor;
-
-	// Client address structure
-	struct Address m_sAddress;
-
-	// New process id for use with fork
-	pid_t m_ChildProcessID;
-
-	// New connection file descriptor
-	int m_iConnfd;
-
-	socklen_t m_ClientLen;
+	int m_iWorldSize;
+	std::vector< std::vector<int> > m_Grid;
 };
-
 #endif

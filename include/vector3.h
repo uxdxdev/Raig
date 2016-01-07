@@ -25,44 +25,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_NETWORK_MANAGER_H_
-#define _INCLUDE_NETWORK_MANAGER_H_
+#ifndef _INCLUDE_VECTOR3_H_
+#define _INCLUDE_VECTOR3_H_
 
-#include <memory>
-
-extern "C" {
-	#include "../external/libsocket/include/socket.h"
-}
-
-class AIManager;
-
-class NetworkManager
-{
+class Vector3{
 public:
-	NetworkManager();
-	virtual ~NetworkManager();
-	void Init();
-	void Start();
-	void CleanUp();
+	int m_iX;
+	int m_iY;
+	int m_iZ;
 
-private:
+	Vector3()
+	{
+		m_iX = 0;
+		m_iY = 0;
+		m_iZ = 0;
+	}
 
-	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
+	Vector3(int x, int y, int z)
+	{
+		m_iX = x;
+		m_iY = y;
+		m_iZ = z;
+	}
 
-	// Server listen file descriptor
-	int m_iListenSocketFileDescriptor;
+	virtual ~Vector3()
+	{
 
-	// Client address structure
-	struct Address m_sAddress;
-
-	// New process id for use with fork
-	pid_t m_ChildProcessID;
-
-	// New connection file descriptor
-	int m_iConnfd;
-
-	socklen_t m_ClientLen;
+	}
 };
 
 #endif

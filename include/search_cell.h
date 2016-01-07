@@ -25,44 +25,63 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_NETWORK_MANAGER_H_
-#define _INCLUDE_NETWORK_MANAGER_H_
+#ifndef _INCLUDE_SEARCH_CELL_H
+#define _INCLUDE_SEARCH_CELL_H
 
-#include <memory>
+#include <math.h>
+#include <stdio.h>
 
-extern "C" {
-	#include "../external/libsocket/include/socket.h"
-}
-
-class AIManager;
-
-class NetworkManager
-{
+class SearchCell{
 public:
-	NetworkManager();
-	virtual ~NetworkManager();
-	void Init();
-	void Start();
-	void CleanUp();
+	int m_iCoordinateX;
+	int m_iCoordinateZ;
+	int m_iId;
+	SearchCell *m_pParent;
+	float G;
+	float H;
 
-private:
+	SearchCell()
+	{
+		m_iCoordinateX = 0;
+		m_iCoordinateZ = 0;
+		m_iId = 0;
+		m_pParent = 0;
+		G = 0;
+		H = 0;
+	}
 
-	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
+	SearchCell(int x, int z, SearchCell *parent = 0, int worldSize = 0)
+	{
+		m_iCoordinateX = x;
+		m_iCoordinateZ = z;
+		m_iId = (z * worldSize + x);
+		m_pParent = parent;
+		G = 0;
+		H = 0;
+	}
 
-	// Server listen file descriptor
-	int m_iListenSocketFileDescriptor;
+	virtual ~SearchCell()
+	{
+		//printf("dtor SearchCell() ID: %d\n", m_iId);
+	}
 
-	// Client address structure
-	struct Address m_sAddress;
+	float GetF()
+	{
+		return G + H;
+	}
 
-	// New process id for use with fork
-	pid_t m_ChildProcessID;
+	void SetId(int id)
+	{
+		m_iId = (m_iCoordinateZ * id + m_iCoordinateX);
+	}
 
-	// New connection file descriptor
-	int m_iConnfd;
+	float ManhattanDistance(SearchCell *nodeEnd)
+	{
+		float x = (float)(fabs((float)this->m_iCoordinateX - nodeEnd->m_iCoordinateX));
+		float z = (float)(fabs((float)this->m_iCoordinateZ - nodeEnd->m_iCoordinateZ));
 
-	socklen_t m_ClientLen;
+		return x + z;
+	}
 };
 
 #endif

@@ -8,3 +8,6 @@ external/
 raig
 .cproject
 .project
+*.dSYM
+.settings
+lib/
