@@ -5,6 +5,8 @@
 #include "pathfinding_astar.h"
 #include "vector3.h"
 
+#define MAX_BUFFER_SIZE 18
+
 class AIManager
 {
 public:
@@ -28,14 +30,16 @@ private:
 
 	//void InitializePacket(raig::Packet* packet);
 
-	void Update();
+	int Update();
 
 	void InitPathfinding(int worldSize);
 
 	void SendPathToClient();
 
 	// Network buffer
-	char m_cBuffer[255];
+	char m_cSendBuffer[MAX_BUFFER_SIZE];
+
+	char m_cRecvBuffer[MAX_BUFFER_SIZE];
 
 	int m_iSocketFileDescriptor;
 
@@ -55,7 +59,17 @@ private:
 		SENDING_PATH
 	};
 
+	enum PacketCode{
+		GAMEWORLD,
+		PATH,
+		NODE,
+		END,
+		EMPTY
+	};
+
 	State m_eState;
+
+	int m_iRequestId;
 };
 
 #endif

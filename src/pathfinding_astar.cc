@@ -85,7 +85,7 @@ void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector
 
 	if(m_bInitializedStartGoal)
 	{
-		ContinuePath();
+		Update();
 	}
 }
 
@@ -267,6 +267,11 @@ void AStar::ResetPath()
 {
 	m_eState = IDLE;
 	m_bInitializedStartGoal = false;
+}
+
+void AStar::Update()
+{
+	ContinuePath();
 }
 
 
