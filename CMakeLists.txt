@@ -35,6 +35,7 @@ ExternalProject_Add(libsocket
     GIT_TAG master 
     BINARY_DIR ${CMAKE_BINARY_DIR}/external/libsocket
     SOURCE_DIR ${CMAKE_BINARY_DIR}/external/libsocket
+    INSTALL_COMMAND ""
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}
 )
 
@@ -50,9 +51,7 @@ endif()
 
 set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding_astar.cc include/pathfinding_astar.h include/game_world.h include/search_cell.h include/vector3.h)
 
-SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib/)
-
-link_directories(${PROJECT_BINARY_DIR}/lib/)
+link_directories(${CMAKE_BINARY_DIR}/external/libsocket/lib/)
 
 add_executable(raig ${SOURCES})
 
