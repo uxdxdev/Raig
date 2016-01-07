@@ -1,5 +1,32 @@
-#ifndef PATHFINDING_CELL_H
-#define PATHFINDING_CELL_H
+/*
+
+The MIT License (MIT)
+
+Copyright (c) 2016 David Morton
+
+https://github.com/damorton/raig.git
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+#ifndef _INCLUDE_PATHFINDING_ASTAR_H
+#define _INCLUDE_PATHFINDING_ASTAR_H
 
 #include <vector>
 #include <string>
@@ -13,7 +40,6 @@ class AStar{
 public:
 	AStar(int worldSize);
 	virtual ~AStar();
-
 
 	void FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos);
 
@@ -55,7 +81,7 @@ private:
 	void ClearPathToGoal();
 	void CleanUp();
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
-	void PathOpened(int x, int z, float newCost, SearchCell *parent);
+	void ProcessCell(int x, int z, float newCost, SearchCell *parent);
 
 	void PrintStatus(std::string message)
 	{
