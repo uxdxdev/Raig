@@ -88,6 +88,18 @@ void AStar::ClearPathToGoal()
 
 void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
 {
+	// Check of start or end goal cells are blocked
+	if(m_pGameWorld->GetCellState(currentPos->m_iX, 0, currentPos->m_iZ) == GameWorld::CELL_BLOCKED)
+	{
+		printf("-------------------------Start Cell Blocked X:%d Z:%d------------------------\n", currentPos->m_iX, currentPos->m_iZ);
+		return;
+	}
+	else if(m_pGameWorld->GetCellState(targetPos->m_iX, 0, targetPos->m_iZ) == GameWorld::CELL_BLOCKED)
+	{
+		printf("-------------------------Target Cell Blocked X:%d Z:%d------------------------\n", targetPos->m_iX, targetPos->m_iZ);
+		return;
+	}
+
 	if(!m_bInitializedStartGoal)
 	{
 		//printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
@@ -159,6 +171,76 @@ SearchCell *AStar::GetNextCell()
 	return nextCell;
 }
 
+
+void AStar::ContinuePath()
+{
+	for(int i = 0; i < 4; i++)
+	{
+		//printf("Called ContinuePath()\n");
+
+		if(m_vOpenList.empty())
+		{
+			return;
+		}
+
+		SearchCell *currentCell = GetNextCell();
+
+		// If we have reached the goal cell
+		if(currentCell->m_iId == m_GoalCell->m_iId)
+		{
+			//printf("Goal cell reached\n");
+
+			m_GoalCell->m_pParent = currentCell->m_pParent;
+
+			SearchCell *getPath;
+
+			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
+			{
+				m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
+			}
+
+			m_eState = REQUEST_COMPLETE;
+			return;
+		}
+		else
+		{
+			// topleft diagonal
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+			// topright diagonal
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+
+			// bottom left diagonal
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+			// bottom right
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+
+			// right side
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+			// left side
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
+
+			// top cell
+			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
+
+			// bottom cell
+			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
+
+
+
+			for(int i = 0; i < m_vOpenList.size(); i++)
+			{
+				if(currentCell->m_iId == m_vOpenList[i]->m_iId)
+				{
+					m_vOpenList.erase(m_vOpenList.begin() + i);
+				}
+			}
+		}
+	}
+}
+
 void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 {
 	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
@@ -170,10 +252,14 @@ void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 	}
 
 	// Walls etc.
-	if(m_pGameWorld->GetCellState(x, z) == GameWorld::CELL_BLOCKED)
+	if(m_pGameWorld->GetCellState(x, 0, z) == GameWorld::CELL_BLOCKED)
 	{
-		printf("CELL_BLOCKED X:%d Z:%d", x, z);
+		printf("-------------------------CELL_BLOCKED X:%d Z:%d------------------------\n", x, z);
 		return;
+	}
+	else
+	{
+		printf("-------------------------CELL_OPEN X:%d Z:%d------------------------\n", x, z);
 	}
 
 	int id = z * m_pGameWorld->GetWorldSize() + x;
@@ -215,72 +301,6 @@ void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 	m_vOpenList.push_back(newChild);
 }
 
-void AStar::ContinuePath()
-{
-	for(int i = 0; i < 4; i++)
-	{
-		//printf("Called ContinuePath()\n");
-
-		if(m_vOpenList.empty())
-		{
-			return;
-		}
-
-		SearchCell *currentCell = GetNextCell();
-
-		// If we have reached the goal cell
-		if(currentCell->m_iId == m_GoalCell->m_iId)
-		{
-			//printf("Goal cell reached\n");
-
-			m_GoalCell->m_pParent = currentCell->m_pParent;
-
-			SearchCell *getPath;
-
-			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
-			{
-				m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
-			}
-
-			m_eState = REQUEST_COMPLETE;
-			return;
-		}
-		else
-		{
-			// right side
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// left side
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// top cell
-			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
-
-			// bottom cell
-			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
-
-			// topleft diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-			// topright diagonal
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
-
-			// bottom left diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-			// bottom right
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
-
-			for(int i = 0; i < m_vOpenList.size(); i++)
-			{
-				if(currentCell->m_iId == m_vOpenList[i]->m_iId)
-				{
-					m_vOpenList.erase(m_vOpenList.begin() + i);
-				}
-			}
-		}
-	}
-}
 
 std::vector<std::shared_ptr<Vector3> > *AStar::GetPathToGoal()
 {

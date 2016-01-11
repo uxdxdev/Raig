@@ -53,11 +53,17 @@ public:
 	int GetCellZ(int z){ return z / CELL_SIZE; }
 
 	enum CellState{
-		CELL_OPEN,
-		CELL_BLOCKED
+		CELL_BLOCKED = 5,
+		CELL_OPEN
 	};
 
-	int GetCellState(int x, int z){ return m_Grid[x][z]; }
+	// Grid is 2D for now
+	int GetCellState(int x, int y, int z){ return m_Grid[x][z]; }
+	void SetCellState(int x, int y, int z, CellState state)
+	{
+		printf("Setting cell X:%d Z:%d to state %d\n", x, z, state);
+		m_Grid[x][z] = state;
+	}
 
 private:
 

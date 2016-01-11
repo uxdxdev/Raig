@@ -32,7 +32,7 @@ SOFTWARE.
 #include "pathfinding_astar.h"
 #include "vector3.h"
 
-#define MAX_BUFFER_SIZE 18
+#define MAX_BUFFER_SIZE 20
 
 class AIManager
 {
@@ -91,7 +91,9 @@ private:
 		PATH,
 		NODE,
 		END,
-		EMPTY
+		EMPTY,
+		CELL_BLOCKED,
+		CELL_OPEN
 	};
 
 	State m_eState;

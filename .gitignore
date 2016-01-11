@@ -11,3 +11,4 @@ raig
 *.dSYM
 .settings
 lib/
+nbproject/

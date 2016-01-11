@@ -199,6 +199,28 @@ int AIManager::Update()
 		m_iRequestId++;
 		// Pathfinding set to PROCESSING
 	}
+	else if(statusCode == PacketCode::CELL_BLOCKED)
+	{
+		char *sourceX = strtok((char*)NULL, "_");
+		char *sourceY = strtok((char*)NULL, "_");
+		char *sourceZ = strtok((char*)NULL, "_");
+		int sourceLocationX = atoi(sourceX); // char array to int
+		int sourceLocationY = atoi(sourceY); // char array to int
+		int sourceLocationZ = atoi(sourceZ); // char array to int
+		m_pPathfinding->GetGameWorld()->SetCellState(sourceLocationX, sourceLocationY, sourceLocationZ, GameWorld::CELL_BLOCKED);
+		ClearBuffer();
+	}
+	else if(statusCode == PacketCode::CELL_OPEN)
+	{
+		char *sourceX = strtok((char*)NULL, "_");
+		char *sourceY = strtok((char*)NULL, "_");
+		char *sourceZ = strtok((char*)NULL, "_");
+		int sourceLocationX = atoi(sourceX); // char array to int
+		int sourceLocationY = atoi(sourceY); // char array to int
+		int sourceLocationZ = atoi(sourceZ); // char array to int
+		m_pPathfinding->GetGameWorld()->SetCellState(sourceLocationX, sourceLocationY, sourceLocationZ, GameWorld::CELL_OPEN);
+		ClearBuffer();
+	}
 	/*
 	if(strcmp(statusFlag, "gameworld") == 0)
 	{

@@ -75,6 +75,9 @@ public:
 
 	void Update();
 
+	// Pathfinding retains ownership of GameWorld object
+	GameWorld *GetGameWorld(){ return m_pGameWorld.get(); }
+
 private:
 	void ClearOpenList();
 	void ClearClosedList();
