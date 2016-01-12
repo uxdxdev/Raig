@@ -91,12 +91,12 @@ void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector
 	// Check of start or end goal cells are blocked
 	if(m_pGameWorld->GetCellState(currentPos->m_iX, 0, currentPos->m_iZ) == GameWorld::CELL_BLOCKED)
 	{
-		printf("-------------------------Start Cell Blocked X:%d Z:%d------------------------\n", currentPos->m_iX, currentPos->m_iZ);
+		//printf("-------------------------Start Cell Blocked X:%d Z:%d------------------------\n", currentPos->m_iX, currentPos->m_iZ);
 		return;
 	}
 	else if(m_pGameWorld->GetCellState(targetPos->m_iX, 0, targetPos->m_iZ) == GameWorld::CELL_BLOCKED)
 	{
-		printf("-------------------------Target Cell Blocked X:%d Z:%d------------------------\n", targetPos->m_iX, targetPos->m_iZ);
+		//printf("-------------------------Target Cell Blocked X:%d Z:%d------------------------\n", targetPos->m_iX, targetPos->m_iZ);
 		return;
 	}
 
@@ -254,12 +254,12 @@ void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 	// Walls etc.
 	if(m_pGameWorld->GetCellState(x, 0, z) == GameWorld::CELL_BLOCKED)
 	{
-		printf("-------------------------CELL_BLOCKED X:%d Z:%d------------------------\n", x, z);
+		//printf("-------------------------CELL_BLOCKED X:%d Z:%d------------------------\n", x, z);
 		return;
 	}
 	else
 	{
-		printf("-------------------------CELL_OPEN X:%d Z:%d------------------------\n", x, z);
+		//printf("-------------------------CELL_OPEN X:%d Z:%d------------------------\n", x, z);
 	}
 
 	int id = z * m_pGameWorld->GetWorldSize() + x;

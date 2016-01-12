@@ -103,5 +103,6 @@ void NetworkManager::Start()
 
 void NetworkManager::CleanUp()
 {
+	close(m_iListenSocketFileDescriptor);
 	close(m_iConnfd);
 }

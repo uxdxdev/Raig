@@ -41,7 +41,6 @@ public:
 
 	virtual ~AIManager()
 	{
-
 	}
 
 	//void ProcessRequest(int in, int out);
@@ -59,7 +58,15 @@ private:
 
 	int Update();
 
-	void InitPathfinding(int worldSize);
+	// Ai services available to clients
+	enum AiService{
+		ASTAR,
+		FSM,
+		BFS,
+		DFS
+	};
+
+	void InitAi(int worldSize,  AiService typeOfAiService);
 
 	void SendPathToClient();
 
@@ -72,7 +79,12 @@ private:
 
 	bool m_bIsPathComplete;
 
+	// AStar pathfinding service
 	std::unique_ptr<AStar> m_pPathfinding;
+
+	// TODO: Finite State Machine service
+	// TODO: Breadth First Search service
+	// TODO: Depth First Search service
 
 	// Path to goal vector owned by m_pPathfinding object.
 	// Must deference pointer to vector before accessing

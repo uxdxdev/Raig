@@ -45,11 +45,23 @@ AIManager::AIManager()
 	ClearBuffer();
 }
 
-void AIManager::InitPathfinding(int worldSize)
+void AIManager::InitAi(int worldSize, AiService typeOfAiService)
 {
-	if(m_pPathfinding == nullptr)
+	if(typeOfAiService == AiService::ASTAR)
 	{
-		m_pPathfinding = std::unique_ptr<AStar> (new AStar(worldSize));
+		if(m_pPathfinding == nullptr)
+		{
+			m_pPathfinding = std::unique_ptr<AStar> (new AStar(worldSize));
+		}
+	}
+	else if(typeOfAiService == AiService::FSM)
+	{
+	}
+	else if(typeOfAiService == AiService::BFS)
+	{
+	}
+	else if(typeOfAiService == AiService::DFS)
+	{
 	}
 }
 
@@ -90,16 +102,10 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 
 	while(1)
 	{
-		// Read
-		//ReadBuffer();
-
 		if(Update() == 0)
 		{
 			return;
 		}
-
-		// Send
-		//SendBuffer();
 	}
 }
 
@@ -111,7 +117,7 @@ int AIManager::SendBuffer()
 	int bytesSent = 0;
 
 	bytesSent = Send(m_iSocketFileDescriptor, m_cSendBuffer, size, flags);
-	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
+	//printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
 	ClearBuffer();
 
 	//sleep(1);
@@ -161,11 +167,16 @@ int AIManager::Update()
 	char *statusFlag = strtok((char*)m_cRecvBuffer, "_");
 	int statusCode = atoi(statusFlag); // Convert to integer
 	//printf("Called Update() statusCode: %d\n", statusCode);
+
 	if(statusCode == GAMEWORLD)
 	{
 		char *gameWorldSize = strtok((char*)NULL, "_");
+		char *serviceType = strtok((char*)NULL, "_");
+
 		int gridSize = atoi(gameWorldSize); // char array to int
-		InitPathfinding(gridSize);
+		AiService typeOfAiService = (AiService)atoi(serviceType); // char array to AiService
+
+		InitAi(gridSize, typeOfAiService);
 		ClearBuffer();
 	}
 	else if(statusCode == PATH && m_pPathfinding->GetState() == AStar::IDLE)
@@ -270,7 +281,7 @@ int AIManager::Update()
 	{
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
-		m_pPathfinding->PrintPath();
+		//m_pPathfinding->PrintPath();
 		m_pPathfinding->ResetPath();
 		m_eState = SENDING_PATH;
 	}
