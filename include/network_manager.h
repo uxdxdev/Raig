@@ -40,12 +40,15 @@ class NetworkManager
 {
 public:
 	NetworkManager();
-	virtual ~NetworkManager();
-	void Init();
+
+	~NetworkManager();
+
 	void Start();
-	void CleanUp();
 
 private:
+	void Init();
+
+	void CleanUp();
 
 	// AI algorithm Manager
 	std::unique_ptr<AIManager> m_AIManager;

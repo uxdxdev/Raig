@@ -29,41 +29,58 @@ SOFTWARE.
 #define _INCLUDE_AI_MANAGER_H_
 
 #include <memory>
+#include <vector>
 #include "pathfinding_astar.h"
-#include "vector3.h"
 
-#define MAX_BUFFER_SIZE 18
+#define MAX_BUFFER_SIZE 20
+
+class AStar;
+class Vector3;
 
 class AIManager
 {
 public:
+
+	enum PacketCode{
+		GAMEWORLD,
+		PATH,
+		NODE,
+		END,
+		EMPTY,
+		CELL_BLOCKED,
+		CELL_OPEN
+	};
+
 	AIManager();
-
-	virtual ~AIManager()
-	{
-
-	}
-
-	//void ProcessRequest(int in, int out);
 
 	void ProcessRequest(int socketFileDescriptor);
 
 private:
+	enum State{
+		IDLE,
+		SENDING_PATH
+	};
+
+	// Ai services available to clients
+	enum AiService{
+		ASTAR,
+		FSM,
+		BFS,
+		DFS
+	};
+
 	int ReadBuffer();
 
 	int SendBuffer();
 
 	void ClearBuffer();
 
-	//void InitializePacket(raig::Packet* packet);
-
 	int Update();
 
-	void InitPathfinding(int worldSize);
+	void InitAi(int worldSize,  AiService typeOfAiService);
 
 	void SendPathToClient();
 
-	// Network buffer
 	char m_cSendBuffer[MAX_BUFFER_SIZE];
 
 	char m_cRecvBuffer[MAX_BUFFER_SIZE];
@@ -72,27 +89,16 @@ private:
 
 	bool m_bIsPathComplete;
 
+	// AStar pathfinding service
 	std::unique_ptr<AStar> m_pPathfinding;
 
-	// Path to goal vector owned by m_pPathfinding object.
-	// Must deference pointer to vector before accessing
-	// any elements stored inside.
+	// TODO: Finite State Machine service
+	// TODO: Breadth First Search service
+	// TODO: Depth First Search service
+
 	std::vector<std::shared_ptr<Vector3> > *m_vPathToGoal;
 
 	int m_iPathIndex;
-
-	enum State{
-		IDLE,
-		SENDING_PATH
-	};
-
-	enum PacketCode{
-		GAMEWORLD,
-		PATH,
-		NODE,
-		END,
-		EMPTY
-	};
 
 	State m_eState;
 

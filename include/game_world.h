@@ -28,40 +28,30 @@ SOFTWARE.
 #ifndef _INCLUDE_GAME_WORLD_H_
 #define _INCLUDE_GAME_WORLD_H_
 
-#include "search_cell.h"
 #include <vector>
 
 #define CELL_SIZE 1
 
 class GameWorld{
 public:
-	GameWorld(int worldSize)
-	{
-		//printf("ctor GameWorld()\n");
+	GameWorld(int worldSize);
 
-		m_iWorldSize = worldSize;
-		m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
-	}
+	int GetWorldSize();
 
-	virtual ~GameWorld()
-	{
-		//printf("dtor ~GameWorld()\n");
-	}
+	int GetCellX(int x);
 
-	int GetWorldSize(){ return m_iWorldSize; }
-	int GetCellX(int x){ return x / CELL_SIZE; }
-	int GetCellZ(int z){ return z / CELL_SIZE; }
+	int GetCellY(int y);
 
-	enum CellState{
-		CELL_OPEN,
-		CELL_BLOCKED
-	};
+	int GetCellZ(int z);
 
-	int GetCellState(int x, int z){ return m_Grid[x][z]; }
+	int GetCellState(int x, int y, int z);
+
+	void SetCellState(int x, int y, int z, int state);
 
 private:
 
 	int m_iWorldSize;
+
 	std::vector< std::vector<int> > m_Grid;
 };
 #endif

@@ -26,6 +26,9 @@ SOFTWARE.
 
 */
 #include "../include/pathfinding_astar.h"
+#include "../include/ai_manager.h"
+#include "../include/vector3.h"
+#include "../include/search_cell.h"
 
 AStar::AStar(int worldSize)
 {
@@ -39,24 +42,53 @@ AStar::AStar(int worldSize)
 
 AStar::~AStar()
 {
-	//printf("dtor ~Pathfinding()\n");
 	CleanUp();
+}
+
+void AStar::PrintPath()
+{
+	printf("-----PATH Start-----\n");
+
+	for(int i = 0; i < m_vPathToGoal.size(); i++)
+	{
+		printf("(%d, %d)\n", m_vPathToGoal[i]->m_iX, m_vPathToGoal[i]->m_iZ);
+	}
+
+	printf("-----PATH End-----\n");
+
+}
+
+void AStar::PrintStatus(std::string message)
+{
+	printf("--Pathfinder Status--\n");
+	printf("State: %d\nOpen List: %d\nClosed List: %d\nPath list: %d\n", m_eState, (int)m_vOpenList.size(), (int)m_vClosedList.size(), (int)m_vPathToGoal.size());
+	printf("Goal Cell: %d\n", ((m_GoalCell) ? m_GoalCell->m_iId : -1));
+	printf("Message: %s\n\n", message.c_str());
+}
+
+// Get pathfinder state
+AStar::State AStar::GetState()
+{
+	return m_eState;
+}
+
+void AStar::SetState(State state)
+{
+	m_eState = state;
+}
+
+GameWorld *AStar::GetGameWorld()
+{
+	return m_pGameWorld.get();
 }
 
 void AStar::CleanUp()
 {
-	//PrintStatus("Before CleanUp()");
-
-	// Delete all objects pointed to by the stored pointers in the vector.
-	// Clear each vector for every new request
 	ClearOpenList();
 	ClearClosedList();
 	ClearPathToGoal();
-
 	delete m_GoalCell;
 	m_GoalCell = NULL;
-
-	//PrintStatus("After CleanUp()");
 }
 
 void AStar::ClearOpenList()
@@ -88,6 +120,18 @@ void AStar::ClearPathToGoal()
 
 void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
 {
+	// Check of start or end goal cells are blocked
+	if(m_pGameWorld->GetCellState(currentPos->m_iX, 0, currentPos->m_iZ) == AIManager::CELL_BLOCKED)
+	{
+		//printf("-------------------------Start Cell Blocked X:%d Z:%d------------------------\n", currentPos->m_iX, currentPos->m_iZ);
+		return;
+	}
+	else if(m_pGameWorld->GetCellState(targetPos->m_iX, 0, targetPos->m_iZ) == AIManager::CELL_BLOCKED)
+	{
+		//printf("-------------------------Target Cell Blocked X:%d Z:%d------------------------\n", targetPos->m_iX, targetPos->m_iZ);
+		return;
+	}
+
 	if(!m_bInitializedStartGoal)
 	{
 		//printf("Initializing Start Goal X:%d Z:%d\n", currentPos.m_iX, currentPos.m_iZ);
@@ -126,8 +170,8 @@ void AStar::SetStartAndGoal(SearchCell start, SearchCell goal)
 	startCell.m_iCoordinateZ = start.m_iCoordinateZ;
 	startCell.m_pParent = 0;
 	startCell.SetId(m_pGameWorld->GetWorldSize());
-	startCell.G = 0;
-	startCell.H = startCell.ManhattanDistance(m_GoalCell);
+	startCell.m_fCostSoFarG = 0;
+	startCell.m_fEstimatedCostToGoalH = startCell.ManhattanDistance(m_GoalCell);
 
 	m_vOpenList.push_back(new SearchCell(startCell));
 }
@@ -140,9 +184,9 @@ SearchCell *AStar::GetNextCell()
 
 	for(int i = 0; i < m_vOpenList.size(); i++)
 	{
-		if(m_vOpenList[i]->GetF() < bestF)
+		if(m_vOpenList[i]->GetEstimatedTotalCostF() < bestF)
 		{
-			bestF = m_vOpenList[i]->GetF();
+			bestF = m_vOpenList[i]->GetEstimatedTotalCostF();
 			cellIndex = i;
 		}
 	}
@@ -159,63 +203,8 @@ SearchCell *AStar::GetNextCell()
 	return nextCell;
 }
 
-void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
-{
-	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
-	if(x < 0 || x > m_pGameWorld->GetWorldSize() - 1 || z < 0 || z > m_pGameWorld->GetWorldSize() - 1)
-	{
-		// Out of bounds
-		return;
-	}
-
-	// Walls etc.
-	if(m_pGameWorld->GetCellState(x, z) == GameWorld::CELL_BLOCKED)
-	{
-		printf("CELL_BLOCKED X:%d Z:%d", x, z);
-		return;
-	}
-
-	int id = z * m_pGameWorld->GetWorldSize() + x;
-
-	for(int i = 0; i < m_vClosedList.size(); i++)
-	{
-		if(id == m_vClosedList[i]->m_iId)
-		{
-			return;
-		}
-	}
-
-	SearchCell *newChild = new SearchCell(x, z, parent, m_pGameWorld->GetWorldSize());
-	newChild->G = newCost;
-	newChild->H = parent->ManhattanDistance(m_GoalCell);
-
-	//printf("New child ID %d X%d Z:%d G:%f H:%f\n",newChild->m_iId, newChild->m_iCoordinateX, newChild->m_iCoordinateZ, newChild->G, newChild->H);
-
-	for(int i = 0; i < m_vOpenList.size(); i++)
-	{
-		if(id == m_vOpenList[i]->m_iId)
-		{
-			float newF = newChild->G + newCost + m_vOpenList[i]->H;
-
-			// if newF is less than one in the list replace it
-			if(m_vOpenList[i]->GetF() > newF)
-			{
-				m_vOpenList[i]->G = newChild->G + newCost;
-				m_vOpenList[i]->m_pParent = newChild;
-			}
-			else // if the newF is not better
-			{
-				delete newChild;
-				return;
-			}
-		}
-	}
-
-	m_vOpenList.push_back(newChild);
-}
-
-void AStar::ContinuePath()
+void AStar::Update()
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -247,29 +236,31 @@ void AStar::ContinuePath()
 		}
 		else
 		{
-			// right side
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// left side
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->G + 1, currentCell);
-
-			// top cell
-			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->G + 1, currentCell);
-
-			// bottom cell
-			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->G + 1, currentCell);
-
 			// topleft diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// topright diagonal
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->G + 1.414f, currentCell);
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// bottom left diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// bottom right
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->G + 1.414f, currentCell);
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
+
+			// right side
+			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->m_fCostSoFarG + 1, currentCell);
+
+			// left side
+			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ, currentCell->m_fCostSoFarG + 1, currentCell);
+
+			// top cell
+			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1, currentCell);
+
+			// bottom cell
+			ProcessCell(currentCell->m_iCoordinateX, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1, currentCell);
+
+
 
 			for(int i = 0; i < m_vOpenList.size(); i++)
 			{
@@ -281,6 +272,62 @@ void AStar::ContinuePath()
 		}
 	}
 }
+
+void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
+{
+	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
+
+	if(x < 0 || x > m_pGameWorld->GetWorldSize() - 1 || z < 0 || z > m_pGameWorld->GetWorldSize() - 1)
+	{
+		// Out of bounds
+		return;
+	}
+
+	// Walls etc.
+	if(m_pGameWorld->GetCellState(x, 0, z) == AIManager::CELL_BLOCKED)
+	{
+		return;
+	}
+
+	int id = z * m_pGameWorld->GetWorldSize() + x;
+
+	for(int i = 0; i < m_vClosedList.size(); i++)
+	{
+		if(id == m_vClosedList[i]->m_iId)
+		{
+			return;
+		}
+	}
+
+	SearchCell *newChild = new SearchCell(x, z, parent, m_pGameWorld->GetWorldSize());
+	newChild->m_fCostSoFarG = newCost;
+	newChild->m_fEstimatedCostToGoalH = parent->ManhattanDistance(m_GoalCell);
+
+	//printf("New child ID %d X%d Z:%d G:%f H:%f\n",newChild->m_iId, newChild->m_iCoordinateX, newChild->m_iCoordinateZ, newChild->G, newChild->H);
+
+	for(int i = 0; i < m_vOpenList.size(); i++)
+	{
+		if(id == m_vOpenList[i]->m_iId)
+		{
+			float newF = newChild->m_fCostSoFarG + newCost + m_vOpenList[i]->m_fEstimatedCostToGoalH;
+
+			// if newF is less than one in the list replace it
+			if(m_vOpenList[i]->GetEstimatedTotalCostF() > newF)
+			{
+				m_vOpenList[i]->m_fCostSoFarG = newChild->m_fCostSoFarG + newCost;
+				m_vOpenList[i]->m_pParent = newChild;
+			}
+			else // if the newF is not better
+			{
+				delete newChild;
+				return;
+			}
+		}
+	}
+
+	m_vOpenList.push_back(newChild);
+}
+
 
 std::vector<std::shared_ptr<Vector3> > *AStar::GetPathToGoal()
 {
@@ -295,10 +342,3 @@ void AStar::ResetPath()
 	m_eState = IDLE;
 	m_bInitializedStartGoal = false;
 }
-
-void AStar::Update()
-{
-	ContinuePath();
-}
-
-

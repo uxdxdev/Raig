@@ -1,17 +1,15 @@
-# R.A.I.G
-Remote Artificial Intelligence for Games
+# R.A.I.G Server Application
+Remote Artificial Intelligence for Games is a server application that processes AI requests from clients using the RAIG Client API https://github.com/damorton/libraig.git.
 
-## Build
-
+## Instructions
+- Download the repo
+- Extract contents of the .zip file
+- `cd raig-folder/`
+- Build
 ```
 $ cmake .
 $ make
 ```
-## Instructions
-- Download the repo
-- Extract contents of the .zip file
-- `cd path/to/raig-folder`
-- Build
 - Run `$ ./raig`
 
 ## Dependencies
