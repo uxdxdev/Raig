@@ -49,7 +49,7 @@ else()
   set(PROJECT_LINK_LIBS libsocket.dylib)
 endif()
 
-set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding_astar.cc include/pathfinding_astar.h include/game_world.h include/search_cell.h include/vector3.h)
+set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding_astar.cc src/game_world.cc include/pathfinding_astar.h include/game_world.h include/search_cell.h include/vector3.h)
 
 link_directories(${CMAKE_BINARY_DIR}/external/libsocket/lib/)
 

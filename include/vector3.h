@@ -72,11 +72,6 @@ public:
 			return 0;
 		}
 	}
-
-	virtual ~Vector3()
-	{
-
-	}
 };
 
 #endif
