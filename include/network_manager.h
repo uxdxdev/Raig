@@ -43,6 +43,10 @@ public:
 
 	~NetworkManager();
 
+	static void SignalHandler(int signalNumber);
+
+	void Signal(int signalNumber);
+
 	void Start();
 
 private:

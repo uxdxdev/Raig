@@ -25,7 +25,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
+
 #include "../include/network_manager.h"
+
+#include <csignal>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include "../include/ai_manager.h"
 
 NetworkManager::NetworkManager()
@@ -51,7 +57,7 @@ void NetworkManager::Init()
 
 	// Signal handler for terminated processes
 	// Only needed when forking processes
-	Signal(SIGCHLD, (void*)SignalHandler);
+	Signal(SIGCHLD);
 }
 
 void NetworkManager::Start()
@@ -91,6 +97,27 @@ void NetworkManager::Start()
 			exit(EXIT_SUCCESS);
 		}
 		close(m_iConnfd);
+	}
+}
+
+void NetworkManager::SignalHandler(int signalNumber)
+{
+	pid_t processID;
+	int stat;
+
+	while( (processID = waitpid(WAIT_ANY, &stat, WNOHANG)) > 0)
+	{
+		printf("child terminated\n");
+	}
+	return;
+}
+
+void NetworkManager::Signal(int signalNumber)
+{
+	if(signal(SIGCHLD, SignalHandler) == SIG_ERR)
+	{
+		perror("Error in Signal()");
+		exit(1); // Exit failure
 	}
 }
 
