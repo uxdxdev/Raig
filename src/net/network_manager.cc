@@ -87,6 +87,7 @@ void NetworkManager::Start()
 			m_AIManager->ProcessRequest(m_iConnfd);
 
 			printf("Disconnecting...\n");
+			// Send usage data to web application using http
 
 			// On return exit to kill the process. The kernel will then
 			// send a signal to the parent which is caught by the parents
