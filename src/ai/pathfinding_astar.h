@@ -25,8 +25,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_PATHFINDING_ASTAR_H
-#define _INCLUDE_PATHFINDING_ASTAR_H
+#ifndef AI_PATHFINDING_ASTAR_H
+#define AI_PATHFINDING_ASTAR_H
 
 #include <memory>
 #include <vector>
@@ -34,8 +34,7 @@ SOFTWARE.
 
 #include "base/game_world.h"
 #include "base/vector3.h"
-
-class SearchCell;
+#include "base/search_cell.h"
 
 namespace ai {
 
@@ -83,21 +82,21 @@ private:
 
 	void CleanUp();
 
-	void SetStartAndGoal(SearchCell start, SearchCell goal);
+	void SetStartAndGoal(base::SearchCell start, base::SearchCell goal);
 
-	void ProcessCell(int x, int z, float newCost, SearchCell *parent);
+	void ProcessCell(int x, int z, float newCost, base::SearchCell *parent);
 
 	void PrintStatus(std::string message);
 
-	SearchCell *GetNextCell();
+	base::SearchCell *GetNextCell();
 
 	State m_eState;
 
-	std::vector<SearchCell*> m_vOpenList;
+	std::vector<base::SearchCell*> m_vOpenList;
 
-	std::vector<SearchCell*> m_vClosedList;
+	std::vector<base::SearchCell*> m_vClosedList;
 
-	SearchCell *m_GoalCell;
+	base::SearchCell *m_GoalCell;
 
 	std::vector<std::shared_ptr<base::Vector3> > m_vPathToGoal;
 

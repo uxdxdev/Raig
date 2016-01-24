@@ -25,10 +25,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_SEARCH_CELL_H
-#define _INCLUDE_SEARCH_CELL_H
+
+#ifndef BASE_SEARCH_CELL_H
+#define BASE_SEARCH_CELL_H
 
 #include <math.h>
+
+namespace base {
 
 class SearchCell{
 public:
@@ -77,5 +80,7 @@ public:
 		return x + z;
 	}
 };
+
+}
 
 #endif

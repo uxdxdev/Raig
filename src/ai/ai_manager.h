@@ -25,8 +25,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_AI_MANAGER_H_
-#define _INCLUDE_AI_MANAGER_H_
+#ifndef AI_AI_MANAGER_H_
+#define AI_AI_MANAGER_H_
 
 #include <memory>
 #include <vector>

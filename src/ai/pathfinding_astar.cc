@@ -29,7 +29,6 @@ SOFTWARE.
 #include "ai/pathfinding_astar.h"
 
 #include "ai/ai_manager.h"
-#include "base/search_cell.h"
 
 namespace ai {
 
@@ -141,12 +140,12 @@ void AStar::FindPath(std::shared_ptr<base::Vector3> currentPos, std::shared_ptr<
 		CleanUp();
 
 		// Initialize start
-		SearchCell start;
+		base::SearchCell start;
 		start.m_iCoordinateX = m_pGameWorld->GetCellX(currentPos->m_iX);
 		start.m_iCoordinateZ = m_pGameWorld->GetCellZ(currentPos->m_iZ);
 
 		// Initialize goal
-		SearchCell goal;
+		base::SearchCell goal;
 		goal.m_iCoordinateX = m_pGameWorld->GetCellX(targetPos->m_iX);
 		goal.m_iCoordinateZ = m_pGameWorld->GetCellZ(targetPos->m_iZ);
 
@@ -163,12 +162,12 @@ void AStar::FindPath(std::shared_ptr<base::Vector3> currentPos, std::shared_ptr<
 	}
 }
 
-void AStar::SetStartAndGoal(SearchCell start, SearchCell goal)
+void AStar::SetStartAndGoal(base::SearchCell start, base::SearchCell goal)
 {
 	//printf("Called SetStartAndGoal()\n");
-	m_GoalCell = new SearchCell(goal.m_iCoordinateX, goal.m_iCoordinateZ, &goal, m_pGameWorld->GetWorldSize());
+	m_GoalCell = new base::SearchCell(goal.m_iCoordinateX, goal.m_iCoordinateZ, &goal, m_pGameWorld->GetWorldSize());
 
-	SearchCell startCell;
+	base::SearchCell startCell;
 	startCell.m_iCoordinateX = start.m_iCoordinateX;
 	startCell.m_iCoordinateZ = start.m_iCoordinateZ;
 	startCell.m_pParent = 0;
@@ -176,14 +175,14 @@ void AStar::SetStartAndGoal(SearchCell start, SearchCell goal)
 	startCell.m_fCostSoFarG = 0;
 	startCell.m_fEstimatedCostToGoalH = startCell.ManhattanDistance(m_GoalCell);
 
-	m_vOpenList.push_back(new SearchCell(startCell));
+	m_vOpenList.push_back(new base::SearchCell(startCell));
 }
 
-SearchCell *AStar::GetNextCell()
+base::SearchCell *AStar::GetNextCell()
 {
 	float bestF = 99999.0f;
 	int cellIndex = -1;
-	SearchCell *nextCell = NULL;
+	base::SearchCell *nextCell = NULL;
 
 	for(int i = 0; i < m_vOpenList.size(); i++)
 	{
@@ -218,7 +217,7 @@ void AStar::Update()
 			return;
 		}
 
-		SearchCell *currentCell = GetNextCell();
+		base::SearchCell *currentCell = GetNextCell();
 
 		// If we have reached the goal cell
 		if(currentCell->m_iId == m_GoalCell->m_iId)
@@ -227,7 +226,7 @@ void AStar::Update()
 
 			m_GoalCell->m_pParent = currentCell->m_pParent;
 
-			SearchCell *getPath;
+			base::SearchCell *getPath;
 
 			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
 			{
@@ -276,7 +275,7 @@ void AStar::Update()
 	}
 }
 
-void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
+void AStar::ProcessCell(int x, int z, float newCost, base::SearchCell *parent)
 {
 	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
@@ -302,7 +301,7 @@ void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 		}
 	}
 
-	SearchCell *newChild = new SearchCell(x, z, parent, m_pGameWorld->GetWorldSize());
+	base::SearchCell *newChild = new base::SearchCell(x, z, parent, m_pGameWorld->GetWorldSize());
 	newChild->m_fCostSoFarG = newCost;
 	newChild->m_fEstimatedCostToGoalH = parent->ManhattanDistance(m_GoalCell);
 
