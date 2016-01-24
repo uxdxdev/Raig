@@ -1,4 +1,4 @@
-#include "../include/game_world.h"
+#include "base/game_world.h"
 
 GameWorld::GameWorld(int worldSize)
 {

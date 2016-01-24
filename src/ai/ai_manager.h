@@ -25,51 +25,85 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_NETWORK_MANAGER_H_
-#define _INCLUDE_NETWORK_MANAGER_H_
+#ifndef _INCLUDE_AI_MANAGER_H_
+#define _INCLUDE_AI_MANAGER_H_
 
 #include <memory>
+#include <vector>
 
-extern "C" {
-	#include "../external/libsocket/include/socket.h"
-}
+#include "ai/pathfinding_astar.h"
+#include "base/vector3.h"
 
-class AIManager;
+#define MAX_BUFFER_SIZE 20
 
-class NetworkManager
+class AStar;
+
+class AIManager
 {
 public:
-	NetworkManager();
 
-	~NetworkManager();
+	enum PacketCode{
+		GAMEWORLD,
+		PATH,
+		NODE,
+		END,
+		EMPTY,
+		CELL_BLOCKED,
+		CELL_OPEN
+	};
 
-	static void SignalHandler(int signalNumber);
+	AIManager();
 
-	void Signal(int signalNumber);
-
-	void Start();
+	void ProcessRequest(int socketFileDescriptor);
 
 private:
-	void Init();
+	enum State{
+		IDLE,
+		SENDING_PATH
+	};
 
-	void CleanUp();
+	// Ai services available to clients
+	enum AiService{
+		ASTAR,
+		FSM,
+		BFS,
+		DFS
+	};
 
-	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
+	int ReadBuffer();
 
-	// Server listen file descriptor
-	int m_iListenSocketFileDescriptor;
+	int SendBuffer();
 
-	// Client address structure
-	struct Address m_sAddress;
+	void ClearBuffer();
 
-	// New process id for use with fork
-	pid_t m_ChildProcessID;
+	int Update();
 
-	// New connection file descriptor
-	int m_iConnfd;
+	void InitAi(int worldSize,  AiService typeOfAiService);
 
-	socklen_t m_ClientLen;
+	void SendPathToClient();
+
+	char m_cSendBuffer[MAX_BUFFER_SIZE];
+
+	char m_cRecvBuffer[MAX_BUFFER_SIZE];
+
+	int m_iSocketFileDescriptor;
+
+	bool m_bIsPathComplete;
+
+	// AStar pathfinding service
+	std::unique_ptr<AStar> m_pPathfinding;
+
+	// TODO: Finite State Machine service
+	// TODO: Breadth First Search service
+	// TODO: Depth First Search service
+
+	std::vector<std::shared_ptr<base::Vector3> > *m_vPathToGoal;
+
+	int m_iPathIndex;
+
+	State m_eState;
+
+	int m_iRequestId;
 };
 
 #endif

@@ -25,10 +25,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#include "../include/pathfinding_astar.h"
-#include "../include/ai_manager.h"
-#include "../include/vector3.h"
-#include "../include/search_cell.h"
+
+#include "ai/pathfinding_astar.h"
+
+#include "ai/ai_manager.h"
+#include "base/search_cell.h"
 
 AStar::AStar(int worldSize)
 {
@@ -118,7 +119,7 @@ void AStar::ClearPathToGoal()
 	m_vPathToGoal.clear();
 }
 
-void AStar::FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos)
+void AStar::FindPath(std::shared_ptr<base::Vector3> currentPos, std::shared_ptr<base::Vector3> targetPos)
 {
 	// Check of start or end goal cells are blocked
 	if(m_pGameWorld->GetCellState(currentPos->m_iX, 0, currentPos->m_iZ) == AIManager::CELL_BLOCKED)
@@ -228,7 +229,7 @@ void AStar::Update()
 
 			for(getPath = m_GoalCell; getPath != NULL; getPath = getPath->m_pParent)
 			{
-				m_vPathToGoal.push_back(std::shared_ptr<Vector3>(new Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
+				m_vPathToGoal.push_back(std::shared_ptr<base::Vector3>(new base::Vector3(getPath->m_iCoordinateX * CELL_SIZE, 0, getPath->m_iCoordinateZ * CELL_SIZE)));
 			}
 
 			m_eState = REQUEST_COMPLETE;
@@ -329,7 +330,7 @@ void AStar::ProcessCell(int x, int z, float newCost, SearchCell *parent)
 }
 
 
-std::vector<std::shared_ptr<Vector3> > *AStar::GetPathToGoal()
+std::vector<std::shared_ptr<base::Vector3> > *AStar::GetPathToGoal()
 {
 	// Once the path to goal has been accessed the pathfinder
 	// can be reset to IDLE in order to process more requests

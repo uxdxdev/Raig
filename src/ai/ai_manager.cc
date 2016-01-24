@@ -25,11 +25,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#include "../include/ai_manager.h"
-#include "../include/vector3.h"
+
+#include "ai/ai_manager.h"
 
 extern "C" {
-	#include "../external/libsocket/include/socket.h"
+	#include "libsocket/include/socket.h"
 }
 
 #include <stdlib.h>
@@ -158,8 +158,8 @@ int AIManager::Update()
 				destinationLocationX,
 				destinationLocationZ);
 
-		std::shared_ptr<Vector3> start(new Vector3(sourceLocationX, 0, sourceLocationZ));
-		std::shared_ptr<Vector3> goal(new Vector3(destinationLocationX, 0, destinationLocationZ));
+		std::shared_ptr<base::Vector3> start(new base::Vector3(sourceLocationX, 0, sourceLocationZ));
+		std::shared_ptr<base::Vector3> goal(new base::Vector3(destinationLocationX, 0, destinationLocationZ));
 
 		m_pPathfinding->FindPath(start, goal);
 		ClearBuffer();

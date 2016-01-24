@@ -33,8 +33,8 @@ ExternalProject_Add(libsocket
     PREFIX ${CMAKE_BINARY_DIR}/build/libsocket
     GIT_REPOSITORY https://github.com/damorton/libsocket.git
     GIT_TAG master 
-    BINARY_DIR ${CMAKE_BINARY_DIR}/external/libsocket
-    SOURCE_DIR ${CMAKE_BINARY_DIR}/external/libsocket
+    BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/libsocket
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/libsocket
     INSTALL_COMMAND ""
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}
 )
@@ -43,18 +43,33 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-if(UNIX AND NOT APPLE)
-  set(PROJECT_LINK_LIBS libsocket.so)
-else()
-  set(PROJECT_LINK_LIBS libsocket.dylib)
-endif()
+include_directories(	
+	${CMAKE_CURRENT_SOURCE_DIR}/external
+	${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
-set(SOURCES src/ai_manager.cc src/main.cc src/network_manager.cc src/pathfinding_astar.cc src/game_world.cc include/pathfinding_astar.h include/game_world.h include/search_cell.h include/vector3.h)
+set(SOURCES 
+	src/ai/ai_manager.cc
+	src/ai/pathfinding_astar.cc	 
+	src/raig/raig_server.cc 
+	src/net/network_manager.cc 
+	src/base/game_world.cc
+	src/base/vector3.cc	 
+	src/base/game_world.cc
+	src/base/search_cell.h	
+)
 
-link_directories(${CMAKE_BINARY_DIR}/external/libsocket/lib/)
+link_directories(
+	${CMAKE_CURRENT_SOURCE_DIR}/external/libsocket/lib/
+)
 
 add_executable(raig ${SOURCES})
 
 add_dependencies(raig libsocket)
 
-target_link_libraries(raig ${PROJECT_LINK_LIBS})
+target_link_libraries(raig socket)
+
+set_target_properties(raig
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"    
+)

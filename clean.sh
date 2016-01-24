@@ -1,1 +1,1 @@
-rm -rf build cmake_install.cmake CMakeCache.txt CMakeFiles external raig lib/
+rm -rf bin linux-build external

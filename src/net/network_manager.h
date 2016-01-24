@@ -4,7 +4,7 @@ The MIT License (MIT)
 
 Copyright (c) 2016 David Morton
 
-https://github.com/damorton/libraig.git
+https://github.com/damorton/raig.git
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,53 +25,51 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_VECTOR3_H_
-#define _INCLUDE_VECTOR3_H_
+#ifndef _INCLUDE_NETWORK_MANAGER_H_
+#define _INCLUDE_NETWORK_MANAGER_H_
 
-#include <string>
+#include <memory>
 
-class Vector3{
+extern "C" {
+	#include "libsocket/include/socket.h"
+}
+
+class AIManager;
+
+class NetworkManager
+{
 public:
-	int m_iX;
-	int m_iY;
-	int m_iZ;
-	int m_iId;
+	NetworkManager();
 
-	Vector3()
-	{
-		m_iX = 0;
-		m_iY = 0;
-		m_iZ = 0;
-		m_iId = 0;
-	}
+	~NetworkManager();
 
-	Vector3(int x, int y, int z)
-	{
-		m_iX = x;
-		m_iY = y;
-		m_iZ = z;
-		m_iId = 0;
-	}
+	static void SignalHandler(int signalNumber);
 
-	Vector3(int id, int x, int y, int z)
-	{
-		m_iX = x;
-		m_iY = y;
-		m_iZ = z;
-		m_iId = id;
-	}
+	void Signal(int signalNumber);
 
-	int Compare(const Vector3 *other)
-	{
-		if(this->m_iX == other->m_iX && this->m_iY == other->m_iY && this->m_iZ == other->m_iZ)
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
+	void Start();
+
+private:
+	void Init();
+
+	void CleanUp();
+
+	// AI algorithm Manager
+	std::unique_ptr<AIManager> m_AIManager;
+
+	// Server listen file descriptor
+	int m_iListenSocketFileDescriptor;
+
+	// Client address structure
+	struct Address m_sAddress;
+
+	// New process id for use with fork
+	pid_t m_ChildProcessID;
+
+	// New connection file descriptor
+	int m_iConnfd;
+
+	socklen_t m_ClientLen;
 };
 
 #endif

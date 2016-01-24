@@ -4,7 +4,7 @@ The MIT License (MIT)
 
 Copyright (c) 2016 David Morton
 
-https://github.com/damorton/raig.git
+https://github.com/damorton/libraig.git
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,84 +25,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_AI_MANAGER_H_
-#define _INCLUDE_AI_MANAGER_H_
 
-#include <memory>
-#include <vector>
-#include "pathfinding_astar.h"
+#ifndef BASE_EVENT_H
+#define BASE_EVENT_H
 
-#define MAX_BUFFER_SIZE 20
+namespace base{
 
-class AStar;
-class Vector3;
-
-class AIManager
-{
+class Event{
 public:
-
-	enum PacketCode{
-		GAMEWORLD,
-		PATH,
+	enum Type{
+		PACKET,
 		NODE,
-		END,
-		EMPTY,
-		CELL_BLOCKED,
-		CELL_OPEN
+		FINISH,
 	};
 
-	AIManager();
-
-	void ProcessRequest(int socketFileDescriptor);
+	Event(Type type);
+	virtual ~Event();
+	virtual Type GetType();
 
 private:
-	enum State{
-		IDLE,
-		SENDING_PATH
-	};
-
-	// Ai services available to clients
-	enum AiService{
-		ASTAR,
-		FSM,
-		BFS,
-		DFS
-	};
-
-	int ReadBuffer();
-
-	int SendBuffer();
-
-	void ClearBuffer();
-
-	int Update();
-
-	void InitAi(int worldSize,  AiService typeOfAiService);
-
-	void SendPathToClient();
-
-	char m_cSendBuffer[MAX_BUFFER_SIZE];
-
-	char m_cRecvBuffer[MAX_BUFFER_SIZE];
-
-	int m_iSocketFileDescriptor;
-
-	bool m_bIsPathComplete;
-
-	// AStar pathfinding service
-	std::unique_ptr<AStar> m_pPathfinding;
-
-	// TODO: Finite State Machine service
-	// TODO: Breadth First Search service
-	// TODO: Depth First Search service
-
-	std::vector<std::shared_ptr<Vector3> > *m_vPathToGoal;
-
-	int m_iPathIndex;
-
-	State m_eState;
-
-	int m_iRequestId;
+	Type m_Type;
 };
+
+} // namespace base
 
 #endif

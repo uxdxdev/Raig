@@ -4,7 +4,7 @@ The MIT License (MIT)
 
 Copyright (c) 2016 David Morton
 
-https://github.com/damorton/raig.git
+https://github.com/damorton/libraig.git
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#include "../include/network_manager.h"
 
-int main(int argc, char* argv[])
+#include "base/event.h"
+
+namespace base{
+
+Event::Event(Type type)
 {
-	NetworkManager *server = new NetworkManager();
-	server->Start();
-	delete server;
-	return 0;
+	m_Type = type;
 }
+
+Type Event::GetType()
+{
+	return m_Type;
+}
+
+Event::~Event()
+{
+
+}
+
+} // namespace base
+
+
+

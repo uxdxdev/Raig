@@ -26,13 +26,13 @@ SOFTWARE.
 
 */
 
-#include "../include/network_manager.h"
+#include "net/network_manager.h"
 
 #include <csignal>
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "../include/ai_manager.h"
+#include "ai/ai_manager.h"
 
 NetworkManager::NetworkManager()
 {

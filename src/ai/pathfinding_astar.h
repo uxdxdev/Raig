@@ -31,9 +31,10 @@ SOFTWARE.
 #include <memory>
 #include <vector>
 #include <string>
-#include "game_world.h"
 
-class Vector3;
+#include "base/game_world.h"
+#include "base/vector3.h"
+
 class SearchCell;
 
 class AStar{
@@ -49,7 +50,7 @@ public:
 
 	~AStar();
 
-	void FindPath(std::shared_ptr<Vector3> currentPos, std::shared_ptr<Vector3> targetPos);
+	void FindPath(std::shared_ptr<base::Vector3> currentPos, std::shared_ptr<base::Vector3> targetPos);
 
 	// Reset the path found
 	void ResetPath();
@@ -63,7 +64,7 @@ public:
 	void SetState(State state);
 
 	// Returns a pointer to the m_vPathToGoal vector
-	std::vector<std::shared_ptr<Vector3> > *GetPathToGoal();
+	std::vector<std::shared_ptr<base::Vector3> > *GetPathToGoal();
 
 	void Update();
 
@@ -96,7 +97,7 @@ private:
 
 	SearchCell *m_GoalCell;
 
-	std::vector<std::shared_ptr<Vector3> > m_vPathToGoal;
+	std::vector<std::shared_ptr<base::Vector3> > m_vPathToGoal;
 
 	std::unique_ptr<GameWorld> m_pGameWorld;
 
