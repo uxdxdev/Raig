@@ -32,8 +32,6 @@ SOFTWARE.
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "ai/ai_manager.h"
-
 NetworkManager::NetworkManager()
 {
 	Init();
@@ -82,7 +80,7 @@ void NetworkManager::Start()
 			printf("Server starting a new connection\n");
 
 			// AI Manager
-			m_AIManager = std::unique_ptr<AIManager>(new AIManager());
+			m_AIManager = std::unique_ptr<ai::AIManager>(new ai::AIManager());
 
 			SetNonBlocking(m_iConnfd);
 

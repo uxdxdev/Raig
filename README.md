@@ -1,19 +1,27 @@
 # R.A.I.G Server Application
-Remote Artificial Intelligence for Games is a server application that processes AI requests from clients using the RAIG Client API https://github.com/damorton/libraig.git.
+Remote Artificial Intelligence for Games is a server application that processes AI requests from game clients using the RAIG Client API https://github.com/damorton/libraig.git. RAIG uses the BSD Sockets API for process communication over networks. 
 
 ## Instructions
+
+### Ubunutu
+
 - Download the repo
 - Extract contents of the .zip file
-- `cd raig-folder/`
+- `cd raig-master/`
 - Build
 ```
-$ cmake .
+$ mkdir linux-build && cd linux-build
+$ cmake ..
 $ make
 ```
-- Run `$ ./raig`
+- Run `../bin/raig`
+
+### Windows 
+
+Coming soon...
 
 ## Dependencies
 
 - libsocket   https://github.com/damorton/libsocket.git
 
-Libraries used in the project are built and installed using `cmake`.
+Libraries used in the project are built and installed using `cmake` into the `external` directory.

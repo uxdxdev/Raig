@@ -28,13 +28,13 @@ SOFTWARE.
 #ifndef _INCLUDE_NETWORK_MANAGER_H_
 #define _INCLUDE_NETWORK_MANAGER_H_
 
-#include <memory>
-
 extern "C" {
 	#include "libsocket/include/socket.h"
 }
 
-class AIManager;
+#include <memory>
+
+#include "ai/ai_manager.h"
 
 class NetworkManager
 {
@@ -55,7 +55,7 @@ private:
 	void CleanUp();
 
 	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
+	std::unique_ptr<ai::AIManager> m_AIManager;
 
 	// Server listen file descriptor
 	int m_iListenSocketFileDescriptor;

@@ -1,5 +1,7 @@
 #include "base/game_world.h"
 
+namespace base{
+
 GameWorld::GameWorld(int worldSize)
 {
 	m_iWorldSize = worldSize;
@@ -34,4 +36,6 @@ int GameWorld::GetCellState(int x, int y, int z)
 void GameWorld::SetCellState(int x, int y, int z, int state)
 {
 	m_Grid[x][z] = state;
+}
+
 }

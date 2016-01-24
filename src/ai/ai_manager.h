@@ -36,7 +36,7 @@ SOFTWARE.
 
 #define MAX_BUFFER_SIZE 20
 
-class AStar;
+namespace ai {
 
 class AIManager
 {
@@ -91,7 +91,7 @@ private:
 	bool m_bIsPathComplete;
 
 	// AStar pathfinding service
-	std::unique_ptr<AStar> m_pPathfinding;
+	std::unique_ptr<ai::AStar> m_pPathfinding;
 
 	// TODO: Finite State Machine service
 	// TODO: Breadth First Search service
@@ -106,4 +106,5 @@ private:
 	int m_iRequestId;
 };
 
+}
 #endif

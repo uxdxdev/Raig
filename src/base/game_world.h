@@ -32,6 +32,8 @@ SOFTWARE.
 
 #define CELL_SIZE 1
 
+namespace base{
+
 class GameWorld{
 public:
 	GameWorld(int worldSize);
@@ -54,4 +56,6 @@ private:
 
 	std::vector< std::vector<int> > m_Grid;
 };
+
+}
 #endif

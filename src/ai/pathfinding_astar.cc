@@ -31,12 +31,14 @@ SOFTWARE.
 #include "ai/ai_manager.h"
 #include "base/search_cell.h"
 
+namespace ai {
+
 AStar::AStar(int worldSize)
 {
 	//printf("ctor Pathfinding()\n");
 
 	m_GoalCell = NULL;
-	m_pGameWorld = std::unique_ptr<GameWorld> (new GameWorld(worldSize));
+	m_pGameWorld = std::unique_ptr<base::GameWorld> (new base::GameWorld(worldSize));
 	m_bInitializedStartGoal = false;
 	m_eState = IDLE;
 }
@@ -78,7 +80,7 @@ void AStar::SetState(State state)
 	m_eState = state;
 }
 
-GameWorld *AStar::GetGameWorld()
+base::GameWorld *AStar::GetGameWorld()
 {
 	return m_pGameWorld.get();
 }
@@ -342,4 +344,6 @@ void AStar::ResetPath()
 {
 	m_eState = IDLE;
 	m_bInitializedStartGoal = false;
+}
+
 }

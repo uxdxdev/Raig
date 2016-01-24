@@ -37,6 +37,8 @@ SOFTWARE.
 
 class SearchCell;
 
+namespace ai {
+
 class AStar{
 
 public:
@@ -68,8 +70,8 @@ public:
 
 	void Update();
 
-	// Pathfinding retains ownership of GameWorld object
-	GameWorld *GetGameWorld();
+	// Pathfinding retains ownership of base::GameWorld object
+	base::GameWorld *GetGameWorld();
 
 private:
 
@@ -99,9 +101,11 @@ private:
 
 	std::vector<std::shared_ptr<base::Vector3> > m_vPathToGoal;
 
-	std::unique_ptr<GameWorld> m_pGameWorld;
+	std::unique_ptr<base::GameWorld> m_pGameWorld;
 
 	bool m_bInitializedStartGoal;
 };
+
+}
 
 #endif

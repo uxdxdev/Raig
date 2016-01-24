@@ -35,6 +35,8 @@ extern "C" {
 #include <stdlib.h>
 #include <cstring>
 
+namespace ai {
+
 AIManager::AIManager()
 {
 	m_iSocketFileDescriptor = -1;
@@ -52,7 +54,7 @@ void AIManager::InitAi(int worldSize, AiService typeOfAiService)
 	{
 		if(m_pPathfinding == nullptr)
 		{
-			m_pPathfinding = std::unique_ptr<AStar> (new AStar(worldSize));
+			m_pPathfinding = std::unique_ptr<ai::AStar> (new ai::AStar(worldSize));
 		}
 	}
 	else if(typeOfAiService == AiService::FSM)
@@ -139,7 +141,7 @@ int AIManager::Update()
 		InitAi(gridSize, typeOfAiService);
 		ClearBuffer();
 	}
-	else if(statusCode == PATH && m_pPathfinding->GetState() == AStar::IDLE)
+	else if(statusCode == PATH && m_pPathfinding->GetState() == ai::AStar::IDLE)
 	{
 		char *sourceX = strtok((char*)NULL, "_");
 		char *sourceZ = strtok((char*)NULL, "_");
@@ -188,11 +190,11 @@ int AIManager::Update()
 		ClearBuffer();
 	}
 
-	if(m_pPathfinding->GetState() == AStar::PROCESSING) // Pathfinder is processing a request
+	if(m_pPathfinding->GetState() == ai::AStar::PROCESSING) // Pathfinder is processing a request
 	{
 		m_pPathfinding->Update();
 	}
-	else if(m_pPathfinding->GetState() == AStar::REQUEST_COMPLETE) // Pathfinder has finished the request
+	else if(m_pPathfinding->GetState() == ai::AStar::REQUEST_COMPLETE) // Pathfinder has finished the request
 	{
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
@@ -248,4 +250,6 @@ void AIManager::ClearBuffer()
 {
 	sprintf(m_cSendBuffer, "%d", EMPTY);
 	sprintf(m_cRecvBuffer, "%d", EMPTY);
+}
+
 }
