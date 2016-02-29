@@ -31,7 +31,7 @@ include(ExternalProject)
 
 ExternalProject_Add(libsocket
     PREFIX ${CMAKE_BINARY_DIR}/build/libsocket
-    GIT_REPOSITORY https://github.com/damorton/libsocket.git
+    GIT_REPOSITORY https://damorton@bitbucket.org/damorton/libsocket.git
     GIT_TAG master 
     BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/libsocket
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/libsocket
