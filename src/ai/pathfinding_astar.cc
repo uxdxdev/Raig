@@ -239,16 +239,16 @@ void AStar::Update()
 		else
 		{
 			// topleft diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
+			//ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// topright diagonal
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
+			//ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ + 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// bottom left diagonal
-			ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
+			//ProcessCell(currentCell->m_iCoordinateX - 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// bottom right
-			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
+			//ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ - 1, currentCell->m_fCostSoFarG + 1.414f, currentCell);
 
 			// right side
 			ProcessCell(currentCell->m_iCoordinateX + 1, currentCell->m_iCoordinateZ, currentCell->m_fCostSoFarG + 1, currentCell);
