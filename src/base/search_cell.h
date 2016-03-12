@@ -60,6 +60,10 @@ public:
 		m_pParent = parent;
 		m_fCostSoFarG = 0;
 		m_fEstimatedCostToGoalH = 0;
+		
+		//printf("Search Cell Created with Id: %d\n", m_iId);
+		//printf("Game World Size %d\n", worldSize);
+		//printf("X:%d Z:%d\n", m_iCoordinateX, m_iCoordinateZ);
 	}
 
 	float GetEstimatedTotalCostF()

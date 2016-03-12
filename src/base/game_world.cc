@@ -1,4 +1,5 @@
 #include "base/game_world.h"
+#include <iostream>
 
 namespace base{
 
@@ -10,8 +11,11 @@ GameWorld::GameWorld(int worldSize)
 
 GameWorld::GameWorld(int width, int height)
 {
+    printf("ctor GameWorld() Width:%d Height:%d\n", width, height);
+
     m_iWorldWidth = width;
     m_iWorldHeight = height;
+    m_iWorldSize = m_iWorldWidth * m_iWorldHeight;
     m_Grid.resize(width, std::vector<int>(height, 0));
 }
 

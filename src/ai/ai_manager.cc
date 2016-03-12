@@ -1,30 +1,6 @@
-/*
-
-The MIT License (MIT)
-
-Copyright (c) 2016 David Morton
-
-https://github.com/damorton/raig.git
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-*/
+// Copyright (c) 2016 David Morton
+// Use of this source code is governed by a license that can be
+// found in the LICENSE file.
 
 #include "ai/ai_manager.h"
 
@@ -54,6 +30,7 @@ void AIManager::InitAi(int worldWidth, int worldHeight, AiService typeOfAiServic
 	{
 		if(m_pPathfinding == nullptr)
 		{
+		    printf("Creating Game World for AStar Service - Width:%d Height:%d\n", worldWidth, worldHeight);
 			m_pPathfinding = std::unique_ptr<ai::AStar> (new ai::AStar(worldWidth, worldHeight));
 		}
 	}
@@ -75,10 +52,16 @@ void AIManager::ProcessRequest(int socketFileDescriptor)
 
 	while(1)
 	{
+	    /*
 		if(Update() == 0)
 		{
             printf("Update() returned 0\n");
 			return;
+		}
+		*/
+		if(ReadBuffer() == 0)
+		{
+		    return;
 		}
 	}
 }
@@ -89,7 +72,7 @@ int AIManager::SendBuffer()
 	int flags = 0;
 	int bytesSent = 0;
 	bytesSent = Send(m_iSocketFileDescriptor, m_cSendBuffer, size, flags);
-	//printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
+	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
 	ClearBuffer();
 	return bytesSent;
 }
@@ -119,22 +102,34 @@ int AIManager::ReadBuffer()
 	{
 		printf("Called ReadBuffer() buffer: %s\n", m_cRecvBuffer);
 	}
-	return receivedBytes;
+	
+	if(receivedBytes == 0)
+	{
+	    // Client has closed the connection
+	    return receivedBytes;
+	}
+	else
+	{
+	    // Process request
+	    return Update();    
+	}
 }
 
 int AIManager::Update()
 {
+    /*
 	if(ReadBuffer() == 0)
 	{
         printf("AIManager::Update() Readbuffer() returned 0\n");
 		return 0;
 	}
+	*/
 
 	char *statusFlag = strtok((char*)m_cRecvBuffer, "_");
 	int statusCode = atoi(statusFlag); // Convert to integer
 	//printf("Called Update() statusCode: %d\n", statusCode);
 
-	if(statusCode == GAMEWORLD)
+    if(statusCode == GAMEWORLD)
 	{
 		char *gameWorldWidth = strtok((char*)NULL, "_");
         char *gameWorldHeight = strtok((char*)NULL, "_");
@@ -193,12 +188,21 @@ int AIManager::Update()
 		m_pPathfinding->GetGameWorld()->SetCellState(sourceLocationX, sourceLocationY, sourceLocationZ, CELL_OPEN);
 		ClearBuffer();
 	}
-
-	if(m_pPathfinding->GetState() == ai::AStar::PROCESSING) // Pathfinder is processing a request
+	else if(statusCode == EMPTY)
+    {
+        //printf("m_cRecvBuffer Empty statusCode: %d\n", statusCode);
+    }
+	
+    if(m_pPathfinding->GetState() == ai::AStar::IDLE) // Pathfinder is idle
+	{
+		 //printf("Pathfinder is idle...\n");
+	}
+	else if(m_pPathfinding->GetState() == ai::AStar::PROCESSING) // Pathfinder is processing a request
 	{
 		m_pPathfinding->Update();
 	}
-	else if(m_pPathfinding->GetState() == ai::AStar::REQUEST_COMPLETE) // Pathfinder has finished the request
+	
+	if(m_pPathfinding->GetState() == ai::AStar::REQUEST_COMPLETE) // Pathfinder has finished the request
 	{
 		printf("Pathfinding REQUEST_COMPLETE\n");
 		m_vPathToGoal = m_pPathfinding->GetPathToGoal();
@@ -217,36 +221,42 @@ int AIManager::Update()
 
 void AIManager::SendPathToClient()
 {
-	//printf("Called SendPathToClient()\n");
-	m_iPathIndex++;
-
-	if(m_vPathToGoal->empty())
+	printf("Called SendPathToClient size %d()\n", (int)m_vPathToGoal->size());
+	while(1)
 	{
-		m_iPathIndex = -1;
-		m_eState = IDLE;
-		return;
-	}
-	else if(m_vPathToGoal->size() == 1) // Only one node in the path
-	{
-		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
-		SendBuffer();
-		m_iPathIndex = -1;
-		m_eState = IDLE;
-		return;
-	}
-	else if(m_iPathIndex < m_vPathToGoal->size() - 1) // More than one node in the path
-	{
-		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", NODE, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
-		SendBuffer();
-		return;
-	}
-	else if(m_iPathIndex == m_vPathToGoal->size() - 1) // Last node in the path
-	{
-		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
-		SendBuffer();
-		m_iPathIndex = -1;
-		m_eState = IDLE;
-		return;
+    	m_iPathIndex++;
+    
+    	if(m_vPathToGoal->empty())
+    	{
+    		m_iPathIndex = -1;
+    		m_eState = IDLE;
+    		printf("Path is empty\n");
+    		return;
+    	}
+    	else if(m_vPathToGoal->size() == 1) // Only one node in the path
+    	{
+    		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+    		SendBuffer();
+    		m_iPathIndex = -1;
+    		m_eState = IDLE;
+    		printf("Only one node in path\n");
+    		return;
+    	}
+    	else if(m_iPathIndex < m_vPathToGoal->size() - 1) // More than one node in the path
+    	{
+    		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", NODE, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+    		SendBuffer();
+    		//return;
+    	}
+    	else if(m_iPathIndex == m_vPathToGoal->size() - 1) // Last node in the path
+    	{
+    		sprintf(m_cSendBuffer, "%02d_%03d_%02d_%02d", END, m_iPathIndex, (*m_vPathToGoal)[m_iPathIndex]->m_iX, (*m_vPathToGoal)[m_iPathIndex]->m_iZ);
+    		SendBuffer();
+    		m_iPathIndex = -1;
+    		m_eState = IDLE;
+    		printf("Final node in the path sent to client\n");
+    		return;
+    	}
 	}
 }
 

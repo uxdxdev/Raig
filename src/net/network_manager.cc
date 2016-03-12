@@ -82,7 +82,7 @@ void NetworkManager::Start()
 			// AI Manager
 			m_AIManager = std::unique_ptr<ai::AIManager>(new ai::AIManager());
 
-			SetNonBlocking(m_iConnfd);
+			//SetNonBlocking(m_iConnfd);
 
 			m_AIManager->ProcessRequest(m_iConnfd);
 
