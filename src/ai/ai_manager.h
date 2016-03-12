@@ -78,7 +78,7 @@ private:
 
 	int Update();
 
-	void InitAi(int worldSize,  AiService typeOfAiService);
+	void InitAi(int worldWidth, int worldHeight, AiService typeOfAiService);
 
 	void SendPathToClient();
 

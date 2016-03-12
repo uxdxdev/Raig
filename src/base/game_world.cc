@@ -8,6 +8,23 @@ GameWorld::GameWorld(int worldSize)
 	m_Grid.resize(worldSize, std::vector<int>(worldSize, 0));
 }
 
+GameWorld::GameWorld(int width, int height)
+{
+    m_iWorldWidth = width;
+    m_iWorldHeight = height;
+    m_Grid.resize(width, std::vector<int>(height, 0));
+}
+
+int GameWorld::GetWorldWidth()
+{
+    return m_iWorldWidth;
+}
+
+int GameWorld::GetWorldHeight()
+{
+    return m_iWorldHeight;
+}
+
 int GameWorld::GetWorldSize()
 {
 	return m_iWorldSize;

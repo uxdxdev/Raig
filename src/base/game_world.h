@@ -38,6 +38,12 @@ class GameWorld{
 public:
 	GameWorld(int worldSize);
 
+    GameWorld(int width, int height);
+
+    int GetWorldWidth();
+
+    int GetWorldHeight();
+
 	int GetWorldSize();
 
 	int GetCellX(int x);
@@ -53,6 +59,8 @@ public:
 private:
 
 	int m_iWorldSize;
+    int m_iWorldWidth;
+    int m_iWorldHeight;
 
 	std::vector< std::vector<int> > m_Grid;
 };

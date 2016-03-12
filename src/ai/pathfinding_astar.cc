@@ -42,6 +42,16 @@ AStar::AStar(int worldSize)
 	m_eState = IDLE;
 }
 
+AStar::AStar(int width, int height)
+{
+    //printf("ctor Pathfinding()\n");
+
+    m_GoalCell = NULL;
+    m_pGameWorld = std::unique_ptr<base::GameWorld> (new base::GameWorld(width, height));
+    m_bInitializedStartGoal = false;
+    m_eState = IDLE;
+}
+
 AStar::~AStar()
 {
 	CleanUp();
@@ -234,6 +244,7 @@ void AStar::Update()
 			}
 
 			m_eState = REQUEST_COMPLETE;
+			printf("Path request complete\n");
 			return;
 		}
 		else
@@ -273,10 +284,11 @@ void AStar::Update()
 			}
 		}
 	}
-}
 
-void AStar::ProcessCell(int x, int z, float newCost, base::SearchCell *parent)
-{
+	}
+
+	void AStar::ProcessCell(int x, int z, float newCost, base::SearchCell *parent)
+	{
 	//printf("Called PathOpened() : X%d Z:%d\n", x, z);
 
 	if(x < 0 || x > m_pGameWorld->GetWorldSize() - 1 || z < 0 || z > m_pGameWorld->GetWorldSize() - 1)
@@ -327,7 +339,7 @@ void AStar::ProcessCell(int x, int z, float newCost, base::SearchCell *parent)
 		}
 	}
 
-	m_vOpenList.push_back(newChild);
+m_vOpenList.push_back(newChild);
 }
 
 

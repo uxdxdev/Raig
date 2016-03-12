@@ -49,6 +49,8 @@ public:
 
 	AStar(int worldSize);
 
+    AStar(int width, int height);
+
 	~AStar();
 
 	void FindPath(std::shared_ptr<base::Vector3> currentPos, std::shared_ptr<base::Vector3> targetPos);

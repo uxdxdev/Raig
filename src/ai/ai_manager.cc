@@ -48,13 +48,13 @@ AIManager::AIManager()
 	ClearBuffer();
 }
 
-void AIManager::InitAi(int worldSize, AiService typeOfAiService)
+void AIManager::InitAi(int worldWidth, int worldHeight, AiService typeOfAiService)
 {
 	if(typeOfAiService == AiService::ASTAR)
 	{
 		if(m_pPathfinding == nullptr)
 		{
-			m_pPathfinding = std::unique_ptr<ai::AStar> (new ai::AStar(worldSize));
+			m_pPathfinding = std::unique_ptr<ai::AStar> (new ai::AStar(worldWidth, worldHeight));
 		}
 	}
 	else if(typeOfAiService == AiService::FSM)
@@ -70,12 +70,14 @@ void AIManager::InitAi(int worldSize, AiService typeOfAiService)
 
 void AIManager::ProcessRequest(int socketFileDescriptor)
 {
+    printf("ProcessRequest() called\n");
 	m_iSocketFileDescriptor = socketFileDescriptor;
 
 	while(1)
 	{
 		if(Update() == 0)
 		{
+            printf("Update() returned 0\n");
 			return;
 		}
 	}
@@ -94,7 +96,6 @@ int AIManager::SendBuffer()
 
 int AIManager::ReadBuffer()
 {
-	//printf("Called ReadBuffer() buffer BEFORE: %s\n", m_cBuffer);
 	size_t size = sizeof(m_cRecvBuffer);
 	int flags = 0;
 	int receivedBytes = 0;
@@ -125,6 +126,7 @@ int AIManager::Update()
 {
 	if(ReadBuffer() == 0)
 	{
+        printf("AIManager::Update() Readbuffer() returned 0\n");
 		return 0;
 	}
 
@@ -134,11 +136,13 @@ int AIManager::Update()
 
 	if(statusCode == GAMEWORLD)
 	{
-		char *gameWorldSize = strtok((char*)NULL, "_");
+		char *gameWorldWidth = strtok((char*)NULL, "_");
+        char *gameWorldHeight = strtok((char*)NULL, "_");
 		char *serviceType = strtok((char*)NULL, "_");
-		int gridSize = atoi(gameWorldSize);
+		int gridWidth = atoi(gameWorldWidth);
+        int gridHeight = atoi(gameWorldHeight);
 		AiService typeOfAiService = (AiService)atoi(serviceType);
-		InitAi(gridSize, typeOfAiService);
+		InitAi(gridWidth, gridHeight, typeOfAiService);
 		ClearBuffer();
 	}
 	else if(statusCode == PATH && m_pPathfinding->GetState() == ai::AStar::IDLE)

@@ -1,1 +1,1 @@
-rm -rf bin linux-build external
+rm -rf bin linux-build
