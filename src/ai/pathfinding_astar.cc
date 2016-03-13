@@ -284,7 +284,7 @@ void AStar::ProcessCell(int x, int z, float newCost, base::SearchCell *parent)
     // Walls etc.
     if(m_pGameWorld->GetCellState(x, 0, z) == AIManager::CELL_BLOCKED)
     {
-        printf("Cell Blocked: X%d Z:%d\n", x, z);
+        //printf("Cell Blocked: X%d Z:%d\n", x, z);
     	return;
     }
     

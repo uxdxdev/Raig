@@ -72,7 +72,7 @@ int AIManager::SendBuffer()
 	int flags = 0;
 	int bytesSent = 0;
 	bytesSent = Send(m_iSocketFileDescriptor, m_cSendBuffer, size, flags);
-	printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
+	//printf("Called SendBuffer() buffer: %s bytes: %d\n", m_cSendBuffer, bytesSent);
 	ClearBuffer();
 	return bytesSent;
 }
