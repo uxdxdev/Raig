@@ -13,3 +13,5 @@ raig
 lib/
 nbproject/
 /Debug/
+xcode/*
+test/*
