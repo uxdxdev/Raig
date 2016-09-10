@@ -1,7 +1,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
-#include "base/Vector3.h"
+#include "base/vector3.h"
 
 TEST(TestCompare, ReturnOneIfEQ)
 {
