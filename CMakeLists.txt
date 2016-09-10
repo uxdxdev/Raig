@@ -61,7 +61,7 @@ link_directories(
 )
 
 # Set executable name
-set(EXECUTABLE Server)
+set(EXECUTABLE RaigServer)
 
 # Create binary
 add_executable(${EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/raig/raig_server.cc)
