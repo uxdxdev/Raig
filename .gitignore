@@ -1,6 +1,6 @@
 .DS_Store
-build/*
-lib/*
-xcode/*
-test/*
-bin/*
+build
+xcode
+test
+bin
+Debug
