@@ -1,0 +1,14 @@
+#!/bin/sh
+
+ssh mortond@${HYDROGEN} <<EOF
+	cd ~/raig
+	git checkout master && git pull
+	mkdir -p build && cd build
+	cmake ..
+	make
+	cd ..
+	pkill Server
+	nohup bin/Server 27000 > /dev/null 2>&1 &
+	echo "Server started on port 27000"
+	exit
+EOF
