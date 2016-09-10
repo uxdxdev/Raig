@@ -25,10 +25,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_SEARCH_CELL_H
-#define _INCLUDE_SEARCH_CELL_H
+
+#ifndef BASE_SEARCH_CELL_H
+#define BASE_SEARCH_CELL_H
 
 #include <math.h>
+
+namespace base {
 
 class SearchCell{
 public:
@@ -57,6 +60,10 @@ public:
 		m_pParent = parent;
 		m_fCostSoFarG = 0;
 		m_fEstimatedCostToGoalH = 0;
+		
+		//printf("Search Cell Created with Id: %d\n", m_iId);
+		//printf("Game World Size %d\n", worldSize);
+		//printf("X:%d Z:%d\n", m_iCoordinateX, m_iCoordinateZ);
 	}
 
 	float GetEstimatedTotalCostF()
@@ -77,5 +84,7 @@ public:
 		return x + z;
 	}
 };
+
+}
 
 #endif

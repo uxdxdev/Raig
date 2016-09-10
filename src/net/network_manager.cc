@@ -25,8 +25,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#include "../include/network_manager.h"
-#include "../include/ai_manager.h"
+
+#include "net/network_manager.h"
+
+#include <csignal>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 NetworkManager::NetworkManager()
 {
@@ -51,7 +55,7 @@ void NetworkManager::Init()
 
 	// Signal handler for terminated processes
 	// Only needed when forking processes
-	Signal(SIGCHLD, (void*)SignalHandler);
+	Signal(SIGCHLD);
 }
 
 void NetworkManager::Start()
@@ -76,13 +80,14 @@ void NetworkManager::Start()
 			printf("Server starting a new connection\n");
 
 			// AI Manager
-			m_AIManager = std::unique_ptr<AIManager>(new AIManager());
+			m_AIManager = std::unique_ptr<ai::AIManager>(new ai::AIManager());
 
-			SetNonBlocking(m_iConnfd);
+			//SetNonBlocking(m_iConnfd);
 
 			m_AIManager->ProcessRequest(m_iConnfd);
 
 			printf("Disconnecting...\n");
+			// Send usage data to web application using http
 
 			// On return exit to kill the process. The kernel will then
 			// send a signal to the parent which is caught by the parents
@@ -91,6 +96,27 @@ void NetworkManager::Start()
 			exit(EXIT_SUCCESS);
 		}
 		close(m_iConnfd);
+	}
+}
+
+void NetworkManager::SignalHandler(int signalNumber)
+{
+	pid_t processID;
+	int stat;
+
+	while( (processID = waitpid(WAIT_ANY, &stat, WNOHANG)) > 0)
+	{
+		printf("child terminated\n");
+	}
+	return;
+}
+
+void NetworkManager::Signal(int signalNumber)
+{
+	if(signal(SIGCHLD, SignalHandler) == SIG_ERR)
+	{
+		perror("Error in Signal()");
+		exit(1); // Exit failure
 	}
 }
 

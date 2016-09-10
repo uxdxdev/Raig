@@ -25,12 +25,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#include "../include/network_manager.h"
+#ifndef BASE_NETWORK_MANAGER_H_
+#define BASE_NETWORK_MANAGER_H_
 
-int main(int argc, char* argv[])
-{
-	NetworkManager *server = new NetworkManager();
-	server->Start();
-	delete server;
-	return 0;
+extern "C" {
+	#include "libsocket/include/socket.h"
 }
+
+#include <memory>
+
+#include "ai/ai_manager.h"
+
+class NetworkManager
+{
+public:
+	NetworkManager();
+
+	~NetworkManager();
+
+	static void SignalHandler(int signalNumber);
+
+	void Signal(int signalNumber);
+
+	void Start();
+
+private:
+	void Init();
+
+	void CleanUp();
+
+	// AI algorithm Manager
+	std::unique_ptr<ai::AIManager> m_AIManager;
+
+	// Server listen file descriptor
+	int m_iListenSocketFileDescriptor;
+
+	// Client address structure
+	struct Address m_sAddress;
+
+	// New process id for use with fork
+	pid_t m_ChildProcessID;
+
+	// New connection file descriptor
+	int m_iConnfd;
+};
+
+#endif

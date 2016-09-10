@@ -4,7 +4,7 @@ The MIT License (MIT)
 
 Copyright (c) 2016 David Morton
 
-https://github.com/damorton/raig.git
+https://github.com/damorton/libraig.git
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,47 +25,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_NETWORK_MANAGER_H_
-#define _INCLUDE_NETWORK_MANAGER_H_
 
-#include <memory>
+#include "http_client.h"
 
-extern "C" {
-	#include "../external/libsocket/include/socket.h"
+namespace http{
+
+void HttpDao::Create()
+{
+
 }
 
-class AIManager;
-
-class NetworkManager
+void HttpDao::Read()
 {
-public:
-	NetworkManager();
 
-	~NetworkManager();
+}
 
-	void Start();
+void HttpDao::Update()
+{
 
-private:
-	void Init();
+}
 
-	void CleanUp();
+void HttpDao::Delete()
+{
 
-	// AI algorithm Manager
-	std::unique_ptr<AIManager> m_AIManager;
+}
 
-	// Server listen file descriptor
-	int m_iListenSocketFileDescriptor;
-
-	// Client address structure
-	struct Address m_sAddress;
-
-	// New process id for use with fork
-	pid_t m_ChildProcessID;
-
-	// New connection file descriptor
-	int m_iConnfd;
-
-	socklen_t m_ClientLen;
-};
-
-#endif
+} // namespace http

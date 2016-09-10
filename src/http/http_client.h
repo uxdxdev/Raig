@@ -4,7 +4,7 @@ The MIT License (MIT)
 
 Copyright (c) 2016 David Morton
 
-https://github.com/damorton/raig.git
+https://github.com/damorton/libraig.git
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,33 +25,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-#ifndef _INCLUDE_GAME_WORLD_H_
-#define _INCLUDE_GAME_WORLD_H_
 
-#include <vector>
+#ifndef HTTP_CLIENT_H
+#define HTTP_CLIENT_H
 
-#define CELL_SIZE 1
+namespace http{
 
-class GameWorld{
+class HttpDao {
 public:
-	GameWorld(int worldSize);
-
-	int GetWorldSize();
-
-	int GetCellX(int x);
-
-	int GetCellY(int y);
-
-	int GetCellZ(int z);
-
-	int GetCellState(int x, int y, int z);
-
-	void SetCellState(int x, int y, int z, int state);
-
-private:
-
-	int m_iWorldSize;
-
-	std::vector< std::vector<int> > m_Grid;
+	void Create();
+	void Read();
+	void Update();
+	void Delete();
 };
+
+} // namespace http
+
 #endif
