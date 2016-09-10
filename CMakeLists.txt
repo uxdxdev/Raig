@@ -60,26 +60,39 @@ set(HEADERS
 set(SOURCES
 	src/ai/ai_manager.cc
 	src/ai/pathfinding_astar.cc	 
-	src/raig/raig_server.cc 
 	src/net/network_manager.cc 
 	src/base/game_world.cc
 	src/base/vector3.cc	 
 	src/base/game_world.cc
 )
 
+add_library(raig ${SOURCES} ${HEADERS})
+
+add_dependencies(raig libsocket)
+
+set_target_properties(raig
+PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+)
+
+
+
+# Link to the libsocket library
 link_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/libsocket/lib/
 )
 
-add_executable(raig ${SOURCES} ${HEADERS})
+# Set executable name
+set(EXECUTABLE Server)
 
-add_dependencies(raig libsocket)
+# Create binary
+add_executable(${EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/raig/raig_server.cc)
 
-target_link_libraries(raig socket)
+target_link_libraries(${EXECUTABLE} raig socket)
 
-set_target_properties(raig
+set_target_properties(${EXECUTABLE}
     PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"    
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
 
 
@@ -96,7 +109,10 @@ ${CMAKE_SOURCE_DIR}/src/test/test_Vector3.cpp
 
 add_executable(${UNIT_TEST_EXECUTABLE} ${TEST_SOURCE_FILES})
 
-target_link_libraries(${UNIT_TEST_EXECUTABLE} gtest gtest_main)
+add_dependencies(${UNIT_TEST_EXECUTABLE} libsocket)
+
+target_link_libraries(${UNIT_TEST_EXECUTABLE} raig socket gtest gtest_main)
+
 add_test(NAME test COMMAND ${UNIT_TEST_EXECUTABLE})
 
 set_target_properties(${UNIT_TEST_EXECUTABLE}

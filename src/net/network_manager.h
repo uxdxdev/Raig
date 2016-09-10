@@ -68,8 +68,6 @@ private:
 
 	// New connection file descriptor
 	int m_iConnfd;
-
-	socklen_t m_ClientLen;
 };
 
 #endif
